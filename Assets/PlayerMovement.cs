@@ -7,10 +7,11 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 10;
     private Rigidbody2D marioBody;
 
-    public float upSpeed = 5;
+    public float upSpeed = 2;
     private bool onGroundState = true;
     private SpriteRenderer marioSprite;
     private bool faceRightState = true;
+    private int jumps = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +35,13 @@ public class PlayerMovement : MonoBehaviour
           faceRightState = true;
           marioSprite.flipX = false;
       }
+
+    if (Input.GetKeyDown("space") && jumps > 0){
+        marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
+        onGroundState = false;
+        jumps--;
+    }
+
     }
     public float maxSpeed = 20;
     // FixedUpdate is called 50 times a second
@@ -54,15 +62,14 @@ public class PlayerMovement : MonoBehaviour
             marioBody.linearVelocity = new Vector2(0, marioBody.linearVelocity.y);
         }
 
-        if (Input.GetKeyDown("space") && onGroundState){
-            marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
-            onGroundState = false;
-        }
   } 
 
   void OnCollisionEnter2D(Collision2D col)
   {
-      if (col.gameObject.CompareTag("Ground")) onGroundState = true;
+      if (col.gameObject.CompareTag("Ground")) {
+        onGroundState = true;
+        jumps = 2;
+        }
   }
 
   
