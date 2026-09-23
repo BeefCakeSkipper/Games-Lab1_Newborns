@@ -1689,8 +1689,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 43, y: 80}
-  m_SizeDelta: {x: 2601.93, y: 1162.81}
+  m_AnchoredPosition: {x: -0.00041334, y: -0.28247}
+  m_SizeDelta: {x: 752.25, y: 422.42}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &453459835
 MonoBehaviour:
@@ -1798,7 +1798,7 @@ Canvas:
   m_GameObject: {fileID: 475099800}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
+  m_RenderMode: 1
   m_Camera: {fileID: 519420031}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -2249,8 +2249,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -1240, y: -709}
-  m_SizeDelta: {x: 40, y: 40}
+  m_AnchoredPosition: {x: -27.25, y: -29.050003}
+  m_SizeDelta: {x: 8.42, y: 8.85}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &569974860
 MonoBehaviour:
@@ -3275,15 +3275,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 18
+  m_fontSizeBase: 18
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
-  m_VerticalAlignment: 256
+  m_HorizontalAlignment: 2
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -3342,10 +3342,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 453459834}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0.5, y: 0.372}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 90, y: 295}
-  m_SizeDelta: {x: 150.45, y: 79.15}
+  m_AnchoredPosition: {x: -0.13527, y: 27.461}
+  m_SizeDelta: {x: 155.6, y: 33.101}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &914846947
 GameObject:
@@ -3741,7 +3741,7 @@ Transform:
   m_GameObject: {fileID: 948275981}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.15, y: 0.03, z: 0}
+  m_LocalPosition: {x: 38.15, y: 2.98, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3791,7 +3791,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 1, y: 6}
+  m_Size: {x: 1, y: 12}
   m_EdgeRadius: 0
 --- !u!114 &948275984
 MonoBehaviour:
