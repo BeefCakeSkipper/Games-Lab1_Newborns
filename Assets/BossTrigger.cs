@@ -12,7 +12,6 @@ public class BossTrigger : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        Debug.Log("BossTrigger Start running");
         boss.SetActive(false);
         // leftWall.SetActive(false);
         // rightWall.SetActive(false);
@@ -25,7 +24,6 @@ public class BossTrigger : MonoBehaviour
         // only mario starts the fight
         if (!bossTriggered && col.GetComponent<PlayerMovement>() != null)
         {
-            Debug.Log("BossTrigger triggered by: " + col.gameObject.name);
             bossTriggered = true;
             cameraFollow.enabled = false;
             boss.SetActive(true);

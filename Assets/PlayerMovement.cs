@@ -98,7 +98,6 @@ public class PlayerMovement : MonoBehaviour
         if (col.gameObject.CompareTag("Enemy")
             && transform.position.y - col.transform.position.y < 0.4f)
         {
-            Debug.Log("Collided with goomba!");
             ShowEndScreen("GAME OVER");
         }
         if (col.gameObject.CompareTag("Boss"))
@@ -106,7 +105,6 @@ public class PlayerMovement : MonoBehaviour
             ContactPoint2D contact = col.GetContact(0);
             if (contact.normal.y < 0.7f)
             {
-                Debug.Log("Collided with Tralalero Tralala! Game Over!");
                 ShowEndScreen("GAME OVER");
             }
         }
@@ -170,7 +168,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void RestartButtonCallback(int input)
     {
-        Debug.Log("Restart!");
         gameOverScreen.SetActive(false);
         // reset everything
         ResetGame();
@@ -202,7 +199,6 @@ public class PlayerMovement : MonoBehaviour
     {
         score++;
         scoreText.text = "Score: " + score.ToString();
-        Debug.Log(score);
     }
 
 
