@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public BossLogic boss;
     public int score = 0;
     public BossTrigger bossTrigger;
+    public GameObject gameOverScreen;
+    public TextMeshProUGUI resultText;
     private bool onGroundState = true;
     private SpriteRenderer marioSprite;
     private bool faceRightState = true;
@@ -90,8 +92,7 @@ public class PlayerMovement : MonoBehaviour
             && transform.position.y - col.transform.position.y < 0.4f)
         {
             Debug.Log("Collided with goomba!");
-            Time.timeScale = 0.0f;
-            bossTrigger.bossHealth.SetActive(false);
+            ShowEndScreen("GAME OVER");
         }
         if (col.gameObject.CompareTag("Boss"))
         {
@@ -99,8 +100,7 @@ public class PlayerMovement : MonoBehaviour
             if (contact.normal.y < 0.7f)
             {
                 Debug.Log("Collided with Tralalero Tralala! Game Over!");
-                Time.timeScale = 0.0f;
-                bossTrigger.bossHealth.SetActive(false);
+                ShowEndScreen("GAME OVER");
             }
         }
     }
@@ -123,9 +123,19 @@ public class PlayerMovement : MonoBehaviour
         Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxSize);
     }
 
+    // shows the end screen
+    public void ShowEndScreen(string message)
+    {
+        resultText.text = message;
+        gameOverScreen.SetActive(true);
+        bossTrigger.bossHealth.SetActive(false);
+        Time.timeScale = 0.0f;
+    }
+
     public void RestartButtonCallback(int input)
     {
         Debug.Log("Restart!");
+        gameOverScreen.SetActive(false);
         // reset everything
         ResetGame();
         cameraFollow.enabled = true;

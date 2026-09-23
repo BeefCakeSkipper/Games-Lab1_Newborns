@@ -27,6 +27,7 @@ public class BossLogic : MonoBehaviour
     public Sprite emptyHeartSprite;
     // public GameObject bossHealth;
     public GameObject[] hearts;
+    public PlayerMovement player;
     private bool isDead = false;
     public float skidDuration = 0.9f;
     private bool skidding = false;
@@ -151,6 +152,7 @@ public class BossLogic : MonoBehaviour
         enemyBody.linearVelocity = Vector2.zero;
         enemyCollider.enabled = false;
         gameObject.SetActive(false);
+        player.ShowEndScreen("You Win!");
 
     }
     private void changeDirection()
