@@ -27,17 +27,12 @@ public class JumpOnGoomba : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // mario jumps -- input must be polled here, not in FixedUpdate
-        if (Input.GetKeyDown("space") && onGroundCheck())
-        {
-            onGroundState = false;
-        }
+        // always check if mario is on the ground so if u fall on the goomba it still gets stomped
+        onGroundState = onGroundCheck();
     }
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if (col.gameObject.CompareTag("Ground")) onGroundState = true;
-
         // mario stomps the goomba: airborne from a jump, haven't scored yet this
         // jump, and mario is above the goomba (so side hits don't count)
         if (col.gameObject.CompareTag("Enemy") && !onGroundState
@@ -47,7 +42,6 @@ public class JumpOnGoomba : MonoBehaviour
             scoreText.text = "Score: " + score.ToString();
             col.gameObject.GetComponent<EnemyMovement>().Squash();
             marioBody.AddForce(Vector2.up * bounceSpeed, ForceMode2D.Impulse);
-            Debug.Log(score);
         }
     }
 
