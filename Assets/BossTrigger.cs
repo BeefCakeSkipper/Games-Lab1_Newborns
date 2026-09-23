@@ -22,7 +22,8 @@ public class BossTrigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (!bossTriggered)
+        // only mario starts the fight
+        if (!bossTriggered && col.GetComponent<PlayerMovement>() != null)
         {
             Debug.Log("BossTrigger triggered by: " + col.gameObject.name);
             bossTriggered = true;
