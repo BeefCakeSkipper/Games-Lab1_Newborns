@@ -33,7 +33,6 @@ public class JumpOnBoss : MonoBehaviour
             // Only count as a stomp if Mario lands clearly on top
             if (contact.normal.y >= 0.7f)
             {
-                Debug.Log("Boss has been stomped");
                 playerMovement.AddScore();
                 col.gameObject.GetComponent<BossLogic>().TakeDamage();
                 marioBody.AddForce(Vector2.up * bounceSpeed, ForceMode2D.Impulse);

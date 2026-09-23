@@ -66,6 +66,7 @@ public class EnemyMovement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
+        if (squashed) return;
         // change direction on collision
         moveRight *= -1;
         ComputeVelocity();

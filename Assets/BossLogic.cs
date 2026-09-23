@@ -86,7 +86,6 @@ public class BossLogic : MonoBehaviour
             // change direction on collision
             bossAnimator.SetTrigger("HitWall");
             Invoke(nameof(changeDirection), skidDuration);
-            Debug.Log("Boss hit wall");
 
         }
     }
@@ -147,7 +146,6 @@ public class BossLogic : MonoBehaviour
     }
     public void Die()
     {
-        Debug.Log("Boss defeated!");
         isDead = true;
         enemyBody.linearVelocity = Vector2.zero;
         enemyCollider.enabled = false;
