@@ -4609,6 +4609,11 @@ MonoBehaviour:
   layerMask:
     serializedVersion: 2
     m_Bits: 8
+  jumpSprite: {fileID: 949594130, guid: f1bde3f95d8d049e59a4208ea4358c51, type: 3}
+  walkSprites:
+  - {fileID: 797620493, guid: f1bde3f95d8d049e59a4208ea4358c51, type: 3}
+  - {fileID: 1965497133, guid: f1bde3f95d8d049e59a4208ea4358c51, type: 3}
+  walkFrameTime: 0.12
   maxSpeed: 20
 --- !u!50 &1191641733
 Rigidbody2D:
@@ -4686,7 +4691,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 257657440, guid: f1bde3f95d8d049e59a4208ea4358c51, type: 3}
+  m_Sprite: {fileID: -15771423, guid: f1bde3f95d8d049e59a4208ea4358c51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4833,7 +4838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1229080941
 Transform:
   m_ObjectHideFlags: 0
@@ -4843,7 +4848,7 @@ Transform:
   m_GameObject: {fileID: 1229080940}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.658056, y: 3.4166667, z: 60.0625}
+  m_LocalPosition: {x: 27.36, y: 3.4166667, z: 60.0625}
   m_LocalScale: {x: 1.7056725, y: 1.7056725, z: 1.7056725}
   m_ConstrainProportionsScale: 0
   m_Children:

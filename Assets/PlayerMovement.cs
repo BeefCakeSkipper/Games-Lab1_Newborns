@@ -25,6 +25,12 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 boxSize;
     public float maxDistance;
     public LayerMask layerMask;
+    public Sprite jumpSprite;
+    private Sprite normalSprite;
+    public Sprite[] walkSprites;
+    public float walkFrameTime = 0.12f;   // seconds each frame is held
+    private float walkTimer;
+    private int walkFrame;
 
     // Start is called before the first frame update
     void Start()
@@ -33,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         Application.targetFrameRate = 30;
         marioBody = GetComponent<Rigidbody2D>();
         marioSprite = GetComponent<SpriteRenderer>();
+        normalSprite = marioSprite.sprite;
         startPosition = transform.localPosition;
         // scoreValue = GetComponent<JumpOnGoomba>();
 
@@ -47,19 +54,19 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKeyDown("a") && faceRightState)
         {
             faceRightState = false;
-            marioSprite.flipX = true;
         }
 
         if (Input.GetKeyDown("d") && !faceRightState)
         {
             faceRightState = true;
-            marioSprite.flipX = false;
         }
 
         if (Input.GetKeyDown("space") && onGroundState)
         {
             marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
         }
+
+        UpdateSprite();
 
     }
     public float maxSpeed = 20;
@@ -102,6 +109,35 @@ public class PlayerMovement : MonoBehaviour
                 Debug.Log("Collided with Tralalero Tralala! Game Over!");
                 ShowEndScreen("GAME OVER");
             }
+        }
+    }
+
+    // sprite helper for animations
+    private void UpdateSprite()
+    {
+        marioSprite.flipX = faceRightState;
+
+        if (!onGroundState)
+        {
+            marioSprite.sprite = jumpSprite;
+            return;
+        }
+
+        if (Mathf.Abs(Input.GetAxisRaw("Horizontal")) > 0 && walkSprites.Length > 0)
+        {
+            walkTimer += Time.deltaTime;
+            if (walkTimer >= walkFrameTime)
+            {
+                walkTimer -= walkFrameTime;
+                walkFrame = (walkFrame + 1) % walkSprites.Length;
+            }
+            marioSprite.sprite = walkSprites[walkFrame];
+        }
+        else
+        {
+            marioSprite.sprite = normalSprite;
+            walkTimer = 0.0f;
+            walkFrame = 0;
         }
     }
 
@@ -150,7 +186,6 @@ public class PlayerMovement : MonoBehaviour
         marioBody.transform.localPosition = startPosition;
         // reset sprite direction
         faceRightState = true;
-        marioSprite.flipX = false;
         // reset score
         score = 0;
         scoreText.text = "Score: 0";
