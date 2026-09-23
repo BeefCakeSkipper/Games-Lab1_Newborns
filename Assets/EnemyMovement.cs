@@ -28,7 +28,7 @@ public class EnemyMovement : MonoBehaviour
     }
     void Movegoomba()
     {
-        enemyBody.MovePosition(enemyBody.position + velocity * Time.fixedDeltaTime);
+        enemyBody.linearVelocity = new Vector2(velocity.x, enemyBody.linearVelocity.y);
     }
 
     void FixedUpdate()
