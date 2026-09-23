@@ -2639,7 +2639,7 @@ GameObject:
   - component: {fileID: 783020761}
   - component: {fileID: 783020760}
   - component: {fileID: 783020762}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Question-block
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -4388,6 +4388,11 @@ MonoBehaviour:
   boss: {fileID: 399862308}
   score: 0
   bossTrigger: {fileID: 948275984}
+  boxSize: {x: 0.5, y: 0.7, z: 0}
+  maxDistance: 0.1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 8
   maxSpeed: 20
 --- !u!50 &1191641733
 Rigidbody2D:
@@ -4549,11 +4554,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::JumpOverGoomba
   enemyLocation: {fileID: 948737090}
-  boxSize: {x: 0.5, y: 0.7, z: 0}
-  maxDistance: 0.1
-  layerMask:
-    serializedVersion: 2
-    m_Bits: 8
   bounceSpeed: 5
 --- !u!114 &1191641738
 MonoBehaviour:
@@ -4788,7 +4788,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1257004178}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Obstacles
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -5302,7 +5302,7 @@ GameObject:
   - component: {fileID: 1416842874}
   - component: {fileID: 1416842876}
   - component: {fileID: 1416842875}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Question-block (2)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -5440,7 +5440,7 @@ GameObject:
   - component: {fileID: 1475765230}
   - component: {fileID: 1475765229}
   - component: {fileID: 1475765231}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Brick
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -5701,7 +5701,7 @@ GameObject:
   - component: {fileID: 1548094603}
   - component: {fileID: 1548094605}
   - component: {fileID: 1548094604}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Question-block (3)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -5839,7 +5839,7 @@ GameObject:
   - component: {fileID: 1550063159}
   - component: {fileID: 1550063161}
   - component: {fileID: 1550063160}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Question-block (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -6357,7 +6357,7 @@ GameObject:
   - component: {fileID: 1687153490}
   - component: {fileID: 1687153492}
   - component: {fileID: 1687153491}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Platforms
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -6817,7 +6817,7 @@ GameObject:
   - component: {fileID: 1795833454}
   - component: {fileID: 1795833456}
   - component: {fileID: 1795833455}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Brick (1)
   m_TagString: Ground
   m_Icon: {fileID: 0}
