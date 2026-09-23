@@ -15,6 +15,7 @@ public class PlayerMovement : MonoBehaviour
     private SpriteRenderer marioSprite;
     private bool faceRightState = true;
     private Vector3 startPosition; // taking it from the scene start
+    private JumpOnGoomba scoreValue;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
         marioBody = GetComponent<Rigidbody2D>();
         marioSprite = GetComponent<SpriteRenderer>();
         startPosition = transform.localPosition;
+        scoreValue = GetComponent<JumpOnGoomba>();
 
     }
 
@@ -100,6 +102,7 @@ public class PlayerMovement : MonoBehaviour
         faceRightState = true;
         marioSprite.flipX = false;
         // reset score
+        scoreValue.score = 0;
         scoreText.text = "Score: 0";
         // reset Goomba
         foreach (Transform eachChild in enemies.transform)

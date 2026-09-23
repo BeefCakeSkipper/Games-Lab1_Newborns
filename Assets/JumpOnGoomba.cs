@@ -15,10 +15,13 @@ public class JumpOnGoomba : MonoBehaviour
     public Vector3 boxSize;
     public float maxDistance;
     public LayerMask layerMask;
+    public float bounceSpeed = 5.0f;   // lil bump after stomp
+    private Rigidbody2D marioBody;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        marioBody = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
@@ -43,6 +46,7 @@ public class JumpOnGoomba : MonoBehaviour
             score++;
             scoreText.text = "Score: " + score.ToString();
             col.gameObject.GetComponent<EnemyMovement>().Squash();
+            marioBody.AddForce(Vector2.up * bounceSpeed, ForceMode2D.Impulse);
             Debug.Log(score);
         }
     }
