@@ -12,7 +12,6 @@ public class JumpOnGoomba : MonoBehaviour
     [System.NonSerialized]
     public int score = 0; // we don't want this to show up in the inspector
 
-    private bool countScoreState = false;
     public Vector3 boxSize;
     public float maxDistance;
     public LayerMask layerMask;
@@ -29,7 +28,6 @@ public class JumpOnGoomba : MonoBehaviour
         if (Input.GetKeyDown("space") && onGroundCheck())
         {
             onGroundState = false;
-            countScoreState = true;
         }
     }
 
@@ -39,13 +37,12 @@ public class JumpOnGoomba : MonoBehaviour
 
         // mario stomps the goomba: airborne from a jump, haven't scored yet this
         // jump, and mario is above the goomba (so side hits don't count)
-        if (col.transform == enemyLocation && !onGroundState && countScoreState
-            && transform.position.y > enemyLocation.position.y)
+        if (col.gameObject.CompareTag("Enemy") && !onGroundState
+            && transform.position.y > col.transform.position.y + 0.4f)
         {
-            countScoreState = false;
             score++;
             scoreText.text = "Score: " + score.ToString();
-            enemyLocation.GetComponent<EnemyMovement>().Squash();
+            col.gameObject.GetComponent<EnemyMovement>().Squash();
             Debug.Log(score);
         }
     }
