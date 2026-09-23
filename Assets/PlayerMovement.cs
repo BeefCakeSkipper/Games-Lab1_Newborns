@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -8,9 +9,12 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D marioBody;
 
     public float upSpeed = 2;
+    public GameObject enemies;
+    public TextMeshProUGUI scoreText;
     private bool onGroundState = true;
     private SpriteRenderer marioSprite;
     private bool faceRightState = true;
+    private Vector3 startPosition; // taking it from the scene start
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
         Application.targetFrameRate =  30;
         marioBody = GetComponent<Rigidbody2D>();
         marioSprite = GetComponent<SpriteRenderer>();
+        startPosition = transform.localPosition;
 
     }
 
@@ -67,7 +72,42 @@ public class PlayerMovement : MonoBehaviour
       if (col.gameObject.CompareTag("Ground")) {
         onGroundState = true;
         }
+
+      if (col.gameObject.CompareTag("Ground")) onGroundState = true;
+
+      if (col.gameObject.CompareTag("Enemy")
+          && transform.position.y - col.transform.position.y < 0.4f)
+      {
+          Debug.Log("Collided with goomba!");
+          Time.timeScale = 0.0f;
+      }
   }
+
+    public void RestartButtonCallback(int input)
+    {
+        Debug.Log("Restart!");
+        // reset everything
+        ResetGame();
+        // resume time
+        Time.timeScale = 1.0f;
+    }
+
+    private void ResetGame()
+    {
+        // reset position
+        marioBody.transform.localPosition = startPosition;
+        // reset sprite direction
+        faceRightState = true;
+        marioSprite.flipX = false;
+        // reset score
+        scoreText.text = "Score: 0";
+        // reset Goomba
+        foreach (Transform eachChild in enemies.transform)
+        {
+            eachChild.GetComponent<EnemyMovement>().Respawn();
+        }
+
+    }
 
   
 

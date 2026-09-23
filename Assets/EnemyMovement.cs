@@ -13,12 +13,19 @@ public class EnemyMovement : MonoBehaviour
 
     private Rigidbody2D enemyBody;
     private SpriteRenderer goombaSprite;
+    private Vector3 startPosition; // taking it from the scene start
+
+    private Collider2D enemyCollider;
+    private Sprite normalSprite;
+    private bool squashed = false;
 
     void Start()
     {
         enemyBody = GetComponent<Rigidbody2D>();
         goombaSprite = GetComponent<SpriteRenderer>();
-        // get the starting position
+        enemyCollider = GetComponent<Collider2D>();
+        normalSprite = goombaSprite.sprite;
+        startPosition = transform.localPosition;
         originalX = transform.position.x;
         ComputeVelocity();
     }
@@ -32,7 +39,9 @@ public class EnemyMovement : MonoBehaviour
     }
 
     void FixedUpdate()
-    {   
+    {
+        if (squashed) return;
+
         if (moveRight > 0)
         {
             goombaSprite.flipX = false;
@@ -67,11 +76,31 @@ public class EnemyMovement : MonoBehaviour
 
     public void Squash()
     {
+        squashed = true;
         goombaSprite.sprite = squashedSprite;
-        enabled = false;
         enemyBody.bodyType = RigidbodyType2D.Static;
-        GetComponent<Collider2D>().enabled = false;
-        Destroy(gameObject, despawnDelay);
+        enemyCollider.enabled = false;
+        // hide when squashed
+        Invoke(nameof(Hide), despawnDelay);
+    }
+
+    private void Hide()
+    {
+        gameObject.SetActive(false);
+    }
+    public void Respawn()
+    {
+        CancelInvoke();
+        squashed = false;
+        gameObject.SetActive(true);
+        transform.localPosition = startPosition;
+        goombaSprite.sprite = normalSprite;
+        enemyCollider.enabled = true;
+        enemyBody.bodyType = RigidbodyType2D.Dynamic;
+        // restart the patrol
+        moveRight = -1;
+        originalX = transform.position.x;
+        ComputeVelocity();
     }
 
 }
