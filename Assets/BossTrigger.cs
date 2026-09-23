@@ -42,6 +42,7 @@ public class BossTrigger : MonoBehaviour
         boss.SetActive(false);
         // leftWall.SetActive(false);
         // rightWall.SetActive(false);
+        bossHealth.SetActive(false);
         bossEnvironment.SetActive(false);
     }
 }

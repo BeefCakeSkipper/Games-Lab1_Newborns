@@ -91,6 +91,7 @@ public class PlayerMovement : MonoBehaviour
         {
             Debug.Log("Collided with goomba!");
             Time.timeScale = 0.0f;
+            bossTrigger.bossHealth.SetActive(false);
         }
         if (col.gameObject.CompareTag("Boss"))
         {
@@ -99,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 Debug.Log("Collided with Tralalero Tralala! Game Over!");
                 Time.timeScale = 0.0f;
+                bossTrigger.bossHealth.SetActive(false);
             }
         }
     }
