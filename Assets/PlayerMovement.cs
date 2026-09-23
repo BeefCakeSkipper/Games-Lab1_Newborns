@@ -16,6 +16,10 @@ public class PlayerMovement : MonoBehaviour
     private bool faceRightState = true;
     private Vector3 startPosition; // taking it from the scene start
     private JumpOnGoomba scoreValue;
+    public bool isOnGround => onGroundState;
+    public Vector3 boxSize;
+    public float maxDistance;
+    public LayerMask layerMask;
 
     // Start is called before the first frame update
     void Start()
@@ -32,6 +36,10 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    
+      // always check if mario is on the ground so if u fall on the goomba it still gets stomped
+      onGroundState = onGroundCheck();
+
       if (Input.GetKeyDown("a") && faceRightState){
           faceRightState = false;
           marioSprite.flipX = true;
@@ -42,10 +50,9 @@ public class PlayerMovement : MonoBehaviour
           marioSprite.flipX = false;
       }
 
-    if (Input.GetKeyDown("space") && onGroundState){
-        marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
-        onGroundState = false;
-    }
+      if (Input.GetKeyDown("space") && onGroundState){
+          marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
+      }
 
     }
     public float maxSpeed = 20;
@@ -71,11 +78,6 @@ public class PlayerMovement : MonoBehaviour
 
   void OnCollisionEnter2D(Collision2D col)
   {
-      if (col.gameObject.CompareTag("Ground")) {
-        onGroundState = true;
-        }
-
-      if (col.gameObject.CompareTag("Ground")) onGroundState = true;
 
       if (col.gameObject.CompareTag("Enemy")
           && transform.position.y - col.transform.position.y < 0.4f)
@@ -84,6 +86,24 @@ public class PlayerMovement : MonoBehaviour
           Time.timeScale = 0.0f;
       }
   }
+
+    private bool onGroundCheck()
+    {
+        if (Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, maxDistance, layerMask))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawCube(transform.position - transform.up * maxDistance, boxSize);
+    }
 
     public void RestartButtonCallback(int input)
     {
