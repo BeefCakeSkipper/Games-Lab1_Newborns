@@ -1079,7 +1079,7 @@ Transform:
   m_GameObject: {fileID: 364476848}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 46.28, y: -0.92, z: 0}
+  m_LocalPosition: {x: 42.504997, y: -0.096000016, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1087,7 +1087,7 @@ Transform:
   - {fileID: 2086392622}
   - {fileID: 115658207}
   - {fileID: 549187603}
-  m_Father: {fileID: 1653104850}
+  m_Father: {fileID: 1280764522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!66 &364476850
 CompositeCollider2D:
@@ -1412,7 +1412,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.35735148, y: -0.35031104}
+  m_Offset: {x: -0.21138275, y: -0.35031104}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -1422,7 +1422,7 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  m_Size: {x: 3.785297, y: 2.299378}
+  m_Size: {x: 3.4933593, y: 2.299378}
   m_EdgeRadius: 0
 --- !u!1 &401843136
 GameObject:
@@ -5058,6 +5058,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1636104545}
+  - {fileID: 364476849}
+  - {fileID: 1781498857}
   - {fileID: 1376648355}
   - {fileID: 5355380}
   - {fileID: 1346172047}
@@ -6301,7 +6304,7 @@ Transform:
   m_GameObject: {fileID: 1636104544}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 36.77, y: -0.92, z: 0}
+  m_LocalPosition: {x: 32.995, y: -0.096000016, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6309,7 +6312,7 @@ Transform:
   - {fileID: 343013365}
   - {fileID: 401843137}
   - {fileID: 898882789}
-  m_Father: {fileID: 1653104850}
+  m_Father: {fileID: 1280764522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!66 &1636104546
 CompositeCollider2D:
@@ -6352,58 +6355,58 @@ CompositeCollider2D:
   m_ColliderPaths:
   - m_Collider: {fileID: 1247508533}
     m_ColliderPaths:
-    - - X: -77561496
+    - - X: -77561512
         Y: 2746500
-      - X: -83317488
+      - X: -83317512
         Y: 2746500
-      - X: -83317488
+      - X: -83317512
         Y: -2846500
-      - X: -77561496
+      - X: -77561512
         Y: -2846500
   - m_Collider: {fileID: 343013366}
     m_ColliderPaths:
-    - - X: -66049500
+    - - X: -66049520
         Y: 2746500
-      - X: -71805496
+      - X: -71805512
         Y: 2746500
-      - X: -71805496
+      - X: -71805512
         Y: -2846500
-      - X: -66049500
+      - X: -66049520
         Y: -2846500
   - m_Collider: {fileID: 401843138}
     m_ColliderPaths:
-    - - X: -71822016
+    - - X: -71822032
         Y: 2746500
-      - X: -77578008
+      - X: -77578032
         Y: 2746500
-      - X: -77578008
+      - X: -77578032
         Y: -2846500
-      - X: -71822016
+      - X: -71822032
         Y: -2846500
   - m_Collider: {fileID: 898882790}
     m_ColliderPaths:
-    - - X: -83422016
+    - - X: -83422032
         Y: 2746500
-      - X: -89178008
+      - X: -89178032
         Y: 2746500
-      - X: -89178008
+      - X: -89178032
         Y: -2846500
-      - X: -83422016
+      - X: -83422032
         Y: -2846500
   m_CompositePaths:
     m_Paths:
-    - - {x: -6.6049795, y: -0.28465}
-      - {x: -6.6049795, y: 0.27465}
-      - {x: -7.1805496, y: 0.2746207}
-      - {x: -7.18052, y: -0.28465}
-    - - {x: -7.1822314, y: -0.28465}
-      - {x: -7.1822314, y: 0.27465}
-      - {x: -8.331749, y: 0.2746207}
-      - {x: -8.331719, y: -0.28465}
-    - - {x: -8.342232, y: -0.28465}
-      - {x: -8.342232, y: 0.27465}
-      - {x: -8.917801, y: 0.2746207}
-      - {x: -8.917771, y: -0.28465}
+    - - {x: -6.6049814, y: -0.28465}
+      - {x: -6.6049814, y: 0.27465}
+      - {x: -7.180551, y: 0.2746207}
+      - {x: -7.1805215, y: -0.28465}
+    - - {x: -7.182233, y: -0.28465}
+      - {x: -7.182233, y: 0.27465}
+      - {x: -8.331751, y: 0.2746207}
+      - {x: -8.331721, y: -0.28465}
+    - - {x: -8.342233, y: -0.28465}
+      - {x: -8.342233, y: 0.27465}
+      - {x: -8.917804, y: 0.2746207}
+      - {x: -8.917773, y: -0.28465}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
@@ -6465,9 +6468,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 914846948}
-  - {fileID: 1636104545}
-  - {fileID: 364476849}
-  - {fileID: 1781498857}
   - {fileID: 1370024729}
   - {fileID: 246179827}
   m_Father: {fileID: 1282756494}
@@ -6751,7 +6751,7 @@ Transform:
   m_GameObject: {fileID: 1781498856}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 41.87, y: 1.65, z: 0}
+  m_LocalPosition: {x: 38.094997, y: 2.474, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -6759,7 +6759,7 @@ Transform:
   - {fileID: 1849235484}
   - {fileID: 941512736}
   - {fileID: 864688917}
-  m_Father: {fileID: 1653104850}
+  m_Father: {fileID: 1280764522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!66 &1781498858
 CompositeCollider2D:
@@ -6803,57 +6803,57 @@ CompositeCollider2D:
   - m_Collider: {fileID: 152988518}
     m_ColliderPaths:
     - - X: -77561496
-        Y: 2746500
+        Y: 2746499
       - X: -83317488
-        Y: 2746500
+        Y: 2746499
       - X: -83317488
-        Y: -2846500
+        Y: -2846501
       - X: -77561496
-        Y: -2846500
+        Y: -2846501
   - m_Collider: {fileID: 1849235485}
     m_ColliderPaths:
     - - X: -66049500
-        Y: 2746500
+        Y: 2746499
       - X: -71805496
-        Y: 2746500
+        Y: 2746499
       - X: -71805496
-        Y: -2846500
+        Y: -2846501
       - X: -66049500
-        Y: -2846500
+        Y: -2846501
   - m_Collider: {fileID: 941512737}
     m_ColliderPaths:
     - - X: -71822016
-        Y: 2746500
+        Y: 2746499
       - X: -77578008
-        Y: 2746500
+        Y: 2746499
       - X: -77578008
-        Y: -2846500
+        Y: -2846501
       - X: -71822016
-        Y: -2846500
+        Y: -2846501
   - m_Collider: {fileID: 864688918}
     m_ColliderPaths:
     - - X: -83422016
-        Y: 2746500
+        Y: 2746499
       - X: -89178008
-        Y: 2746500
+        Y: 2746499
       - X: -89178008
-        Y: -2846500
+        Y: -2846501
       - X: -83422016
-        Y: -2846500
+        Y: -2846501
   m_CompositePaths:
     m_Paths:
-    - - {x: -6.6049795, y: -0.28465}
-      - {x: -6.6049795, y: 0.27465}
-      - {x: -7.1805496, y: 0.2746207}
-      - {x: -7.18052, y: -0.28465}
-    - - {x: -7.1822314, y: -0.28465}
-      - {x: -7.1822314, y: 0.27465}
-      - {x: -8.331749, y: 0.2746207}
-      - {x: -8.331719, y: -0.28465}
-    - - {x: -8.342232, y: -0.28465}
-      - {x: -8.342232, y: 0.27465}
-      - {x: -8.917801, y: 0.2746207}
-      - {x: -8.917771, y: -0.28465}
+    - - {x: -6.6049795, y: -0.28465012}
+      - {x: -6.6049795, y: 0.27464992}
+      - {x: -7.1805496, y: 0.2746206}
+      - {x: -7.18052, y: -0.28465012}
+    - - {x: -7.1822314, y: -0.28465012}
+      - {x: -7.1822314, y: 0.27464992}
+      - {x: -8.331749, y: 0.2746206}
+      - {x: -8.331719, y: -0.28465012}
+    - - {x: -8.342232, y: -0.28465012}
+      - {x: -8.342232, y: 0.27464992}
+      - {x: -8.917801, y: 0.2746206}
+      - {x: -8.917771, y: -0.28465012}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
   m_UseDelaunayMesh: 0
