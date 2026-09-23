@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class JumpOnGoomba : MonoBehaviour
+public class JumpOnBoss : MonoBehaviour
 {
     public Transform enemyLocation;
     // public TextMeshProUGUI scoreText;
@@ -40,16 +40,21 @@ public class JumpOnGoomba : MonoBehaviour
     {
         if (col.gameObject.CompareTag("Ground")) onGroundState = true;
 
-        // mario stomps the goomba: airborne from a jump, haven't scored yet this
+        // mario stomps the Boss: airborne from a jump, haven't scored yet this
         // jump, and mario is above the goomba (so side hits don't count)
-        if (col.gameObject.CompareTag("Enemy") && !onGroundState
-            && transform.position.y > col.transform.position.y + 0.4f)
+        // Mario collides with Boss
+        if (col.gameObject.CompareTag("Boss"))
         {
-            // score++;
-            // scoreText.text = "Score: " + score.ToString();
-            playerMovement.AddScore();
-            col.gameObject.GetComponent<EnemyMovement>().Squash();
-            marioBody.AddForce(Vector2.up * bounceSpeed, ForceMode2D.Impulse);
+            ContactPoint2D contact = col.GetContact(0);
+
+            // Only count as a stomp if Mario lands clearly on top
+            if (contact.normal.y >= 0.7f)
+            {
+                Debug.Log("Boss has been stomped");
+                playerMovement.AddScore();
+                col.gameObject.GetComponent<BossLogic>().TakeDamage();
+                marioBody.AddForce(Vector2.up * bounceSpeed, ForceMode2D.Impulse);
+            }
         }
     }
 

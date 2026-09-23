@@ -1,0 +1,1144 @@
+fileFormatVersion: 2
+guid: d7d2a08d42d90324fb86bd1524a2140d
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2863381563455056641
+    second: Tralalero Tralala sprites_0
+  - first:
+      213: -1229371246803326627
+    second: Tralalero Tralala sprites_1
+  - first:
+      213: 1929096452434901065
+    second: Tralalero Tralala sprites_2
+  - first:
+      213: 3105152621001789163
+    second: Tralalero Tralala sprites_3
+  - first:
+      213: -4143628326786461525
+    second: Tralalero Tralala sprites_4
+  - first:
+      213: 420426017631220059
+    second: Tralalero Tralala sprites_5
+  - first:
+      213: -4456818768932514371
+    second: Tralalero Tralala sprites_6
+  - first:
+      213: -1251204059110334280
+    second: Tralalero Tralala sprites_7
+  - first:
+      213: -6272977725067976874
+    second: Tralalero Tralala sprites_8
+  - first:
+      213: -4006549409322289417
+    second: Tralalero Tralala sprites_9
+  - first:
+      213: 486703146828570172
+    second: Tralalero Tralala sprites_10
+  - first:
+      213: -6030308643581520693
+    second: Tralalero Tralala sprites_11
+  - first:
+      213: 4465606108249821615
+    second: Tralalero Tralala sprites_12
+  - first:
+      213: 8348685699224043102
+    second: Tralalero Tralala sprites_13
+  - first:
+      213: -3992767391477999854
+    second: Tralalero Tralala sprites_14
+  - first:
+      213: -4232619100159266070
+    second: Tralalero Tralala sprites_15
+  - first:
+      213: -8221374877018000244
+    second: Tralalero Tralala sprites_16
+  - first:
+      213: -4988365636242208567
+    second: Tralalero Tralala sprites_17
+  - first:
+      213: 6171867506063250817
+    second: Tralalero Tralala sprites_18
+  - first:
+      213: 5827923889465872401
+    second: Tralalero Tralala sprites_19
+  - first:
+      213: -1490384535384420069
+    second: Tralalero Tralala sprites_20
+  - first:
+      213: 1246868863690414397
+    second: Tralalero Tralala sprites_21
+  - first:
+      213: 6976042752777102308
+    second: Tralalero Tralala sprites_22
+  - first:
+      213: 1687711296513908730
+    second: Tralalero Tralala sprites_23
+  - first:
+      213: 34887908619346067
+    second: Tralalero Tralala sprites_24
+  - first:
+      213: 3598508926576930720
+    second: Tralalero Tralala sprites_25
+  - first:
+      213: -8550073493339080932
+    second: Tralalero Tralala sprites_26
+  - first:
+      213: -8982249263199599961
+    second: Tralalero Tralala sprites_27
+  - first:
+      213: 6606945796986503326
+    second: Tralalero Tralala sprites_28
+  - first:
+      213: 466694270616096544
+    second: Tralalero Tralala sprites_29
+  - first:
+      213: 6531829055049439650
+    second: Tralalero Tralala sprites_30
+  - first:
+      213: 299731489903230972
+    second: Tralalero Tralala sprites_31
+  - first:
+      213: -665429216323354369
+    second: Tralalero Tralala sprites_32
+  - first:
+      213: -44665249529150130
+    second: Tralalero Tralala sprites_33
+  - first:
+      213: -8206946918253774870
+    second: Tralalero Tralala sprites_34
+  - first:
+      213: 4086666370416489901
+    second: Tralalero Tralala sprites_35
+  - first:
+      213: -5762913658893363914
+    second: Tralalero Tralala sprites_36
+  - first:
+      213: -3522283744024382700
+    second: Tralalero Tralala sprites_37
+  - first:
+      213: 6058107389519251488
+    second: Tralalero Tralala sprites_38
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_0
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 447
+        width: 72
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10b24227c56ccb720800000000000000
+      internalID: 2863381563455056641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_1
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 447
+        width: 71
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5965315d5560fee0800000000000000
+      internalID: -1229371246803326627
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_2
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 447
+        width: 70
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94839d0b00785ca10800000000000000
+      internalID: 1929096452434901065
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_3
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 447
+        width: 70
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bee4f246bd7b71b20800000000000000
+      internalID: 3105152621001789163
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_4
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 447
+        width: 74
+        height: 43
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba095ac9dffde76c0800000000000000
+      internalID: -4143628326786461525
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_5
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 447
+        width: 72
+        height: 44
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b51bd3b4c37a5d500800000000000000
+      internalID: 420426017631220059
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_6
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 447
+        width: 71
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: db5db7161f23622c0800000000000000
+      internalID: -4456818768932514371
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_7
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 447
+        width: 70
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8b0a3339984d2aee0800000000000000
+      internalID: -1251204059110334280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_8
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 447
+        width: 70
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65f9265aef7e1f8a0800000000000000
+      internalID: -6272977725067976874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_9
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 447
+        width: 70
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f63b423a80e568c0800000000000000
+      internalID: -4006549409322289417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_10
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 447
+        width: 74
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3e18c1feed11c600800000000000000
+      internalID: 486703146828570172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_11
+      rect:
+        serializedVersion: 2
+        x: 885
+        y: 447
+        width: 73
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc41b551d3a005ca0800000000000000
+      internalID: -6030308643581520693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_12
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 383
+        width: 73
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa19b0d781509fd30800000000000000
+      internalID: 4465606108249821615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_13
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 383
+        width: 70
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e5ef1a3096d7cd370800000000000000
+      internalID: 8348685699224043102
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_14
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 383
+        width: 72
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 217d0384637d698c0800000000000000
+      internalID: -3992767391477999854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_15
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 383
+        width: 70
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae239719a57b245c0800000000000000
+      internalID: -4232619100159266070
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_16
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 383
+        width: 73
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c84750aab1fc7ed80800000000000000
+      internalID: -8221374877018000244
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_17
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 383
+        width: 70
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c8840222e3c5cab0800000000000000
+      internalID: -4988365636242208567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_18
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 383
+        width: 72
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1851dabfbc0e6a550800000000000000
+      internalID: 6171867506063250817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_19
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 383
+        width: 70
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 11050a956e1f0e050800000000000000
+      internalID: 5827923889465872401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_20
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 319
+        width: 70
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b111da55927115be0800000000000000
+      internalID: -1490384535384420069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_21
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 319
+        width: 73
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3913c510a4cd4110800000000000000
+      internalID: 1246868863690414397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_22
+      rect:
+        serializedVersion: 2
+        x: 165
+        y: 319
+        width: 72
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e3a7394ce1efc060800000000000000
+      internalID: 6976042752777102308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_23
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 323
+        width: 70
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aff10287b74fb6710800000000000000
+      internalID: 1687711296513908730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_24
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 326
+        width: 73
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 39066383e52fb7000800000000000000
+      internalID: 34887908619346067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_25
+      rect:
+        serializedVersion: 2
+        x: 405
+        y: 319
+        width: 70
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0afa0b19dc870f130800000000000000
+      internalID: 3598508926576930720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_26
+      rect:
+        serializedVersion: 2
+        x: 485
+        y: 319
+        width: 73
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c177a024579085980800000000000000
+      internalID: -8550073493339080932
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_27
+      rect:
+        serializedVersion: 2
+        x: 565
+        y: 319
+        width: 72
+        height: 53
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7a249f692e3a85380800000000000000
+      internalID: -8982249263199599961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_28
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 322
+        width: 70
+        height: 56
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9004af723690bb50800000000000000
+      internalID: 6606945796986503326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_29
+      rect:
+        serializedVersion: 2
+        x: 725
+        y: 325
+        width: 73
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02f48ca67f70a7600800000000000000
+      internalID: 466694270616096544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_30
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 255
+        width: 70
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a91ccf1be7b5aa50800000000000000
+      internalID: 6531829055049439650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_31
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 255
+        width: 69
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cff3ea7b33cd82400800000000000000
+      internalID: 299731489903230972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_32
+      rect:
+        serializedVersion: 2
+        x: 8
+        y: 191
+        width: 65
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff041e147abe3c6f0800000000000000
+      internalID: -665429216323354369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_33
+      rect:
+        serializedVersion: 2
+        x: 88
+        y: 191
+        width: 61
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e45c2043131516ff0800000000000000
+      internalID: -44665249529150130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_34
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 136
+        width: 72
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae73ff692411b1e80800000000000000
+      internalID: -8206946918253774870
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_35
+      rect:
+        serializedVersion: 2
+        x: 85
+        y: 136
+        width: 71
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: da5b53c6961c6b830800000000000000
+      internalID: 4086666370416489901
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_36
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 66
+        width: 68
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6351a6a7f840600b0800000000000000
+      internalID: -5762913658893363914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_37
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 66
+        width: 67
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4133b4fb8955e1fc0800000000000000
+      internalID: -3522283744024382700
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Tralalero Tralala sprites_38
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 0
+        width: 70
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 028c673d298b21450800000000000000
+      internalID: 6058107389519251488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Tralalero Tralala sprites_0: 2863381563455056641
+      Tralalero Tralala sprites_1: -1229371246803326627
+      Tralalero Tralala sprites_10: 486703146828570172
+      Tralalero Tralala sprites_11: -6030308643581520693
+      Tralalero Tralala sprites_12: 4465606108249821615
+      Tralalero Tralala sprites_13: 8348685699224043102
+      Tralalero Tralala sprites_14: -3992767391477999854
+      Tralalero Tralala sprites_15: -4232619100159266070
+      Tralalero Tralala sprites_16: -8221374877018000244
+      Tralalero Tralala sprites_17: -4988365636242208567
+      Tralalero Tralala sprites_18: 6171867506063250817
+      Tralalero Tralala sprites_19: 5827923889465872401
+      Tralalero Tralala sprites_2: 1929096452434901065
+      Tralalero Tralala sprites_20: -1490384535384420069
+      Tralalero Tralala sprites_21: 1246868863690414397
+      Tralalero Tralala sprites_22: 6976042752777102308
+      Tralalero Tralala sprites_23: 1687711296513908730
+      Tralalero Tralala sprites_24: 34887908619346067
+      Tralalero Tralala sprites_25: 3598508926576930720
+      Tralalero Tralala sprites_26: -8550073493339080932
+      Tralalero Tralala sprites_27: -8982249263199599961
+      Tralalero Tralala sprites_28: 6606945796986503326
+      Tralalero Tralala sprites_29: 466694270616096544
+      Tralalero Tralala sprites_3: 3105152621001789163
+      Tralalero Tralala sprites_30: 6531829055049439650
+      Tralalero Tralala sprites_31: 299731489903230972
+      Tralalero Tralala sprites_32: -665429216323354369
+      Tralalero Tralala sprites_33: -44665249529150130
+      Tralalero Tralala sprites_34: -8206946918253774870
+      Tralalero Tralala sprites_35: 4086666370416489901
+      Tralalero Tralala sprites_36: -5762913658893363914
+      Tralalero Tralala sprites_37: -3522283744024382700
+      Tralalero Tralala sprites_38: 6058107389519251488
+      Tralalero Tralala sprites_4: -4143628326786461525
+      Tralalero Tralala sprites_5: 420426017631220059
+      Tralalero Tralala sprites_6: -4456818768932514371
+      Tralalero Tralala sprites_7: -1251204059110334280
+      Tralalero Tralala sprites_8: -6272977725067976874
+      Tralalero Tralala sprites_9: -4006549409322289417
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

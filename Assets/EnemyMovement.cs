@@ -45,7 +45,8 @@ public class EnemyMovement : MonoBehaviour
         if (moveRight > 0)
         {
             goombaSprite.flipX = false;
-        } else
+        }
+        else
         {
             goombaSprite.flipX = true;
         }
