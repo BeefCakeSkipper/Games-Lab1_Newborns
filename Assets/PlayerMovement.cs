@@ -11,7 +11,6 @@ public class PlayerMovement : MonoBehaviour
     private bool onGroundState = true;
     private SpriteRenderer marioSprite;
     private bool faceRightState = true;
-    private int jumps = 2;
 
     // Start is called before the first frame update
     void Start()
@@ -36,10 +35,9 @@ public class PlayerMovement : MonoBehaviour
           marioSprite.flipX = false;
       }
 
-    if (Input.GetKeyDown("space") && jumps > 0){
+    if (Input.GetKeyDown("space") && onGroundState){
         marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
         onGroundState = false;
-        jumps--;
     }
 
     }
@@ -68,7 +66,6 @@ public class PlayerMovement : MonoBehaviour
   {
       if (col.gameObject.CompareTag("Ground")) {
         onGroundState = true;
-        jumps = 2;
         }
   }
 

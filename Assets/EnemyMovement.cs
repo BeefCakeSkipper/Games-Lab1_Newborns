@@ -62,4 +62,16 @@ public class EnemyMovement : MonoBehaviour
         Movegoomba();
 
     }
+    public Sprite squashedSprite;
+    public float despawnDelay = 0.5f;
+
+    public void Squash()
+    {
+        goombaSprite.sprite = squashedSprite;
+        enabled = false;
+        enemyBody.bodyType = RigidbodyType2D.Static;
+        GetComponent<Collider2D>().enabled = false;
+        Destroy(gameObject, despawnDelay);
+    }
+
 }

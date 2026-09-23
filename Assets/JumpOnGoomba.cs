@@ -45,6 +45,7 @@ public class JumpOnGoomba : MonoBehaviour
             countScoreState = false;
             score++;
             scoreText.text = "Score: " + score.ToString();
+            enemyLocation.GetComponent<EnemyMovement>().Squash();
             Debug.Log(score);
         }
     }
