@@ -4937,7 +4937,6 @@ GameObject:
   - component: {fileID: 1191641736}
   - component: {fileID: 1191641737}
   - component: {fileID: 1191641738}
-  - component: {fileID: 1191641739}
   m_Layer: 0
   m_Name: Mario
   m_TagString: Player
@@ -4977,7 +4976,6 @@ MonoBehaviour:
   - {fileID: 797620493, guid: f1bde3f95d8d049e59a4208ea4358c51, type: 3}
   - {fileID: 1965497133, guid: f1bde3f95d8d049e59a4208ea4358c51, type: 3}
   walkFrameTime: 0.12
-  marioAnimator: {fileID: 1191641739}
   maxSpeed: 20
 --- !u!50 &1191641733
 Rigidbody2D:
@@ -5055,7 +5053,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 257657440, guid: f1bde3f95d8d049e59a4208ea4358c51, type: 3}
+  m_Sprite: {fileID: -15771423, guid: f1bde3f95d8d049e59a4208ea4358c51, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -5074,7 +5072,7 @@ Transform:
   m_GameObject: {fileID: 1191641731}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4.56, y: -2.64, z: 0}
+  m_LocalPosition: {x: -4.31, y: -1.3, z: 0}
   m_LocalScale: {x: 0.5622336, y: 0.6888392, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5154,28 +5152,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::JumpOnBoss
   enemyLocation: {fileID: 399862304}
   bounceSpeed: 5
---- !u!95 &1191641739
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191641731}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: c82712767d9fe374bae37447485dfc8c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1205078213
 GameObject:
   m_ObjectHideFlags: 0
