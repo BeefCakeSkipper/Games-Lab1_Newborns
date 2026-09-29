@@ -181,6 +181,7 @@ public class PlayerMovement : MonoBehaviour
     {
         // reset position
         marioBody.transform.localPosition = startPosition;
+        marioBody.linearVelocity = Vector2.zero;
         // reset sprite direction
         faceRightState = true;
         // reset score
