@@ -14,13 +14,11 @@ public class CameraFollow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
     }
 
     void LateUpdate()
     {
         float distanceFromCamera = mario.position.x - transform.position.x;
-
 
         if (distanceFromCamera > horizontalLimit)
         {
