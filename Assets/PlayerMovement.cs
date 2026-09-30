@@ -90,10 +90,6 @@ public class PlayerMovement : MonoBehaviour
             marioAnimator.SetTrigger("onSkid");
         }
 
-        if (Input.GetKeyDown("space") && onGroundState)
-        {
-            marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
-        }
 
         marioAnimator.SetFloat("xSpeed", Mathf.Abs(marioBody.linearVelocity.x));
 
