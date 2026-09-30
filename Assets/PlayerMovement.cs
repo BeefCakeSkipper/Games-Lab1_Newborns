@@ -60,6 +60,8 @@ public class PlayerMovement : MonoBehaviour
         marioSprite = GetComponent<SpriteRenderer>();
         normalSprite = marioSprite.sprite;
         startPosition = transform.localPosition;
+        // ground check hits layer 3 (Ground) and layer 7 (Obstacles)
+        layerMask = (1 << 3) | (1 << 7);
         // scoreValue = GetComponent<JumpOnGoomba>();
 
         // update animator state
