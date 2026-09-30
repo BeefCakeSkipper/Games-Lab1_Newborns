@@ -64,6 +64,22 @@ public class PlayerMovement : MonoBehaviour
         ShowEndScreen("GAME OVER");
     }
 
+    // kills mario dedge
+    public void Die()
+    {
+        if (!alive)
+            return;
+
+        // play death animation
+        marioAnimator.Play("mario-die");
+        marioAudio.PlayOneShot(marioDeath);
+        alive = false;
+        // remove hitbox so mario falls through everything
+        GetComponent<Collider2D>().enabled = false;
+        // wait for the death impulse + animation before freezing the game
+        Invoke(nameof(GameOver), deathDelay);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -164,21 +180,14 @@ public class PlayerMovement : MonoBehaviour
         if (alive && col.gameObject.CompareTag("Enemy")
             && transform.position.y - col.transform.position.y < 0.4f)
         {
-            // play death animation
-            marioAnimator.Play("mario-die");
-            marioAudio.PlayOneShot(marioDeath);
-            alive = false;
-            // remove hitbox so mario falls through everything
-            GetComponent<Collider2D>().enabled = false;
-            // wait for the death impulse + animation before freezing the game
-            Invoke(nameof(GameOver), deathDelay);
+            Die();
         }
         if (col.gameObject.CompareTag("Boss"))
         {
             ContactPoint2D contact = col.GetContact(0);
             if (contact.normal.y < 0.7f)
             {
-                ShowEndScreen("GAME OVER");
+                Die();
             }
         }
     }
