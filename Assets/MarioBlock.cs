@@ -10,6 +10,9 @@ public class MarioBlock : MonoBehaviour
 
     private bool bouncingUp = false;
     private bool bouncingDown = false;
+    public Animator blockAnimator;
+    private bool used = false;
+
 
     void Start()
     {
@@ -57,9 +60,12 @@ public class MarioBlock : MonoBehaviour
             Debug.Log(contact.normal.y);
             if (contact.normal.y > 0.5f)
             {
-                if (!bouncingUp && !bouncingDown) // So that it doesn't proc during animation
+                if (!used && !bouncingUp && !bouncingDown) // So that it doesn't proc during animation
                 {
                     bouncingUp = true;
+                    used = true;
+                    blockAnimator.SetTrigger("Spawn");
+                    
                 }
 
                 break;

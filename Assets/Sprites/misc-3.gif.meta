@@ -1625,7 +1625,7 @@ TextureImporter:
         x: 427
         y: 1075
         width: 10
-        height: 32
+        height: 15
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1644,10 +1644,10 @@ TextureImporter:
       name: misc-3_74
       rect:
         serializedVersion: 2
-        x: 440
-        y: 1093
-        width: 4
-        height: 14
+        x: 439
+        y: 1092
+        width: 6
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1666,10 +1666,10 @@ TextureImporter:
       name: misc-3_75
       rect:
         serializedVersion: 2
-        x: 448
-        y: 1093
-        width: 8
-        height: 14
+        x: 447
+        y: 1092
+        width: 10
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -1688,10 +1688,10 @@ TextureImporter:
       name: misc-3_76
       rect:
         serializedVersion: 2
-        x: 461
-        y: 1093
-        width: 4
-        height: 14
+        x: 460
+        y: 1092
+        width: 6
+        height: 16
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -9512,6 +9512,28 @@ TextureImporter:
       bones: []
       spriteID: 067c6c30892315a4cbb3aaf92ed74eb0
       internalID: 1476959158
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: misc-3_0
+      rect:
+        serializedVersion: 2
+        x: 432
+        y: 1092
+        width: 5
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98fde29374ca87541bcb2dd504b7b973
+      internalID: 145593326
       vertices: []
       indices: 
       edges: []
