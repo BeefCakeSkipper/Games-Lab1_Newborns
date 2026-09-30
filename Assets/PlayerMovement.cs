@@ -34,6 +34,7 @@ public class PlayerMovement : MonoBehaviour
     public Animator marioAnimator;
     public AudioSource marioAudio;
     public AudioClip marioDeath;
+    public AudioClip marioJump;
     public float deathImpulse = 15;
     public GameObject obstacles;
 
@@ -42,16 +43,18 @@ public class PlayerMovement : MonoBehaviour
     [System.NonSerialized]
     public bool alive = true;
 
+    public float deathDelay = 3.0f;   // seconds before the game over screen shows
+
     void PlayDeathImpulse()
     {
+        marioBody.linearVelocity = Vector2.zero;
         marioBody.AddForce(Vector2.up * deathImpulse, ForceMode2D.Impulse);
     }
 
-    void PlayJumpSound()
+    void GameOver()
     {
-        marioAudio.PlayOneShot(marioAudio.clip);
+        ShowEndScreen("GAME OVER");
     }
-
 
     // Start is called before the first frame update
     void Start()
@@ -117,6 +120,7 @@ public class PlayerMovement : MonoBehaviour
             if (Input.GetKeyDown("space") && onGroundState)
             {
                 marioBody.AddForce(Vector2.up * upSpeed, ForceMode2D.Impulse);
+                marioAudio.PlayOneShot(marioJump);
                 onGroundState = false;
                 // update animator state
                 marioAnimator.SetBool("onGround", onGroundState);
@@ -148,7 +152,10 @@ public class PlayerMovement : MonoBehaviour
             marioAnimator.Play("mario-die");
             marioAudio.PlayOneShot(marioDeath);
             alive = false;
-            ShowEndScreen("GAME OVER");
+            // remove hitbox so mario falls through everything
+            GetComponent<Collider2D>().enabled = false;
+            // wait for the death impulse + animation before freezing the game
+            Invoke(nameof(GameOver), deathDelay);
         }
         if (col.gameObject.CompareTag("Boss"))
         {
@@ -254,6 +261,8 @@ public class PlayerMovement : MonoBehaviour
         // reset animation
         marioAnimator.SetTrigger("gameRestart");
         alive = true;
+        // give mario his hitbox back
+        GetComponent<Collider2D>().enabled = true;
 
     }
     public void AddScore()

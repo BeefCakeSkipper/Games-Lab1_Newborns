@@ -3591,8 +3591,10 @@ MonoBehaviour:
   marioAnimator: {fileID: 1191641739}
   marioAudio: {fileID: 1191641740}
   marioDeath: {fileID: 8300000, guid: 0f4e05c00f1ceec40859da13d14351e4, type: 3}
+  marioJump: {fileID: 8300000, guid: bc5ca5e0703c54692a186434e1149ccd, type: 3}
   deathImpulse: 15
   obstacles: {fileID: 1257004177}
+  deathDelay: 3
   maxSpeed: 20
 --- !u!50 &1191641733
 Rigidbody2D:
