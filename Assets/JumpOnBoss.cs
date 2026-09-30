@@ -14,6 +14,7 @@ public class JumpOnBoss : MonoBehaviour
     public float bounceSpeed = 5.0f;   // lil bump after stomp
     private Rigidbody2D marioBody;
     private PlayerMovement playerMovement;
+    public AudioClip stompSound;
 
     // Start is called before the first frame update
     void Start()
@@ -35,6 +36,7 @@ public class JumpOnBoss : MonoBehaviour
             {
                 playerMovement.AddScore();
                 col.gameObject.GetComponent<BossLogic>().TakeDamage();
+                playerMovement.marioAudio.PlayOneShot(stompSound);
                 marioBody.AddForce(Vector2.up * bounceSpeed, ForceMode2D.Impulse);
             }
         }
