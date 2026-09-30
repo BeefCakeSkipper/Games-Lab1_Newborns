@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     public AudioSource marioAudio;
     public AudioClip marioDeath;
     public float deathImpulse = 15;
+    public GameObject obstacles;
+
 
     // state
     [System.NonSerialized]
@@ -239,6 +241,11 @@ public class PlayerMovement : MonoBehaviour
         foreach (Transform eachChild in enemies.transform)
         {
             eachChild.GetComponent<EnemyMovement>().Respawn();
+        }
+        // reset blocks
+        foreach (MarioBlock block in obstacles.GetComponentsInChildren<MarioBlock>())
+        {
+            block.ResetBlock();
         }
         // reset boss
         boss.Respawn();

@@ -11,7 +11,10 @@ public class MarioBlock : MonoBehaviour
     private bool bouncingUp = false;
     private bool bouncingDown = false;
     public Animator blockAnimator;
+    public AudioSource blockAudio;
+    public AudioClip coinSound;
     private bool used = false;
+    public bool hasCoin = true;
 
 
     void Start()
@@ -64,7 +67,12 @@ public class MarioBlock : MonoBehaviour
                 {
                     bouncingUp = true;
                     used = true;
-                    blockAnimator.SetTrigger("Spawn");
+                    if (hasCoin)
+                    { 
+                        blockAnimator.SetTrigger("Spawn");
+                        blockAudio.PlayOneShot(coinSound);
+                    }
+
                     
                 }
 
@@ -72,4 +80,15 @@ public class MarioBlock : MonoBehaviour
             }
         }
     }
+
+    public void ResetBlock()
+    {
+        used = false;
+        bouncingUp = false;
+        bouncingDown = false;
+        transform.position = startPosition;
+        blockAnimator.ResetTrigger("Spawn");
+        blockAnimator.Rebind();
+    }
+
 }
