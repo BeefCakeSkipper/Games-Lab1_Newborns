@@ -14,6 +14,7 @@ public class MarioBlock : MonoBehaviour
     public AudioSource blockAudio;
     public AudioClip coinSound;
     private bool used = false;
+    public bool reusable = false;
     public bool hasCoin = true;
 
 
@@ -60,17 +61,21 @@ public class MarioBlock : MonoBehaviour
         foreach (ContactPoint2D contact in collision.contacts)
         {
             // Hit from underneath
-            Debug.Log(contact.normal.y);
             if (contact.normal.y > 0.5f)
             {
                 if (!used && !bouncingUp && !bouncingDown) // So that it doesn't proc during animation
                 {
                     bouncingUp = true;
-                    used = true;
+
                     if (hasCoin)
-                    { 
+                    {
                         blockAnimator.SetTrigger("Spawn");
                         blockAudio.PlayOneShot(coinSound);
+                        hasCoin = false;
+                    }
+                    if (!reusable)
+                    {
+                        used = true;
                     }
 
                     
@@ -87,8 +92,12 @@ public class MarioBlock : MonoBehaviour
         bouncingUp = false;
         bouncingDown = false;
         transform.position = startPosition;
-        blockAnimator.ResetTrigger("Spawn");
-        blockAnimator.Rebind();
+        if (blockAnimator)
+        {
+            blockAnimator.ResetTrigger("Spawn");
+            blockAnimator.Rebind();  
+        }
+
     }
 
 }
