@@ -16,10 +16,12 @@ public class MarioBlock : MonoBehaviour
     private bool used = false;
     public bool reusable = false;
     public bool hasCoin = true;
+    private bool startHasCoin;
 
 
     void Start()
     {
+        startHasCoin = hasCoin;
         startPosition = transform.position;
         topPosition = startPosition + Vector3.up * bounceHeight;
     }
@@ -69,8 +71,10 @@ public class MarioBlock : MonoBehaviour
 
                     if (hasCoin)
                     {
-                        blockAnimator.SetTrigger("Spawn");
-                        blockAudio.PlayOneShot(coinSound);
+                        if (blockAnimator != null && blockAnimator.runtimeAnimatorController != null)
+                            blockAnimator.SetTrigger("Spawn");
+                        if (blockAudio != null && coinSound != null)
+                            blockAudio.PlayOneShot(coinSound);
                         hasCoin = false;
                     }
                     if (!reusable)
@@ -89,10 +93,11 @@ public class MarioBlock : MonoBehaviour
     public void ResetBlock()
     {
         used = false;
+        hasCoin = startHasCoin;
         bouncingUp = false;
         bouncingDown = false;
         transform.position = startPosition;
-        if (blockAnimator)
+        if (blockAnimator != null)
         {
             blockAnimator.ResetTrigger("Spawn");
             blockAnimator.Rebind();  
