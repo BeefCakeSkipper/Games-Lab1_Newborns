@@ -37,6 +37,14 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip marioJump;
     public float deathImpulse = 15;
     public GameObject obstacles;
+    public Vector2 gameOverScorePosition = new Vector2(0, -80); // below the game over text
+
+    // original score position
+    private Vector2 scoreAnchorMin;
+    private Vector2 scoreAnchorMax;
+    private Vector2 scorePosition;
+    private TextAlignmentOptions scoreAlignment;
+    private int scoreSiblingIndex;
 
 
     // state
@@ -67,6 +75,14 @@ public class PlayerMovement : MonoBehaviour
         startPosition = transform.localPosition;
         // ground check hits layer 3 (Ground) and layer 7 (Obstacles)
         layerMask = (1 << 3) | (1 << 7);
+
+        // remember where the score sits in the HUD
+        RectTransform scoreRect = scoreText.rectTransform;
+        scoreAnchorMin = scoreRect.anchorMin;
+        scoreAnchorMax = scoreRect.anchorMax;
+        scorePosition = scoreRect.anchoredPosition;
+        scoreAlignment = scoreText.alignment;
+        scoreSiblingIndex = scoreRect.GetSiblingIndex();
         // scoreValue = GetComponent<JumpOnGoomba>();
 
         // update animator state
@@ -220,6 +236,15 @@ public class PlayerMovement : MonoBehaviour
         resultText.text = message;
         gameOverScreen.SetActive(true);
         bossTrigger.bossHealth.SetActive(false);
+
+        // move the score to the center and below the game over text
+        RectTransform scoreRect = scoreText.rectTransform;
+        scoreRect.anchorMin = new Vector2(0.5f, 0.5f);
+        scoreRect.anchorMax = new Vector2(0.5f, 0.5f);
+        scoreRect.anchoredPosition = gameOverScorePosition;
+        scoreText.alignment = TextAlignmentOptions.Center;
+        scoreRect.SetAsLastSibling(); // put score over the gameover overlay
+
         Time.timeScale = 0.0f;
     }
 
@@ -244,6 +269,13 @@ public class PlayerMovement : MonoBehaviour
         // reset score
         score = 0;
         scoreText.text = "Score: 0";
+        // put the score back to the corner
+        RectTransform scoreRect = scoreText.rectTransform;
+        scoreRect.anchorMin = scoreAnchorMin;
+        scoreRect.anchorMax = scoreAnchorMax;
+        scoreRect.anchoredPosition = scorePosition;
+        scoreText.alignment = scoreAlignment;
+        scoreRect.SetSiblingIndex(scoreSiblingIndex);
         // reset Goomba
         foreach (Transform eachChild in enemies.transform)
         {
