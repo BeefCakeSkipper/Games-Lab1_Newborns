@@ -186,7 +186,13 @@ public partial class @MarioActions: IInputActionCollection2, IDisposable
         {
             ""name"": ""keyboard"",
             ""bindingGroup"": ""keyboard"",
-            ""devices"": []
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Keyboard>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
