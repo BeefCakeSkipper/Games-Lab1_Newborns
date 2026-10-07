@@ -31,6 +31,8 @@ public class BossLogic : MonoBehaviour
     private bool isDead = false;
     public float skidDuration = 0.9f;
     private bool skidding = false;
+    public AudioSource LevelCompleteAudio;
+    public AudioSource bossMusic;
     void Start()
     {
         // bossHealth.SetActive(true);
@@ -121,6 +123,8 @@ public class BossLogic : MonoBehaviour
         CancelInvoke(nameof(ResetSprite));
         if (currentHealth <= 0)
         {
+            LevelCompleteAudio.Play();
+            bossMusic.Stop();
             Die();
         }
         else
@@ -150,6 +154,8 @@ public class BossLogic : MonoBehaviour
         enemyBody.linearVelocity = Vector2.zero;
         enemyCollider.enabled = false;
         gameObject.SetActive(false);
+        LevelCompleteAudio.Play();
+        bossMusic.Stop();
         player.ShowEndScreen("You Win!");
 
     }

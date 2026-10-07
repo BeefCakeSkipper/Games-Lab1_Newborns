@@ -33,8 +33,10 @@ public class PlayerMovement : MonoBehaviour
     private int walkFrame;
     public Animator marioAnimator;
     public AudioSource marioAudio;
+    public AudioSource marioDeathAudio;
     public AudioClip marioDeath;
     public AudioClip marioJump;
+    public AudioSource LevelCompleteAudio;
     public float deathImpulse = 15;
     public GameObject obstacles;
     public Vector2 gameOverScorePosition = new Vector2(0, -80); // below the game over text
@@ -72,7 +74,8 @@ public class PlayerMovement : MonoBehaviour
 
         // play death animation
         marioAnimator.Play("mario-die");
-        marioAudio.PlayOneShot(marioDeath);
+        // marioAudio.PlayOneShot(marioDeath); // Removed this to use marioDeathAudio instead which is a separate AudioSource for the death sound
+        marioDeathAudio.PlayOneShot(marioDeath);
         alive = false;
         // remove hitbox so mario falls through everything
         GetComponent<Collider2D>().enabled = false;
@@ -265,7 +268,7 @@ public class PlayerMovement : MonoBehaviour
         cameraFollow.enabled = true;
 
         // resume time
-        Time.timeScale = 1.0f;
+        // Time.timeScale = 1.0f;
     }
 
     private void ResetGame()
@@ -298,12 +301,14 @@ public class PlayerMovement : MonoBehaviour
         // reset boss
         boss.Respawn();
         bossTrigger.ResetTrigger();
+        LevelCompleteAudio.Stop();
 
         // reset animation
         marioAnimator.SetTrigger("gameRestart");
         alive = true;
         // give mario his hitbox back
         GetComponent<Collider2D>().enabled = true;
+        Time.timeScale = 1.0f;
 
     }
     public void AddScore()

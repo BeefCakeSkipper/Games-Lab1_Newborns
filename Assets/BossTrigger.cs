@@ -1,3 +1,4 @@
+// Hello World     
 using UnityEngine;
 
 public class BossTrigger : MonoBehaviour
@@ -9,6 +10,10 @@ public class BossTrigger : MonoBehaviour
     // public GameObject rightWall;
     public GameObject bossHealth;
     public GameObject bossEnvironment;
+    public AudioSource backgroundMusic;
+    public AudioSource bossMusic;
+
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -31,6 +36,8 @@ public class BossTrigger : MonoBehaviour
             // rightWall.SetActive(true);
             bossHealth.SetActive(true);
             bossEnvironment.SetActive(true);
+            backgroundMusic.Stop();
+            bossMusic.Play();
         }
 
     }
@@ -43,5 +50,7 @@ public class BossTrigger : MonoBehaviour
         // rightWall.SetActive(false);
         bossHealth.SetActive(false);
         bossEnvironment.SetActive(false);
+        backgroundMusic.Play();
+        bossMusic.Stop();
     }
 }
