@@ -15,12 +15,30 @@ public class JumpOnGoomba : MonoBehaviour
     private PlayerMovement playerMovement;
     public AudioClip stompSound;
 
+    public delegate void GoombaStompHandler(EnemyMovement goomba);
+    public event GoombaStompHandler goombaStomped;
+    public GameManagerWeek3 gameManager;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
         marioBody = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
+
+        goombaStomped += AddStompScore;
+        goombaStomped += SquashGoomba;
+        goombaStomped += PlayStompSound;
+        goombaStomped += Bounce;
+    }
+
+    void OnDestroy()
+    {
+        goombaStomped -= AddStompScore;
+        goombaStomped -= SquashGoomba;
+        goombaStomped -= PlayStompSound;
+        goombaStomped -= Bounce;
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -32,11 +50,28 @@ public class JumpOnGoomba : MonoBehaviour
         {
             // score++;
             // scoreText.text = "Score: " + score.ToString();
-            playerMovement.AddScore();
-            col.gameObject.GetComponent<EnemyMovement>().Squash();
-            playerMovement.marioAudio.PlayOneShot(stompSound);
-            marioBody.AddForce(Vector2.up * bounceSpeed, ForceMode2D.Impulse);
+            goombaStomped?.Invoke(col.gameObject.GetComponent<EnemyMovement>());
         }
+    }
+
+    void AddStompScore(EnemyMovement goomba)
+    {
+        gameManager.IncreaseScore(1);
+    }
+
+    void SquashGoomba(EnemyMovement goomba)
+    {
+        goomba.Squash();
+    }
+
+    void PlayStompSound(EnemyMovement goomba)
+    {
+        playerMovement.marioAudio.PlayOneShot(stompSound);
+    }
+
+    void Bounce(EnemyMovement goomba)
+    {
+        marioBody.AddForce(Vector2.up * bounceSpeed, ForceMode2D.Impulse);
     }
 
 

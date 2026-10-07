@@ -207,6 +207,11 @@ public class PlayerMovement : MonoBehaviour
             Move(value);
         }
     }
+    public void SetScore(int newScore)
+    {
+        score = newScore;
+        scoreText.text = "Score: " + score.ToString();
+    }
 
     private bool onGroundCheck()
     {
