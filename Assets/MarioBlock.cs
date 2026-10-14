@@ -17,6 +17,8 @@ public class MarioBlock : MonoBehaviour
     public bool reusable = false;
     public bool hasCoin = true;
     private bool startHasCoin;
+    public BasePowerup powerup;       // leave empty for coin blocks
+    public Animator powerupAnimator;  // the powerup's animator
 
 
     void Start()
@@ -76,6 +78,15 @@ public class MarioBlock : MonoBehaviour
                         if (blockAudio != null && coinSound != null)
                             blockAudio.PlayOneShot(coinSound);
                         hasCoin = false;
+                    }
+                    if (powerup != null && !powerup.hasSpawned)
+                    {
+                        // block plays its "used" animation
+                        if (blockAnimator != null && blockAnimator.runtimeAnimatorController != null)
+                            blockAnimator.SetTrigger("Spawn");
+                        // powerup rises out of the block
+                        if (powerupAnimator != null)
+                            powerupAnimator.SetTrigger("spawned");
                     }
                     if (!reusable)
                     {

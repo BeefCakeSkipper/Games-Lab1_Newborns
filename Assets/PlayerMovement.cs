@@ -54,6 +54,13 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public bool alive = true;
 
     public float deathDelay = 3.0f;   // seconds before the game over screen shows
+
+    // magic mushroom
+    public float bigScale = 1.5f;          // how much bigger mario gets
+    public float hurtInvincibleTime = 1.5f; // seconds mario can't be hit after shrinking
+    private bool isBig = false;
+    private bool invincible = false;
+    private Vector3 smallScale;
     // Property
     public override void Awake()
     {
@@ -88,8 +95,17 @@ public class PlayerMovement : Singleton<PlayerMovement>
     // kills mario dedge
     public void Die()
     {
-        if (!alive)
+        if (!alive || invincible)
             return;
+
+        // big mario shrinks instead of dying
+        if (isBig)
+        {
+            MakeSmall();
+            invincible = true;
+            Invoke(nameof(EndInvincible), hurtInvincibleTime);
+            return;
+        }
 
         // play death animation
         marioAnimator.Play("mario-die");
@@ -112,6 +128,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         marioBody = GetComponent<Rigidbody2D>();
         marioSprite = GetComponent<SpriteRenderer>();
         startPosition = transform.localPosition;
+        smallScale = transform.localScale;
         // ground check hits layer 3 (Ground) and layer 7 (Obstacles)
         layerMask = (1 << 3) | (1 << 7);
 
@@ -258,9 +275,31 @@ public class PlayerMovement : Singleton<PlayerMovement>
             highScoreText.text = "High Score: " + highScore.ToString();
     }
 
+    // called by the magic mushroom
+    public void MakeBig()
+    {
+        if (isBig)
+            return;
+        isBig = true;
+        transform.localScale = smallScale * bigScale;
+    }
+
+    void MakeSmall()
+    {
+        isBig = false;
+        transform.localScale = smallScale;
+    }
+
+    void EndInvincible()
+    {
+        invincible = false;
+    }
+
     private bool onGroundCheck()
     {
-        if (Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, maxDistance, layerMask))
+        // big mario's feet are further from his center, so check further down
+        float distance = isBig ? maxDistance * bigScale : maxDistance;
+        if (Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, distance, layerMask))
         {
             return true;
         }
@@ -304,6 +343,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
         marioSprite.flipX = false;
         moving = false;
         jumpedState = false;
+        // back to small mario
+        MakeSmall();
+        CancelInvoke(nameof(EndInvincible));
+        invincible = false;
         // reset score
         score = 0;
         scoreText.text = "Score: 0";
