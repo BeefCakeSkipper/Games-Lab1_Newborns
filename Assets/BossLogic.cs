@@ -7,8 +7,8 @@ public class BossLogic : MonoBehaviour
 {
 
     private float originalX;
-    private float maxOffset = 8.0f;
-    private float enemyPatroltime = 2.0f;
+    private float maxOffset;        // set from GameConstants
+    private float enemyPatroltime;  // set from GameConstants
     private int moveRight = -1;
     private Vector2 velocity;
 
@@ -43,6 +43,11 @@ public class BossLogic : MonoBehaviour
         normalSprite = bossSprite.sprite;
         startPosition = transform.localPosition;
         originalX = transform.position.x;
+
+        // patrol values come from the game constants
+        GameConstants constants = GameManager.instance.gameConstants;
+        maxOffset = constants.bossMaxOffset;
+        enemyPatroltime = constants.bossPatrolTime;
         ComputeVelocity();
 
         currentHealth = maxHealth;

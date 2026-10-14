@@ -235,12 +235,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5825295}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.027780056, y: 2.4372802, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 745842937}
+  m_Father: {fileID: 1280764522}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &5825297
 AudioSource:
@@ -2579,10 +2579,7 @@ Transform:
   m_LocalPosition: {x: 3.74722, y: 1.61328, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1245014991}
-  - {fileID: 1533335571}
-  - {fileID: 5825296}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &745842938
@@ -2597,6 +2594,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef65785ecec2114493664376d108f56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameManagerWeek3
+  gameConstants: {fileID: 11400000, guid: 496ed93c8e0dbc44aba77a2ead3a80d6, type: 2}
   gameStart:
     m_PersistentCalls:
       m_Calls: []
@@ -4362,10 +4360,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   speed: 20
   upSpeed: 14
-  enemies: {fileID: 1205078213}
   scoreText: {fileID: 698862763}
   cameraFollow: {fileID: 519420033}
-  boss: {fileID: 399862308}
   score: 0
   highScoreText: {fileID: 930412699}
   bossTrigger: {fileID: 948275984}
@@ -4383,7 +4379,7 @@ MonoBehaviour:
   marioJump: {fileID: 8300000, guid: bc5ca5e0703c54692a186434e1149ccd, type: 3}
   LevelCompleteAudio: {fileID: 5825297}
   deathImpulse: 15
-  obstacles: {fileID: 1257004177}
+  isDead: 0
   gameOverScorePosition: {x: 0, y: -80}
   deathDelay: 3
   bigMarioController: {fileID: 22100000, guid: c2b22645d40e1f740958e5eccc187342, type: 2}
@@ -4499,7 +4495,8 @@ Transform:
   m_LocalPosition: {x: -4.56, y: -2.64, z: 0}
   m_LocalScale: {x: 0.5622336, y: 0.6888392, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1245014991}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1191641736
@@ -4562,7 +4559,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::JumpOverGoomba
   bounceSpeed: 5
   stompSound: {fileID: 8300000, guid: d84415726495b4d46b5a557ed2a97cfa, type: 3}
-  gameManager: {fileID: 745842938}
 --- !u!114 &1191641738
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5029,12 +5025,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1245014990}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 14.77539, y: 6.1745625, z: 0}
+  m_LocalScale: {x: 1.7786201, y: 1.4517177, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 745842937}
+  m_Father: {fileID: 1191641735}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1245014992
 AudioSource:
@@ -5224,6 +5220,7 @@ Transform:
   - {fileID: 1185561485}
   - {fileID: 1602577934}
   - {fileID: 270322815}
+  - {fileID: 5825296}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1280764523
@@ -5413,6 +5410,7 @@ Transform:
   - {fileID: 1498947929}
   - {fileID: 1653104850}
   - {fileID: 953312649}
+  - {fileID: 1533335571}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1291310407
@@ -6013,12 +6011,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1533335570}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.74722, y: 1.61328, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 745842937}
+  m_Father: {fileID: 1282756494}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &1533335572
 AudioSource:

@@ -17,7 +17,6 @@ public class JumpOnGoomba : MonoBehaviour
 
     public delegate void GoombaStompHandler(EnemyMovement goomba);
     public event GoombaStompHandler goombaStomped;
-    public GameManager gameManager;
 
 
 
@@ -56,7 +55,8 @@ public class JumpOnGoomba : MonoBehaviour
 
     void AddStompScore(EnemyMovement goomba)
     {
-        gameManager.IncreaseScore(1);
+        // use the singleton so it still works after a scene change
+        GameManager.instance.IncreaseScore(GameManager.instance.gameConstants.goombaStompScore);
     }
 
     void SquashGoomba(EnemyMovement goomba)

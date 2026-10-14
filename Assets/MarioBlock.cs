@@ -27,6 +27,16 @@ public class MarioBlock : MonoBehaviour
         startHasCoin = hasCoin;
         startPosition = transform.position;
         topPosition = startPosition + Vector3.up * bounceHeight;
+
+        // reset this block (and its powerup) when the game restarts
+        GameManager.instance.gameRestart.AddListener(ResetBlock);
+    }
+
+    void OnDestroy()
+    {
+        // GameManager survives scene changes, so stop listening when this block is gone
+        if (GameManager.instance != null)
+            GameManager.instance.gameRestart.RemoveListener(ResetBlock);
     }
 
     void Update()

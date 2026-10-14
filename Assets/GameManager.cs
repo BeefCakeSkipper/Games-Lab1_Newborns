@@ -5,7 +5,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 public class GameManager : Singleton<GameManager>
 {
-    // events
+    public GameConstants gameConstants;
     public UnityEvent gameStart;
     public UnityEvent gameRestart;
     public UnityEvent<int> scoreChange;
@@ -13,8 +13,18 @@ public class GameManager : Singleton<GameManager>
 
     private int score = 0;
 
+    public override void Awake()
+    {
+        base.Awake();
+        if (gameConstants == null)
+        {
+            gameConstants = ScriptableObject.CreateInstance<GameConstants>();
+        }
+    }
+
     void Start()
     {
+        score = gameConstants.startingScore;
         gameStart.Invoke();
         Time.timeScale = 1.0f;
         // subscribe to scene manager scene change
@@ -34,7 +44,7 @@ public class GameManager : Singleton<GameManager>
     public void GameRestart()
     {
         // reset score
-        score = 0;
+        score = gameConstants.startingScore;
         SetScore(score);
         gameRestart.Invoke();
         Time.timeScale = 1.0f;
@@ -56,5 +66,11 @@ public class GameManager : Singleton<GameManager>
     {
         Time.timeScale = 0.0f;
         gameOver.Invoke();
+    }
+
+    protected override void OnDestroy()
+    {
+        SceneManager.activeSceneChanged -= SceneSetup;
+        base.OnDestroy();
     }
 }

@@ -6,8 +6,8 @@ public class EnemyMovement : MonoBehaviour
 {
 
     private float originalX;
-    private float maxOffset = 5.0f;
-    private float enemyPatroltime = 2.0f;
+    private float maxOffset;        // set from GameConstants
+    private float enemyPatroltime;  // set from GameConstants
     private int moveRight = -1;
     private Vector2 velocity;
 
@@ -27,7 +27,21 @@ public class EnemyMovement : MonoBehaviour
         normalSprite = goombaSprite.sprite;
         startPosition = transform.localPosition;
         originalX = transform.position.x;
+
+        // patrol values come from the game constants
+        GameConstants constants = GameManager.instance.gameConstants;
+        maxOffset = constants.goombaMaxOffset;
+        enemyPatroltime = constants.goombaPatrolTime;
         ComputeVelocity();
+
+        // reset this goomba when the game restarts
+        GameManager.instance.gameRestart.AddListener(Respawn);
+    }
+
+    void OnDestroy()
+    {
+        if (GameManager.instance != null)
+            GameManager.instance.gameRestart.RemoveListener(Respawn);
     }
     void ComputeVelocity()
     {

@@ -10,10 +10,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
     private Rigidbody2D marioBody;
 
     public float upSpeed = 2;
-    public GameObject enemies;
     public TextMeshProUGUI scoreText;
     public CameraFollow cameraFollow;
-    public BossLogic boss;
     public int score = 0;
     public TextMeshProUGUI highScoreText;
     private int highScore = 0;
@@ -38,7 +36,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public AudioClip marioJump;
     public AudioSource LevelCompleteAudio;
     public float deathImpulse = 15;
-    public GameObject obstacles;
     public bool isDead = false;
     public Vector2 gameOverScorePosition = new Vector2(0, -80); // below the game over text
 
@@ -429,7 +426,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (enemy == null)
             return;
         enemy.Squash();
-        GameManager.instance.IncreaseScore(1);
+        GameManager.instance.IncreaseScore(GameManager.instance.gameConstants.starKillScore);
         if (marioAudio != null && starKillSound != null)
             marioAudio.PlayOneShot(starKillSound);
     }
@@ -560,34 +557,16 @@ public class PlayerMovement : Singleton<PlayerMovement>
         jumpedState = false;
         // back to small mario
         MakeSmall();
-        // lose the star (the boss trigger reset below restarts the level music)
+        // lose the star (BossTrigger restarts the level music on restart)
         EndStar(false);
-        // reset score
-        score = 0;
-        scoreText.text = "Score: 0";
-        // put the score back to the corner
+        // the score itself is reset by GameManager, just put it back in the corner
         RectTransform scoreRect = scoreText.rectTransform;
         scoreRect.anchorMin = scoreAnchorMin;
         scoreRect.anchorMax = scoreAnchorMax;
         scoreRect.anchoredPosition = scorePosition;
         scoreText.alignment = scoreAlignment;
         scoreRect.SetSiblingIndex(scoreSiblingIndex);
-        // reset Goomba
-        foreach (Transform eachChild in enemies.transform)
-        {
-            eachChild.GetComponent<EnemyMovement>().Respawn();
-        }
-        // reset blocks
-        foreach (MarioBlock block in obstacles.GetComponentsInChildren<MarioBlock>())
-        {
-            block.ResetBlock();
-        }
-        // reset boss
-        if (boss != null)
-            boss.Respawn();
-
-        if (bossTrigger != null)
-            bossTrigger.ResetTrigger();
+        // goombas, blocks/powerups and the boss + music reset themselves on GameManager.gameRestart
 
         if (LevelCompleteAudio != null)
             LevelCompleteAudio.Stop();
@@ -600,11 +579,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
 
     }
+    // called when mario stomps the boss, goes through the GameManager so the score stays in one place
     public void AddScore()
     {
-        score++;
-        scoreText.text = "Score: " + score.ToString();
-        CheckHighScore();
+        GameManager.instance.IncreaseScore(GameManager.instance.gameConstants.bossHitScore);
     }
 
     public void SetStartingPosition(Scene current, Scene next)
@@ -613,7 +591,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (next.name == "SampleScene" || next.name == "World-1-1" || next.name == "World-1-2")
         {
             // change the position accordingly in your World-1-2 case
-            this.transform.position = new Vector3(-4.56f, -2.64f, 0.0f);
+            this.transform.position = GameManager.instance.gameConstants.marioStartingPosition;
         }
     }
 
@@ -638,6 +616,13 @@ public class PlayerMovement : Singleton<PlayerMovement>
     {
         // Unsubscribe from scene change events
         SceneManager.activeSceneChanged -= SetStartingPosition;
+        // stop listening to the GameManager (it survives going back to the main menu, mario doesn't)
+        if (GameManager.instance != null)
+        {
+            GameManager.instance.gameRestart.RemoveListener(GameRestart);
+            GameManager.instance.scoreChange.RemoveListener(SetScore);
+            GameManager.instance.gameOver.RemoveListener(GameOver);
+        }
         Debug.Log($"Mario Destroyed: {gameObject.name}");
         // Clear singleton reference
         base.OnDestroy();

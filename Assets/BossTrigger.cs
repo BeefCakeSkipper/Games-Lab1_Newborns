@@ -22,6 +22,24 @@ public class BossTrigger : MonoBehaviour
         // rightWall.SetActive(false);
         bossHealth.SetActive(false);
         bossEnvironment.SetActive(false);
+
+        // reset the boss fight and the music when the game restarts
+        GameManager.instance.gameRestart.AddListener(GameRestart);
+    }
+
+    void OnDestroy()
+    {
+        // GameManager survives scene changes, so stop listening when this trigger is gone
+        if (GameManager.instance != null)
+            GameManager.instance.gameRestart.RemoveListener(GameRestart);
+    }
+
+    void GameRestart()
+    {
+        BossLogic bossLogic = boss.GetComponent<BossLogic>();
+        if (bossLogic != null)
+            bossLogic.Respawn();
+        ResetTrigger();
     }
 
     void OnTriggerEnter2D(Collider2D col)
