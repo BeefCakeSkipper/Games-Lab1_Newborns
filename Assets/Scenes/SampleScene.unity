@@ -4204,9 +4204,13 @@ MonoBehaviour:
   obstacles: {fileID: 1257004177}
   gameOverScorePosition: {x: 0, y: -80}
   deathDelay: 3
-  bigScale: 1.5
+  bigMarioController: {fileID: 22100000, guid: c2b22645d40e1f740958e5eccc187342, type: 2}
+  bigColliderSize: {x: 1, y: 2}
+  bigColliderOffset: {x: 0, y: 0.5}
+  bigMaxDistance: 0.1
   hurtInvincibleTime: 1.5
   maxSpeed: 20
+  stopDamping: 0.7
 --- !u!50 &1191641733
 Rigidbody2D:
   serializedVersion: 5

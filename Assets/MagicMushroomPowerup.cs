@@ -34,8 +34,8 @@ public class MagicMushroomPowerup : BasePowerup
             // give mario the powerup
             ApplyPowerup(col.gameObject.GetComponent<PlayerMovement>());
 
-            // then destroy powerup
-            DestroyPowerup();
+            // hide instead of destroying so it can be reset on restart
+            gameObject.SetActive(false);
         }
         else
         {
@@ -65,6 +65,26 @@ public class MagicMushroomPowerup : BasePowerup
         goRight = true; // move to the right
     }
 
+
+    // put the mushroom back inside the block
+    public override void ResetPowerup()
+    {
+        gameObject.SetActive(true);
+        spawned = false;
+        goRight = true;
+
+        // stop it and hand control back to the animator
+        rigidBody.linearVelocity = Vector2.zero;
+        rigidBody.bodyType = RigidbodyType2D.Kinematic;
+        GetComponent<Collider2D>().enabled = false;
+        transform.localPosition = Vector3.zero;
+
+        // back to the idle animation
+        Animator animator = GetComponent<Animator>();
+        animator.enabled = true;
+        animator.ResetTrigger("spawned");
+        animator.Rebind();
+    }
 
     // interface implementation
     public override void ApplyPowerup(MonoBehaviour i)

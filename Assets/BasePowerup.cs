@@ -40,4 +40,5 @@ public abstract class BasePowerup : MonoBehaviour, IPowerup
     // 2. abstract methods, must be implemented by derived classes
     public abstract void SpawnPowerup();
     public abstract void ApplyPowerup(MonoBehaviour i);
+    public abstract void ResetPowerup(); // put the powerup back in its block on restart
 }

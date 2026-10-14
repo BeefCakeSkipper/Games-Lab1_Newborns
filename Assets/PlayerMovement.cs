@@ -56,11 +56,17 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public float deathDelay = 3.0f;   // seconds before the game over screen shows
 
     // magic mushroom
-    public float bigScale = 1.5f;          // how much bigger mario gets
+    public RuntimeAnimatorController bigMarioController; // override controller with the big mario sprites
+    public Vector2 bigColliderSize = new Vector2(1, 2);   // big mario's hitbox
+    public Vector2 bigColliderOffset = new Vector2(0, 0.5f);
+    public float bigMaxDistance = 0.1f;                   // ground check distance for big mario
     public float hurtInvincibleTime = 1.5f; // seconds mario can't be hit after shrinking
     private bool isBig = false;
     private bool invincible = false;
-    private Vector3 smallScale;
+    private RuntimeAnimatorController smallMarioController;
+    private BoxCollider2D marioCollider;
+    private Vector2 smallColliderSize;
+    private Vector2 smallColliderOffset;
     // Property
     public override void Awake()
     {
@@ -128,7 +134,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
         marioBody = GetComponent<Rigidbody2D>();
         marioSprite = GetComponent<SpriteRenderer>();
         startPosition = transform.localPosition;
-        smallScale = transform.localScale;
+        // remember small mario's animator and hitbox
+        smallMarioController = marioAnimator.runtimeAnimatorController;
+        marioCollider = GetComponent<BoxCollider2D>();
+        smallColliderSize = marioCollider.size;
+        smallColliderOffset = marioCollider.offset;
         // ground check hits layer 3 (Ground) and layer 7 (Obstacles)
         layerMask = (1 << 3) | (1 << 7);
 
@@ -156,12 +166,18 @@ public class PlayerMovement : Singleton<PlayerMovement>
         marioAnimator.SetFloat("xSpeed", Mathf.Abs(marioBody.linearVelocity.x));
     }
     public float maxSpeed = 20;
+    public float stopDamping = 0.7f; // how fast mario slows down after letting go
     // FixedUpdate is called 50 times a second
     void FixedUpdate()
     {
         if (alive && moving)
         {
             Move(faceRightState == true ? 1 : -1);
+        }
+        else if (alive)
+        {
+            // skid
+            marioBody.linearVelocity = new Vector2(marioBody.linearVelocity.x * stopDamping, marioBody.linearVelocity.y);
         }
     }
 
@@ -242,7 +258,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (value == 0)
         {
             moving = false;
-            marioBody.linearVelocity = new Vector2(0, marioBody.linearVelocity.y);
+            // FixedUpdate slows mario down from here
         }
         else
         {
@@ -281,13 +297,19 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (isBig)
             return;
         isBig = true;
-        transform.localScale = smallScale * bigScale;
+        // switch to the big mario sprites and a taller hitbox
+        if (bigMarioController != null)
+            marioAnimator.runtimeAnimatorController = bigMarioController;
+        marioCollider.size = bigColliderSize;
+        marioCollider.offset = bigColliderOffset;
     }
 
     void MakeSmall()
     {
         isBig = false;
-        transform.localScale = smallScale;
+        marioAnimator.runtimeAnimatorController = smallMarioController;
+        marioCollider.size = smallColliderSize;
+        marioCollider.offset = smallColliderOffset;
     }
 
     void EndInvincible()
@@ -298,7 +320,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     private bool onGroundCheck()
     {
         // big mario's feet are further from his center, so check further down
-        float distance = isBig ? maxDistance * bigScale : maxDistance;
+        float distance = isBig ? bigMaxDistance : maxDistance;
         if (Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, distance, layerMask))
         {
             return true;

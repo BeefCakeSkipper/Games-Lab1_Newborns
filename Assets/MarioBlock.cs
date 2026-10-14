@@ -111,7 +111,12 @@ public class MarioBlock : MonoBehaviour
         if (blockAnimator != null)
         {
             blockAnimator.ResetTrigger("Spawn");
-            blockAnimator.Rebind();  
+            blockAnimator.Rebind();
+        }
+        // put the powerup back inside the block
+        if (powerup != null)
+        {
+            powerup.ResetPowerup();
         }
 
     }
