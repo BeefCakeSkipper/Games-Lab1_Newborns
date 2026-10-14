@@ -10,7 +10,8 @@ public abstract class BasePowerup : MonoBehaviour, IPowerup
     protected Rigidbody2D rigidBody;
 
     // base methods
-    protected virtual void Start(){
+    protected virtual void Start()
+    {
         rigidBody = GetComponent<Rigidbody2D>();
     }
 
