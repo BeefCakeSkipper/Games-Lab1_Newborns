@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : Singleton<PlayerMovement>
 {
     public float speed = 10;
     private Rigidbody2D marioBody;
@@ -53,7 +54,15 @@ public class PlayerMovement : MonoBehaviour
     public bool alive = true;
 
     public float deathDelay = 3.0f;   // seconds before the game over screen shows
+    // Property
+    public override void Awake()
+    {
+        Debug.Log("Mario Awake called");
 
+        base.Awake();
+
+        Debug.Log($"Mario scene: {gameObject.scene.name}");
+    }
     void PlayDeathImpulse()
     {
         marioBody.linearVelocity = Vector2.zero;
@@ -85,7 +94,9 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Debug.Log($"Mario is in scene: {gameObject.scene.name}");
         // Set to be 30 FPS
+        SceneManager.activeSceneChanged += SetStartingPosition;
         Application.targetFrameRate = 30;
         marioBody = GetComponent<Rigidbody2D>();
         marioSprite = GetComponent<SpriteRenderer>();
@@ -333,6 +344,34 @@ public class PlayerMovement : MonoBehaviour
         CheckHighScore();
     }
 
+    public void SetStartingPosition(Scene current, Scene next)
+    {
 
+        if (next.name == "SampleScene" || next.name == "World-1-1" || next.name == "World-1-2")
+        {
+            // change the position accordingly in your World-1-2 case
+            this.transform.position = new Vector3(-4.56f, -2.64f, 0.0f);
+        }
+    }
 
+    // Allows player to move to next scene
+    public void NextScene()
+    {
+        int currentSceneIndex = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentSceneIndex + 1;
+
+        if (nextSceneIndex < SceneManager.sceneCountInBuildSettings)
+        {
+            Time.timeScale = 1f;
+            SceneManager.LoadScene(nextSceneIndex);
+        }
+        else
+        {
+            Debug.Log("Already at the last scene!");
+        }
+    }
 }
+
+
+
+

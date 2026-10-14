@@ -17,7 +17,7 @@ public class JumpOnGoomba : MonoBehaviour
 
     public delegate void GoombaStompHandler(EnemyMovement goomba);
     public event GoombaStompHandler goombaStomped;
-    public GameManagerWeek3 gameManager;
+    public GameManager gameManager;
 
 
 

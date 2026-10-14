@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class GameManagerWeek3 : MonoBehaviour
+public class GameManager : Singleton<GameManager>
 {
     // events
     public UnityEvent gameStart;
