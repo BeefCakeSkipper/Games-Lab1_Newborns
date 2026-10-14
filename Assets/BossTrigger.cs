@@ -27,7 +27,8 @@ public class BossTrigger : MonoBehaviour
     void OnTriggerEnter2D(Collider2D col)
     {
         // only mario starts the fight
-        if (!bossTriggered && col.GetComponent<PlayerMovement>() != null)
+        PlayerMovement mario = col.GetComponent<PlayerMovement>();
+        if (!bossTriggered && mario != null)
         {
             bossTriggered = true;
             cameraFollow.enabled = false;
@@ -38,6 +39,8 @@ public class BossTrigger : MonoBehaviour
             bossEnvironment.SetActive(true);
             backgroundMusic.Stop();
             bossMusic.Play();
+            // if mario has the star, keep the star music playing over the boss music
+            mario.MusicChanged(bossMusic);
         }
 
     }

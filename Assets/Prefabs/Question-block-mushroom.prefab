@@ -265,6 +265,10 @@ PrefabInstance:
       propertyPath: powerupAnimator
       value: 
       objectReference: {fileID: 6503040786380905336}
+    - target: {fileID: 847325115620356528, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
+      propertyPath: powerupAppearsSound
+      value: 
+      objectReference: {fileID: 8300000, guid: 97a450c65284a4a3094ba5c2221a492b, type: 3}
     - target: {fileID: 8850680806718565455, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
       propertyPath: m_Name
       value: Question-block-mushroom

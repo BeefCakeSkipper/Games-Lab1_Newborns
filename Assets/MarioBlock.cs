@@ -19,6 +19,7 @@ public class MarioBlock : MonoBehaviour
     private bool startHasCoin;
     public BasePowerup powerup;       // leave empty for coin blocks
     public Animator powerupAnimator;  // the powerup's animator
+    public AudioClip powerupAppearsSound;
 
 
     void Start()
@@ -62,6 +63,10 @@ public class MarioBlock : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        // only mario can hit the block so the star doesnt activate it
+        if (!collision.gameObject.CompareTag("Player"))
+            return;
+
         foreach (ContactPoint2D contact in collision.contacts)
         {
             // Hit from underneath
@@ -87,6 +92,8 @@ public class MarioBlock : MonoBehaviour
                         // powerup rises out of the block
                         if (powerupAnimator != null)
                             powerupAnimator.SetTrigger("spawned");
+                        if (blockAudio != null && powerupAppearsSound != null)
+                            blockAudio.PlayOneShot(powerupAppearsSound);
                     }
                     if (!reusable)
                     {

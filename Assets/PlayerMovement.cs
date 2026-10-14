@@ -61,12 +61,26 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public Vector2 bigColliderOffset = new Vector2(0, 0.5f);
     public float bigMaxDistance = 0.1f;                   // ground check distance for big mario
     public float hurtInvincibleTime = 1.5f; // seconds mario can't be hit after shrinking
+    public AudioClip marioPowerup;
+    public AudioClip marioPowerdown;
+    public int sizeFlickers = 8;            // how many times mario flickers between small and big
+    public float flickerInterval = 0.08f;   // seconds between each flicker
+    private Coroutine sizeAnimation;
     private bool isBig = false;
     private bool invincible = false;
     private RuntimeAnimatorController smallMarioController;
     private BoxCollider2D marioCollider;
     private Vector2 smallColliderSize;
     private Vector2 smallColliderOffset;
+
+    // starman
+    public float starDuration = 10f;        // seconds of invincibility
+    public float starColorSpeed = 10f;      // how fast mario cycles colours
+    public AudioSource starMusic;           // plays the starman theme while invincible
+    public AudioClip starKillSound;         // when mario runs into an enemy while invincible
+    private bool starPower = false;
+    private Coroutine starAnimation;
+    private AudioSource pausedMusic;        // level/boss music paused while the star music plays
     // Property
     public override void Awake()
     {
@@ -101,15 +115,13 @@ public class PlayerMovement : Singleton<PlayerMovement>
     // kills mario dedge
     public void Die()
     {
-        if (!alive || invincible)
+        if (!alive || invincible || starPower)
             return;
 
         // big mario shrinks instead of dying
         if (isBig)
         {
-            MakeSmall();
-            invincible = true;
-            Invoke(nameof(EndInvincible), hurtInvincibleTime);
+            PowerDown();
             return;
         }
 
@@ -117,6 +129,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         marioAnimator.Play("mario-die");
         // marioAudio.PlayOneShot(marioDeath); // Removed this to use marioDeathAudio instead which is a separate AudioSource for the death sound
         marioDeathAudio.PlayOneShot(marioDeath);
+        StopAllMusic();
         alive = false;
         // remove hitbox so mario falls through everything
         GetComponent<Collider2D>().enabled = false;
@@ -181,15 +194,21 @@ public class PlayerMovement : Singleton<PlayerMovement>
         }
     }
 
-    void OnCollisionEnter2D(Collision2D col)
+    // if invincibility ends and mario is still touching enemy nuke him
+    void OnCollisionStay2D(Collision2D col)
     {
-        // grounding is handled by onGroundCheck() now, not by collisions
-        if (alive && col.gameObject.CompareTag("Enemy")
+        if (!alive)
+            return;
+
+        if (col.gameObject.CompareTag("Enemy")
             && transform.position.y - col.transform.position.y < 0.4f)
         {
-            Die();
+            if (starPower)
+                StarKill(col.gameObject.GetComponent<EnemyMovement>());
+            else if (!invincible)
+                Die();
         }
-        if (col.gameObject.CompareTag("Boss"))
+        else if (col.gameObject.CompareTag("Boss") && !invincible && !starPower)
         {
             ContactPoint2D contact = col.GetContact(0);
             if (contact.normal.y < 0.7f)
@@ -297,24 +316,182 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (isBig)
             return;
         isBig = true;
-        // switch to the big mario sprites and a taller hitbox
-        if (bigMarioController != null)
-            marioAnimator.runtimeAnimatorController = bigMarioController;
-        marioCollider.size = bigColliderSize;
-        marioCollider.offset = bigColliderOffset;
+        if (marioAudio != null && marioPowerup != null)
+            marioAudio.PlayOneShot(marioPowerup);
+        // taller hitbox straight away, sprites flicker into big mario
+        SetBigCollider(true);
+        StartSizeAnimation(GrowAnimation());
     }
 
-    void MakeSmall()
+    // big mario got hit, shrink and become invincible for a bit
+    void PowerDown()
     {
         isBig = false;
-        marioAnimator.runtimeAnimatorController = smallMarioController;
-        marioCollider.size = smallColliderSize;
-        marioCollider.offset = smallColliderOffset;
+        invincible = true;
+        if (marioAudio != null && marioPowerdown != null)
+            marioAudio.PlayOneShot(marioPowerdown);
+        SetBigCollider(false);
+        StartSizeAnimation(ShrinkAnimation());
     }
 
-    void EndInvincible()
+    // called by the starman powerup
+    public void MakeStar()
     {
+        if (starAnimation != null)
+            StopCoroutine(starAnimation); // picking up another star restarts the timer
+        else
+            StartStarMusic();
+        starPower = true;
+        starAnimation = StartCoroutine(StarAnimation());
+    }
+
+    // cycle mario's colour until the star runs out
+    IEnumerator StarAnimation()
+    {
+        float elapsed = 0;
+        while (elapsed < starDuration)
+        {
+            marioSprite.color = Color.HSVToRGB((elapsed * starColorSpeed) % 1f, 0.6f, 1f);
+            yield return null;
+            elapsed += Time.deltaTime;
+        }
+        EndStar(true);
+    }
+
+    void EndStar(bool resumeMusic)
+    {
+        if (starAnimation != null)
+            StopCoroutine(starAnimation);
+        starAnimation = null;
+        starPower = false;
+        marioSprite.color = Color.white;
+
+        if (starMusic != null)
+            starMusic.Stop();
+        if (resumeMusic && pausedMusic != null)
+            pausedMusic.UnPause();
+        pausedMusic = null;
+    }
+
+    // called when the level switches music so the star music has priority
+    public void MusicChanged(AudioSource newMusic)
+    {
+        if (!starPower || newMusic == null)
+            return;
+        newMusic.Pause();
+        pausedMusic = newMusic; // resume this one when the star runs out
+    }
+
+    // stop the level, boss and star music (restart plays the level music again)
+    void StopAllMusic()
+    {
+        EndStar(false);
+        if (bossTrigger != null)
+        {
+            if (bossTrigger.backgroundMusic != null)
+                bossTrigger.backgroundMusic.Stop();
+            if (bossTrigger.bossMusic != null)
+                bossTrigger.bossMusic.Stop();
+        }
+    }
+
+    void StartStarMusic()
+    {
+        // pause whatever is playing and play the star theme
+        pausedMusic = null;
+        if (bossTrigger != null)
+        {
+            if (bossTrigger.bossMusic != null && bossTrigger.bossMusic.isPlaying)
+                pausedMusic = bossTrigger.bossMusic;
+            else if (bossTrigger.backgroundMusic != null && bossTrigger.backgroundMusic.isPlaying)
+                pausedMusic = bossTrigger.backgroundMusic;
+        }
+        if (pausedMusic != null)
+            pausedMusic.Pause();
+        if (starMusic != null)
+            starMusic.Play();
+    }
+
+    void StarKill(EnemyMovement enemy)
+    {
+        if (enemy == null)
+            return;
+        enemy.Squash();
+        GameManager.instance.IncreaseScore(1);
+        if (marioAudio != null && starKillSound != null)
+            marioAudio.PlayOneShot(starKillSound);
+    }
+
+    // instantly back to small mario, no sound or animation (used on restart)
+    void MakeSmall()
+    {
+        StopSizeAnimation();
+        isBig = false;
         invincible = false;
+        SetBigSprites(false);
+        SetBigCollider(false);
+    }
+
+    void SetBigSprites(bool big)
+    {
+        if (big && bigMarioController != null)
+            marioAnimator.runtimeAnimatorController = bigMarioController;
+        else
+            marioAnimator.runtimeAnimatorController = smallMarioController;
+    }
+
+    void SetBigCollider(bool big)
+    {
+        marioCollider.size = big ? bigColliderSize : smallColliderSize;
+        marioCollider.offset = big ? bigColliderOffset : smallColliderOffset;
+    }
+
+    // doing this cause idk how to make him invincible while the animation plays
+    void StartSizeAnimation(IEnumerator animation)
+    {
+        StopSizeAnimation();
+        sizeAnimation = StartCoroutine(animation);
+    }
+
+    void StopSizeAnimation()
+    {
+        if (sizeAnimation != null)
+            StopCoroutine(sizeAnimation);
+        sizeAnimation = null;
+        marioSprite.enabled = true;
+    }
+
+    IEnumerator GrowAnimation()
+    {
+        for (int i = 0; i < sizeFlickers; i++)
+        {
+            SetBigSprites(i % 2 == 1);
+            yield return new WaitForSeconds(flickerInterval);
+        }
+        SetBigSprites(true);
+        sizeAnimation = null;
+    }
+
+    IEnumerator ShrinkAnimation()
+    {
+        float elapsed = 0;
+        for (int i = 0; i < sizeFlickers; i++)
+        {
+            SetBigSprites(i % 2 == 1);
+            yield return new WaitForSeconds(flickerInterval);
+            elapsed += flickerInterval;
+        }
+        SetBigSprites(false);
+
+        while (elapsed < hurtInvincibleTime)
+        {
+            marioSprite.enabled = !marioSprite.enabled;
+            yield return new WaitForSeconds(flickerInterval);
+            elapsed += flickerInterval;
+        }
+        marioSprite.enabled = true;
+        invincible = false;
+        sizeAnimation = null;
     }
 
     private bool onGroundCheck()
@@ -342,6 +519,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     {
         resultText.text = message;
         gameOverScreen.SetActive(true);
+        EndStar(false);
         bossTrigger.bossHealth.SetActive(false);
 
         // move the score to the center and below the game over text
@@ -367,8 +545,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
         jumpedState = false;
         // back to small mario
         MakeSmall();
-        CancelInvoke(nameof(EndInvincible));
-        invincible = false;
+        // lose the star (the boss trigger reset below restarts the level music)
+        EndStar(false);
         // reset score
         score = 0;
         scoreText.text = "Score: 0";
