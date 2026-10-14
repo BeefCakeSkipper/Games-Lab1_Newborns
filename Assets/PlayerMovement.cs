@@ -39,6 +39,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public AudioSource LevelCompleteAudio;
     public float deathImpulse = 15;
     public GameObject obstacles;
+    public bool isDead = false;
     public Vector2 gameOverScorePosition = new Vector2(0, -80); // below the game over text
 
     // original score position
@@ -85,7 +86,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public override void Awake()
     {
         Debug.Log("Mario Awake called");
-
+        Debug.Log($"Mario Awake: {gameObject.name}");
+        Debug.Log($"Mario Instance: {PlayerMovement.instance}");
         base.Awake();
 
         Debug.Log($"Mario scene: {gameObject.scene.name}");
@@ -100,11 +102,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
     }
 
     public void GameRestart()
-{
-    gameOverScreen.SetActive(false);
-    ResetGame();
-    cameraFollow.enabled = true;
-}
+    {
+        gameOverScreen.SetActive(false);
+        ResetGame();
+        cameraFollow.enabled = true;
+    }
 
 
     void GameOver()
@@ -125,15 +127,19 @@ public class PlayerMovement : Singleton<PlayerMovement>
             return;
         }
 
-        // play death animation
-        marioAnimator.Play("mario-die");
-        // marioAudio.PlayOneShot(marioDeath); // Removed this to use marioDeathAudio instead which is a separate AudioSource for the death sound
-        marioDeathAudio.PlayOneShot(marioDeath);
-        StopAllMusic();
+        isDead = true;
         alive = false;
-        // remove hitbox so mario falls through everything
+
+        marioAnimator.Play("mario-die");
+
+        if (marioDeathAudio != null && marioDeath != null)
+        {
+            marioDeathAudio.PlayOneShot(marioDeath);
+        }
+        StopAllMusic();
+
         GetComponent<Collider2D>().enabled = false;
-        // wait for the death impulse + animation before freezing the game
+
         Invoke(nameof(GameOver), deathDelay);
     }
 
@@ -177,6 +183,12 @@ public class PlayerMovement : Singleton<PlayerMovement>
         onGroundState = onGroundCheck();
         marioAnimator.SetBool("onGround", onGroundState);
         marioAnimator.SetFloat("xSpeed", Mathf.Abs(marioBody.linearVelocity.x));
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            Debug.Log($"TimeScale: {Time.timeScale}");
+            Debug.Log($"Mario alive: {alive}");
+            Debug.Log($"Mario isDead: {isDead}");
+        }
     }
     public float maxSpeed = 20;
     public float stopDamping = 0.7f; // how fast mario slows down after letting go
@@ -535,6 +547,9 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     private void ResetGame()
     {
+        isDead = false;
+        Time.timeScale = 1.0f;
+        AudioListener.pause = false;
         // reset position
         marioBody.transform.localPosition = startPosition;
         marioBody.linearVelocity = Vector2.zero;
@@ -568,16 +583,21 @@ public class PlayerMovement : Singleton<PlayerMovement>
             block.ResetBlock();
         }
         // reset boss
-        boss.Respawn();
-        bossTrigger.ResetTrigger();
-        LevelCompleteAudio.Stop();
+        if (boss != null)
+            boss.Respawn();
+
+        if (bossTrigger != null)
+            bossTrigger.ResetTrigger();
+
+        if (LevelCompleteAudio != null)
+            LevelCompleteAudio.Stop();
 
         // reset animation
         marioAnimator.SetTrigger("gameRestart");
         alive = true;
         // give mario his hitbox back
         GetComponent<Collider2D>().enabled = true;
-        Time.timeScale = 1.0f;
+
 
     }
     public void AddScore()
@@ -612,6 +632,15 @@ public class PlayerMovement : Singleton<PlayerMovement>
         {
             Debug.Log("Already at the last scene!");
         }
+    }
+
+    protected override void OnDestroy()
+    {
+        // Unsubscribe from scene change events
+        SceneManager.activeSceneChanged -= SetStartingPosition;
+        Debug.Log($"Mario Destroyed: {gameObject.name}");
+        // Clear singleton reference
+        base.OnDestroy();
     }
 }
 
