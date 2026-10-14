@@ -14,6 +14,9 @@ public class PlayerMovement : MonoBehaviour
     public CameraFollow cameraFollow;
     public BossLogic boss;
     public int score = 0;
+    public TextMeshProUGUI highScoreText;
+    private int highScore = 0;
+    private const string HighScoreKey = "HighScore";
     public BossTrigger bossTrigger;
     public GameObject gameOverScreen;
     public TextMeshProUGUI resultText;
@@ -98,6 +101,8 @@ public class PlayerMovement : MonoBehaviour
         scoreAlignment = scoreText.alignment;
         scoreSiblingIndex = scoreRect.GetSiblingIndex();
         // scoreValue = GetComponent<JumpOnGoomba>();
+        highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
+        UpdateHighScoreText();
 
         // update animator state
         // marioAnimator.SetBool("onGround", onGroundState);
@@ -211,6 +216,24 @@ public class PlayerMovement : MonoBehaviour
     {
         score = newScore;
         scoreText.text = "Score: " + score.ToString();
+        CheckHighScore();
+    }
+
+    void CheckHighScore()
+    {
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt(HighScoreKey, highScore);
+            PlayerPrefs.Save();
+            UpdateHighScoreText();
+        }
+    }
+
+    void UpdateHighScoreText()
+    {
+        if (highScoreText != null)
+            highScoreText.text = "High Score: " + highScore.ToString();
     }
 
     private bool onGroundCheck()
@@ -307,6 +330,7 @@ public class PlayerMovement : MonoBehaviour
     {
         score++;
         scoreText.text = "Score: " + score.ToString();
+        CheckHighScore();
     }
 
 
