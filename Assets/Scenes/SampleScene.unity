@@ -1891,9 +1891,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 11dab9350ad149c49863e61a323a1c8a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CameraFollow
-  mario: {fileID: 1191641735}
   horizontalLimit: 3.5
-  player: {fileID: 1191641735}
 --- !u!4 &520377205 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6349829852283458276, guid: b573df44a150b9843a0f1fc15f78a68a, type: 3}
@@ -2125,8 +2123,9 @@ GameObject:
   - component: {fileID: 569974862}
   - component: {fileID: 569974861}
   - component: {fileID: 569974860}
+  - component: {fileID: 569974863}
   m_Layer: 5
-  m_Name: Button
+  m_Name: RestartButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2195,21 +2194,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1191641732}
-        m_TargetAssemblyTypeName: PlayerMovement, Assembly-CSharp
-        m_MethodName: RestartButtonCallback
-        m_Mode: 3
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 745842938}
-        m_TargetAssemblyTypeName: GameManagerWeek3, Assembly-CSharp
-        m_MethodName: GameRestart
+      - m_Target: {fileID: 569974863}
+        m_TargetAssemblyTypeName: ButtonController, Assembly-CSharp
+        m_MethodName: ButtonClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2257,6 +2244,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 569974858}
   m_CullTransparentMesh: 1
+--- !u!114 &569974863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 569974858}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cedd63a5e138cb843a2fbf729c47f2cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ButtonController
 --- !u!4 &603087183 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 213609928969261052, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}

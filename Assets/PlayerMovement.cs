@@ -62,12 +62,23 @@ public class PlayerMovement : Singleton<PlayerMovement>
         base.Awake();
 
         Debug.Log($"Mario scene: {gameObject.scene.name}");
+        GameManager.instance.gameRestart.AddListener(GameRestart);
+        GameManager.instance.scoreChange.AddListener(SetScore);
+        GameManager.instance.gameOver.AddListener(GameOver);
     }
     void PlayDeathImpulse()
     {
         marioBody.linearVelocity = Vector2.zero;
         marioBody.AddForce(Vector2.up * deathImpulse, ForceMode2D.Impulse);
     }
+
+    public void GameRestart()
+{
+    gameOverScreen.SetActive(false);
+    ResetGame();
+    cameraFollow.enabled = true;
+}
+
 
     void GameOver()
     {
@@ -281,17 +292,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
         scoreRect.SetAsLastSibling(); // put score over the gameover overlay
 
         Time.timeScale = 0.0f;
-    }
-
-    public void RestartButtonCallback(int input)
-    {
-        gameOverScreen.SetActive(false);
-        // reset everything
-        ResetGame();
-        cameraFollow.enabled = true;
-
-        // resume time
-        // Time.timeScale = 1.0f;
     }
 
     private void ResetGame()
