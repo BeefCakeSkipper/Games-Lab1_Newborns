@@ -31,8 +31,8 @@ public class BossLogic : MonoBehaviour
     private bool isDead = false;
     public float skidDuration = 0.9f;
     private bool skidding = false;
-    public AudioSource LevelCompleteAudio;
     public AudioSource bossMusic;
+    public GameObject castle; // hidden until the boss is beaten
     void Start()
     {
         // bossHealth.SetActive(true);
@@ -116,6 +116,9 @@ public class BossLogic : MonoBehaviour
         ComputeVelocity();
         currentHealth = maxHealth;
         UpdateHealth();
+        // hide the castle again on restart
+        if (castle != null)
+            castle.SetActive(false);
 
     }
 
@@ -128,7 +131,6 @@ public class BossLogic : MonoBehaviour
         CancelInvoke(nameof(ResetSprite));
         if (currentHealth <= 0)
         {
-            LevelCompleteAudio.Play();
             bossMusic.Stop();
             Die();
         }
@@ -159,9 +161,10 @@ public class BossLogic : MonoBehaviour
         enemyBody.linearVelocity = Vector2.zero;
         enemyCollider.enabled = false;
         gameObject.SetActive(false);
-        LevelCompleteAudio.Play();
         bossMusic.Stop();
-        player.ShowEndScreen("You Win!");
+        // the castle appears, walking into it takes mario to the next level
+        if (castle != null)
+            castle.SetActive(true);
 
     }
     private void changeDirection()
