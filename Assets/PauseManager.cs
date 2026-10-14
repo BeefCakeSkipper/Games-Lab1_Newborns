@@ -57,6 +57,18 @@ public class PauseManager : MonoBehaviour
             Destroy(PlayerMovement.instance.gameObject);
         }
 
+        // Destroy persistent HUD so the score doesn't show on the main menu
+        if (HUDManager.instance != null)
+        {
+            Destroy(HUDManager.instance.gameObject);
+        }
+
+        // Destroy persistent GameManager so a new game starts from 0 (the high score is saved separately)
+        if (GameManager.instance != null)
+        {
+            Destroy(GameManager.instance.gameObject);
+        }
+
         // Return to Main Menu
         SceneManager.LoadScene("MainMenu");
     }

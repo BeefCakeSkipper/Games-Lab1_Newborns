@@ -10,15 +10,8 @@ public class PlayerMovement : Singleton<PlayerMovement>
     private Rigidbody2D marioBody;
 
     public float upSpeed = 2;
-    public TextMeshProUGUI scoreText;
     public CameraFollow cameraFollow;
-    public int score = 0;
-    public TextMeshProUGUI highScoreText;
-    private int highScore = 0;
-    private const string HighScoreKey = "HighScore";
     public BossTrigger bossTrigger;
-    public GameObject gameOverScreen;
-    public TextMeshProUGUI resultText;
     private bool onGroundState = true;
     private SpriteRenderer marioSprite;
     private bool faceRightState = true;
@@ -37,15 +30,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public AudioSource LevelCompleteAudio;
     public float deathImpulse = 15;
     public bool isDead = false;
-    public Vector2 gameOverScorePosition = new Vector2(0, -80); // below the game over text
-
-    // original score position
-    private Vector2 scoreAnchorMin;
-    private Vector2 scoreAnchorMax;
-    private Vector2 scorePosition;
-    private TextAlignmentOptions scoreAlignment;
-    private int scoreSiblingIndex;
-
 
     // state
     [System.NonSerialized]
@@ -89,7 +73,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
         Debug.Log($"Mario scene: {gameObject.scene.name}");
         GameManager.instance.gameRestart.AddListener(GameRestart);
-        GameManager.instance.scoreChange.AddListener(SetScore);
         GameManager.instance.gameOver.AddListener(GameOver);
     }
     void PlayDeathImpulse()
@@ -100,9 +83,10 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     public void GameRestart()
     {
-        gameOverScreen.SetActive(false);
+        // the HUDManager hides the game over screen itself on restart
         ResetGame();
-        cameraFollow.enabled = true;
+        if (cameraFollow != null)
+            cameraFollow.enabled = true;
     }
 
 
@@ -158,16 +142,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         // ground check hits layer 3 (Ground) and layer 7 (Obstacles)
         layerMask = (1 << 3) | (1 << 7);
 
-        // remember where the score sits in the HUD
-        RectTransform scoreRect = scoreText.rectTransform;
-        scoreAnchorMin = scoreRect.anchorMin;
-        scoreAnchorMax = scoreRect.anchorMax;
-        scorePosition = scoreRect.anchoredPosition;
-        scoreAlignment = scoreText.alignment;
-        scoreSiblingIndex = scoreRect.GetSiblingIndex();
         // scoreValue = GetComponent<JumpOnGoomba>();
-        highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
-        UpdateHighScoreText();
 
         // update animator state
         // marioAnimator.SetBool("onGround", onGroundState);
@@ -295,30 +270,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
             Move(value);
         }
     }
-    public void SetScore(int newScore)
-    {
-        score = newScore;
-        scoreText.text = "Score: " + score.ToString();
-        CheckHighScore();
-    }
-
-    void CheckHighScore()
-    {
-        if (score > highScore)
-        {
-            highScore = score;
-            PlayerPrefs.SetInt(HighScoreKey, highScore);
-            PlayerPrefs.Save();
-            UpdateHighScoreText();
-        }
-    }
-
-    void UpdateHighScoreText()
-    {
-        if (highScoreText != null)
-            highScoreText.text = "High Score: " + highScore.ToString();
-    }
-
     // called by the magic mushroom
     public void MakeBig()
     {
@@ -526,18 +477,13 @@ public class PlayerMovement : Singleton<PlayerMovement>
     // shows the end screen
     public void ShowEndScreen(string message)
     {
-        resultText.text = message;
-        gameOverScreen.SetActive(true);
+        // the HUD only exists if the game was started from a level that has one
+        if (HUDManager.instance != null)
+            HUDManager.instance.ShowEndScreen(message);
         EndStar(false);
-        bossTrigger.bossHealth.SetActive(false);
-
-        // move the score to the center and below the game over text
-        RectTransform scoreRect = scoreText.rectTransform;
-        scoreRect.anchorMin = new Vector2(0.5f, 0.5f);
-        scoreRect.anchorMax = new Vector2(0.5f, 0.5f);
-        scoreRect.anchoredPosition = gameOverScorePosition;
-        scoreText.alignment = TextAlignmentOptions.Center;
-        scoreRect.SetAsLastSibling(); // put score over the gameover overlay
+        // not every level has a boss
+        if (bossTrigger != null)
+            bossTrigger.bossHealth.SetActive(false);
 
         Time.timeScale = 0.0f;
     }
@@ -559,13 +505,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         MakeSmall();
         // lose the star (BossTrigger restarts the level music on restart)
         EndStar(false);
-        // the score itself is reset by GameManager, just put it back in the corner
-        RectTransform scoreRect = scoreText.rectTransform;
-        scoreRect.anchorMin = scoreAnchorMin;
-        scoreRect.anchorMax = scoreAnchorMax;
-        scoreRect.anchoredPosition = scorePosition;
-        scoreText.alignment = scoreAlignment;
-        scoreRect.SetSiblingIndex(scoreSiblingIndex);
+        // the score and the HUD are reset by GameManager and HUDManager
         // goombas, blocks/powerups and the boss + music reset themselves on GameManager.gameRestart
 
         if (LevelCompleteAudio != null)
@@ -588,11 +528,21 @@ public class PlayerMovement : Singleton<PlayerMovement>
     public void SetStartingPosition(Scene current, Scene next)
     {
 
-        if (next.name == "SampleScene" || next.name == "World-1-1" || next.name == "World-1-2")
+        if (next.name == "SampleScene" || next.name.StartsWith("World"))
         {
             // change the position accordingly in your World-1-2 case
             this.transform.position = GameManager.instance.gameConstants.marioStartingPosition;
+            // restarting in this level should put mario back here, not at the previous level's start
+            startPosition = transform.localPosition;
         }
+        FindSceneReferences();
+    }
+
+    // mario survives scene changes but the camera and boss trigger don't, so grab the new scene's ones
+    void FindSceneReferences()
+    {
+        cameraFollow = FindFirstObjectByType<CameraFollow>();
+        bossTrigger = FindFirstObjectByType<BossTrigger>(); // null in levels without a boss
     }
 
     // Allows player to move to next scene
@@ -620,7 +570,6 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (GameManager.instance != null)
         {
             GameManager.instance.gameRestart.RemoveListener(GameRestart);
-            GameManager.instance.scoreChange.RemoveListener(SetScore);
             GameManager.instance.gameOver.RemoveListener(GameOver);
         }
         Debug.Log($"Mario Destroyed: {gameObject.name}");

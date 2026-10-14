@@ -13,9 +13,14 @@ public class GameManager : Singleton<GameManager>
 
     private int score = 0;
 
+    // best score ever, saved between play sessions
+    private const string HighScoreKey = "HighScore"; // MainMenu reads/resets the same key
+    public int highScore { get; private set; }
+
     public override void Awake()
     {
         base.Awake();
+        highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
         if (gameConstants == null)
         {
             gameConstants = ScriptableObject.CreateInstance<GameConstants>();
@@ -56,8 +61,23 @@ public class GameManager : Singleton<GameManager>
         SetScore(score);
     }
 
+    // called by the main menu's reset highscore button
+    public void ResetHighScore()
+    {
+        highScore = 0;
+        PlayerPrefs.DeleteKey(HighScoreKey);
+        PlayerPrefs.Save();
+    }
+
     public void SetScore(int score)
     {
+        // save a new high score before telling the HUD, so it shows the updated one
+        if (score > highScore)
+        {
+            highScore = score;
+            PlayerPrefs.SetInt(HighScoreKey, highScore);
+            PlayerPrefs.Save();
+        }
         scoreChange.Invoke(score);
     }
 
