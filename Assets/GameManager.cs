@@ -1,96 +1,95 @@
-using System.Collections;
-using System.Collections.Generic;
+
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.SceneManagement;
-public class GameManager : Singleton<GameManager>
+
+public class GameManager : MonoBehaviour
 {
     public GameConstants gameConstants;
-    public UnityEvent gameStart;
-    public UnityEvent gameRestart;
-    public UnityEvent<int> scoreChange;
-    public UnityEvent gameOver;
 
-    private int score = 0;
+    [Header("ScriptableObject Events")]
+    [SerializeField] private SimpleGameEvent onGameStart;
+    [SerializeField] private SimpleGameEvent onGameRestart;
+    [SerializeField] private IntGameEvent onUpdateScore;
+    [SerializeField] private IntGameEvent onUpdateHighScore;
+    [SerializeField] private SimpleGameEvent onGameOver;
+    [SerializeField] private IntVariable gameScore;
 
-    // best score ever, saved between play sessions
-    private const string HighScoreKey = "HighScore"; // MainMenu reads/resets the same key
+    private const string HighScoreKey = "HighScore";
     public int highScore { get; private set; }
 
-    public override void Awake()
+    private void Awake()
     {
-        base.Awake();
         highScore = PlayerPrefs.GetInt(HighScoreKey, 0);
+
         if (gameConstants == null)
         {
             gameConstants = ScriptableObject.CreateInstance<GameConstants>();
         }
+
+        if (gameScore == null)
+        {
+            Debug.LogError("[GameManager] Game Score IntVariable is not assigned!");
+        }
     }
 
-    void Start()
+    private void Start()
     {
-        score = gameConstants.startingScore;
-        gameStart.Invoke();
         Time.timeScale = 1.0f;
-        // subscribe to scene manager scene change
-        SceneManager.activeSceneChanged += SceneSetup;
+
+        onGameStart.Raise();
+
+        // Display the existing score without resetting it.
+        SetScore(gameScore.Value);
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-    public void SceneSetup(Scene current, Scene next)
-    {
-        gameStart.Invoke();
-        SetScore(score);
-    }
     public void GameRestart()
     {
-        // reset score
-        score = gameConstants.startingScore;
-        SetScore(score);
-        gameRestart.Invoke();
         Time.timeScale = 1.0f;
+
+        SetScore(gameConstants.startingScore);
+
+        onGameRestart.Raise();
     }
 
     public void IncreaseScore(int increment)
     {
-        score += increment;
-        SetScore(score);
+        SetScore(gameScore.Value + increment);
     }
 
-    // called by the main menu's reset highscore button
     public void ResetHighScore()
     {
         highScore = 0;
+
         PlayerPrefs.DeleteKey(HighScoreKey);
         PlayerPrefs.Save();
+
+        onUpdateHighScore.Raise(highScore);
     }
 
-    public void SetScore(int score)
+    public void SetScore(int newScore)
     {
-        // save a new high score before telling the HUD, so it shows the updated one
-        if (score > highScore)
+        gameScore.Value = newScore;
+
+        if (gameScore.Value > highScore)
         {
-            highScore = score;
+            highScore = gameScore.Value;
+
             PlayerPrefs.SetInt(HighScoreKey, highScore);
             PlayerPrefs.Save();
         }
-        scoreChange.Invoke(score);
-    }
 
+        onUpdateScore.Raise(gameScore.Value);
+        onUpdateHighScore.Raise(highScore);
+    }
 
     public void GameOver()
     {
         Time.timeScale = 0.0f;
-        gameOver.Invoke();
+        onGameOver.Raise();
     }
 
-    protected override void OnDestroy()
+    // Call this when starting a completely new game.
+    public void StartNewGame()
     {
-        SceneManager.activeSceneChanged -= SceneSetup;
-        base.OnDestroy();
+        SetScore(gameConstants.startingScore);
     }
 }

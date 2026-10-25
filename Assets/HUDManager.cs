@@ -1,40 +1,48 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
 
-// owns the HUD (score, high score, game over screen) and updates it from GameManager events,
-// it survives scene changes like mario and the GameManager so the score carries over to the next level
-public class HUDManager : Singleton<HUDManager>
+public class HUDManager : MonoBehaviour
 {
+    [Header("HUD References")]
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI highScoreText;
     public GameObject gameOverScreen;
     public TextMeshProUGUI resultText;
-    public Vector2 gameOverScorePosition = new Vector2(0, -80); // below the game over text
+
+    public Vector2 gameOverScorePosition = new Vector2(0, -80);
 
     private Canvas canvas;
 
-    // original score position
+    // Original score position
     private Vector2 scoreAnchorMin;
     private Vector2 scoreAnchorMax;
     private Vector2 scorePosition;
     private TextAlignmentOptions scoreAlignment;
     private int scoreSiblingIndex;
 
-    public override void Awake()
+    private void Awake()
     {
-        base.Awake();
+
+
         canvas = GetComponent<Canvas>();
-        // a prefab can't keep a link to the scene camera, so grab it here too
-        if (canvas != null && canvas.renderMode == RenderMode.ScreenSpaceCamera && canvas.worldCamera == null)
+
+        if (canvas != null &&
+            canvas.renderMode == RenderMode.ScreenSpaceCamera &&
+            canvas.worldCamera == null)
+        {
             canvas.worldCamera = Camera.main;
+        }
+
         SceneManager.activeSceneChanged += UseSceneCamera;
     }
 
-    void Start()
+    private void Start()
     {
-        // remember where the score sits in the HUD
+        // Remember the original score position.
         RectTransform scoreRect = scoreText.rectTransform;
+
         scoreAnchorMin = scoreRect.anchorMin;
         scoreAnchorMax = scoreRect.anchorMax;
         scorePosition = scoreRect.anchoredPosition;
@@ -42,40 +50,47 @@ public class HUDManager : Singleton<HUDManager>
         scoreSiblingIndex = scoreRect.GetSiblingIndex();
 
         gameOverScreen.SetActive(false);
-        UpdateHighScoreText();
-
-        GameManager.instance.scoreChange.AddListener(SetScore);
-        GameManager.instance.gameRestart.AddListener(GameRestart);
     }
 
-    protected override void OnDestroy()
+    private void OnDestroy()
     {
         SceneManager.activeSceneChanged -= UseSceneCamera;
-        if (GameManager.instance != null)
-        {
-            GameManager.instance.scoreChange.RemoveListener(SetScore);
-            GameManager.instance.gameRestart.RemoveListener(GameRestart);
-        }
-        base.OnDestroy();
     }
-
-    // the canvas renders through the scene camera, so switch to the new scene's camera after a scene change
-    void UseSceneCamera(Scene current, Scene next)
+    // Update the Canvas camera when changing scenes.
+    private void UseSceneCamera(Scene current, Scene next)
     {
-        if (canvas != null && canvas.renderMode == RenderMode.ScreenSpaceCamera)
+        if (canvas != null &&
+            canvas.renderMode == RenderMode.ScreenSpaceCamera)
+        {
             canvas.worldCamera = Camera.main;
+        }
     }
 
+    // Called by OnUpdateScore.asset
     public void SetScore(int score)
     {
-        scoreText.text = "Score: " + score.ToString();
-        UpdateHighScoreText();
+        Debug.Log($"[HUDManager] SetScore received: {score}");
+
+        if (scoreText != null)
+        {
+            scoreText.text = "Score: " + score;
+        }
     }
 
-    void UpdateHighScoreText()
+    // Called by OnUpdateHighScore.asset
+    public void SetHighScore(int highScore)
     {
+        Debug.Log($"HUDManager: Received HighScore={highScore}");
         if (highScoreText != null)
-            highScoreText.text = "High Score: " + GameManager.instance.highScore.ToString();
+        {
+            highScoreText.text = "High Score: " + highScore;
+        }
+    }
+
+    // Called by OnGameOver.asset
+    public void ShowGameOver()
+    {
+        ShowEndScreen("GAME OVER");
     }
 
     public void ShowEndScreen(string message)
@@ -83,25 +98,34 @@ public class HUDManager : Singleton<HUDManager>
         resultText.text = message;
         gameOverScreen.SetActive(true);
 
-        // move the score to the center and below the game over text
+        // Move score below the game-over text.
         RectTransform scoreRect = scoreText.rectTransform;
+
         scoreRect.anchorMin = new Vector2(0.5f, 0.5f);
         scoreRect.anchorMax = new Vector2(0.5f, 0.5f);
         scoreRect.anchoredPosition = gameOverScorePosition;
+
         scoreText.alignment = TextAlignmentOptions.Center;
-        scoreRect.SetAsLastSibling(); // put score over the gameover overlay
+        scoreRect.SetAsLastSibling();
     }
 
-    void GameRestart()
+    // Called by OnGameRestart.asset
+    public void GameRestart()
     {
         gameOverScreen.SetActive(false);
 
-        // put the score back to the corner
+        // Restore the original score position.
         RectTransform scoreRect = scoreText.rectTransform;
+
         scoreRect.anchorMin = scoreAnchorMin;
         scoreRect.anchorMax = scoreAnchorMax;
         scoreRect.anchoredPosition = scorePosition;
+
         scoreText.alignment = scoreAlignment;
         scoreRect.SetSiblingIndex(scoreSiblingIndex);
+    }
+    public void ShowLevelComplete()
+    {
+        ShowEndScreen("You Win!");
     }
 }

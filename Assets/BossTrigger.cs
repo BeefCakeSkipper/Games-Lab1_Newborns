@@ -3,12 +3,17 @@ using UnityEngine;
 
 public class BossTrigger : MonoBehaviour
 {
-    public CameraFollow cameraFollow;
+    [Header("Boss UI")]
+    [SerializeField] private GameObject bossHealthUI;
+    [SerializeField] private PlayerMovement player;
+    public CameraController CameraController;
     public GameObject boss;
     public bool bossTriggered = false;
-    // public GameObject leftWall;
-    // public GameObject rightWall;
-    public GameObject bossHealth;
+
+    [Header("Boss Arena Walls")]
+    [SerializeField] private GameObject leftWall;
+    [SerializeField] private GameObject rightWall;
+
     public GameObject bossEnvironment;
     public AudioSource backgroundMusic;
     public AudioSource bossMusic;
@@ -18,23 +23,20 @@ public class BossTrigger : MonoBehaviour
     void Start()
     {
         boss.SetActive(false);
-        // leftWall.SetActive(false);
-        // rightWall.SetActive(false);
-        bossHealth.SetActive(false);
+
+        if (leftWall != null)
+            leftWall.SetActive(false);
+
+        if (rightWall != null)
+            rightWall.SetActive(false);
+
+        if (bossHealthUI != null)
+            bossHealthUI.SetActive(false);
+
         bossEnvironment.SetActive(false);
-
-        // reset the boss fight and the music when the game restarts
-        GameManager.instance.gameRestart.AddListener(GameRestart);
     }
 
-    void OnDestroy()
-    {
-        // GameManager survives scene changes, so stop listening when this trigger is gone
-        if (GameManager.instance != null)
-            GameManager.instance.gameRestart.RemoveListener(GameRestart);
-    }
-
-    void GameRestart()
+    public void GameRestart()
     {
         BossLogic bossLogic = boss.GetComponent<BossLogic>();
         if (bossLogic != null)
@@ -42,36 +44,122 @@ public class BossTrigger : MonoBehaviour
         ResetTrigger();
     }
 
-    void OnTriggerEnter2D(Collider2D col)
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        // only mario starts the fight
         PlayerMovement mario = col.GetComponent<PlayerMovement>();
+
         if (!bossTriggered && mario != null)
         {
+            Debug.Log("[BossTrigger] Mario entered boss arena.");
+
             bossTriggered = true;
-            cameraFollow.enabled = false;
+
+            if (CameraController != null)
+                CameraController.enabled = false;
+
+            // Activate boss.
             boss.SetActive(true);
-            // leftWall.SetActive(true);
-            // rightWall.SetActive(true);
-            bossHealth.SetActive(true);
+
+            // Activate arena walls.
+            if (leftWall != null)
+                leftWall.SetActive(true);
+
+            if (rightWall != null)
+                rightWall.SetActive(true);
+
+            // Activate boss health UI.
+            if (bossHealthUI != null)
+            {
+                Debug.Log(
+                    $"[BossTrigger] BEFORE activation: " +
+                    $"activeSelf={bossHealthUI.activeSelf}, " +
+                    $"activeInHierarchy={bossHealthUI.activeInHierarchy}"
+                );
+
+                bossHealthUI.SetActive(true);
+
+                Debug.Log(
+                    $"[BossTrigger] AFTER activation: " +
+                    $"activeSelf={bossHealthUI.activeSelf}, " +
+                    $"activeInHierarchy={bossHealthUI.activeInHierarchy}"
+                );
+
+                Canvas canvas = bossHealthUI.GetComponentInParent<Canvas>();
+
+                if (canvas != null)
+                {
+                    Debug.Log(
+                        $"[BossTrigger] Canvas={canvas.name}, " +
+                        $"renderMode={canvas.renderMode}, " +
+                        $"enabled={canvas.enabled}, " +
+                        $"activeInHierarchy={canvas.gameObject.activeInHierarchy}"
+                    );
+                }
+                else
+                {
+                    Debug.LogWarning("[BossTrigger] No parent Canvas found!");
+                }
+            }
+            else
+            {
+                Debug.LogError("[BossTrigger] BossHealthUI is not assigned!");
+            }
+
             bossEnvironment.SetActive(true);
+
             backgroundMusic.Stop();
             bossMusic.Play();
-            // if mario has the star, keep the star music playing over the boss music
+
             mario.MusicChanged(bossMusic);
         }
-
     }
-
     public void ResetTrigger()
     {
         bossTriggered = false;
+
         boss.SetActive(false);
-        // leftWall.SetActive(false);
-        // rightWall.SetActive(false);
-        bossHealth.SetActive(false);
+
+        if (leftWall != null)
+            leftWall.SetActive(false);
+
+        if (rightWall != null)
+            rightWall.SetActive(false);
+        Debug.LogWarning("[BossLogic.Respawn] Disabling BossHealthUI");
+        if (bossHealthUI != null)
+            bossHealthUI.SetActive(false);
+
         bossEnvironment.SetActive(false);
-        backgroundMusic.Play();
+
+        if (CameraController != null)
+            CameraController.enabled = true;
+
         bossMusic.Stop();
+        backgroundMusic.Play();
+    }
+    public void HideBossHealthUI()
+    {
+        Debug.LogWarning("[BossLogic.Respawn] Disabling BossHealthUI");
+        if (bossHealthUI != null)
+            bossHealthUI.SetActive(false);
+    }
+    private void LateUpdate()
+    {
+        BossLogic bossLogic = boss != null
+            ? boss.GetComponent<BossLogic>()
+            : null;
+
+        if (bossTriggered &&
+            player != null &&
+            player.alive &&
+            bossLogic != null &&
+            !bossLogic.IsDead &&
+            bossHealthUI != null &&
+            !bossHealthUI.activeSelf)
+        {
+            Debug.LogError(
+                "[BossTrigger] BossHealthUI unexpectedly disabled during boss fight!",
+                bossHealthUI
+            );
+        }
     }
 }

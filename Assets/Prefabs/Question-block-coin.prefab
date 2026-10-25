@@ -102,7 +102,6 @@ GameObject:
   - component: {fileID: 213609928969261052}
   - component: {fileID: 2700375409615669332}
   - component: {fileID: 1097871340626167902}
-  - component: {fileID: 847325115620356528}
   - component: {fileID: 7016627034957638998}
   - component: {fileID: 5601129446831653240}
   m_Layer: 7
@@ -233,24 +232,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
---- !u!114 &847325115620356528
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8850680806718565455}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ba7a1f55bb023b34bb5da323187c88b4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MarioBlock
-  bounceHeight: 0.5
-  bounceSpeed: 2
-  blockAnimator: {fileID: 7016627034957638998}
-  blockAudio: {fileID: 5601129446831653240}
-  coinSound: {fileID: 8300000, guid: d885ffc842af744d89f7d595ffcc176a, type: 3}
-  hasCoin: 1
 --- !u!95 &7016627034957638998
 Animator:
   serializedVersion: 7

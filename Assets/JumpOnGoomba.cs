@@ -10,6 +10,10 @@ public class JumpOnGoomba : MonoBehaviour
     // [System.NonSerialized]
     // public int score = 0; // we don't want this to show up in the inspector
 
+    [Header("ScriptableObject References")]
+    [SerializeField] private IntGameEvent onIncrementScore;
+    [SerializeField] private GameConstants gameConstants;
+
     public float bounceSpeed = 5.0f;   // lil bump after stomp
     private Rigidbody2D marioBody;
     private PlayerMovement playerMovement;
@@ -26,7 +30,7 @@ public class JumpOnGoomba : MonoBehaviour
         marioBody = GetComponent<Rigidbody2D>();
         playerMovement = GetComponent<PlayerMovement>();
 
-        goombaStomped += AddStompScore;
+        goombaStomped += IncrementScore;
         goombaStomped += SquashGoomba;
         goombaStomped += PlayStompSound;
         goombaStomped += Bounce;
@@ -34,7 +38,7 @@ public class JumpOnGoomba : MonoBehaviour
 
     void OnDestroy()
     {
-        goombaStomped -= AddStompScore;
+        goombaStomped -= IncrementScore;
         goombaStomped -= SquashGoomba;
         goombaStomped -= PlayStompSound;
         goombaStomped -= Bounce;
@@ -53,10 +57,10 @@ public class JumpOnGoomba : MonoBehaviour
         }
     }
 
-    void AddStompScore(EnemyMovement goomba)
+
+    public void IncrementScore(EnemyMovement goomba)
     {
-        // use the singleton so it still works after a scene change
-        GameManager.instance.IncreaseScore(GameManager.instance.gameConstants.goombaStompScore);
+        onIncrementScore.Raise(gameConstants.goombaStompScore);
     }
 
     void SquashGoomba(EnemyMovement goomba)

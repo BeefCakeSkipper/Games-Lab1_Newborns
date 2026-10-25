@@ -1,0 +1,223 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &4191125747545804439
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6730751409125636720, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 3.74722
+      objectReference: {fileID: 0}
+    - target: {fileID: 6730751409125636720, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 1.61328
+      objectReference: {fileID: 0}
+    - target: {fileID: 6730751409125636720, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6730751409125636720, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6730751409125636720, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6730751409125636720, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6730751409125636720, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6730751409125636720, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6730751409125636720, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6730751409125636720, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9168012617671367473, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      propertyPath: m_Name
+      value: GameManager Variant
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 8785801013479039783, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 9168012617671367473, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1801672024379173083}
+    - targetCorrespondingSourceObject: {fileID: 9168012617671367473, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3335074315951675446}
+    - targetCorrespondingSourceObject: {fileID: 9168012617671367473, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 167206300708130399}
+    - targetCorrespondingSourceObject: {fileID: 9168012617671367473, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8596067950428159286}
+    - targetCorrespondingSourceObject: {fileID: 9168012617671367473, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6370912032077460313}
+  m_SourcePrefab: {fileID: 100100000, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+--- !u!1 &4977194811878528422 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9168012617671367473, guid: 2a05af662dc461d46b02e99d06f9d430, type: 3}
+  m_PrefabInstance: {fileID: 4191125747545804439}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1801672024379173083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4977194811878528422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef65785ecec2114493664376d108f56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameManager
+  gameConstants: {fileID: 11400000, guid: 496ed93c8e0dbc44aba77a2ead3a80d6, type: 2}
+  onGameStart: {fileID: 11400000, guid: 7937dedb3e4fc914984a7590ce5a04ea, type: 2}
+  onGameRestart: {fileID: 11400000, guid: ce7f88ad76086924495dab9fe7c9c6ad, type: 2}
+  onUpdateScore: {fileID: 11400000, guid: e301f8416a9d8904bb2dd4a4c89eff0c, type: 2}
+  onUpdateHighScore: {fileID: 11400000, guid: f8d88add404503442a4644f3afdbc67f, type: 2}
+  onGameOver: {fileID: 11400000, guid: b8ce7e65ead103342adc5b5472ea6288, type: 2}
+  gameScore: {fileID: 11400000, guid: 096d843602603ed409fd214a88a45e99, type: 2}
+--- !u!114 &3335074315951675446
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4977194811878528422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf2a847bad23634a9a53d7ae09c082a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IntGameEventListener
+  Event: {fileID: 11400000, guid: e301f8416a9d8904bb2dd4a4c89eff0c, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+  intResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HUDManager, Assembly-CSharp
+        m_MethodName: SetScore
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &167206300708130399
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4977194811878528422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aaf2a847bad23634a9a53d7ae09c082a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::IntGameEventListener
+  Event: {fileID: 11400000, guid: f8d88add404503442a4644f3afdbc67f, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+  intResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HUDManager, Assembly-CSharp
+        m_MethodName: SetHighScore
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &8596067950428159286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4977194811878528422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21957f54eba86b4588df9a1b9ceca2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleGameEventListener
+  Event: {fileID: 11400000, guid: ce7f88ad76086924495dab9fe7c9c6ad, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+  simpleResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HUDManager, Assembly-CSharp
+        m_MethodName: GameRestart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &6370912032077460313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4977194811878528422}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21957f54eba86b4588df9a1b9ceca2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleGameEventListener
+  Event: {fileID: 11400000, guid: b8ce7e65ead103342adc5b5472ea6288, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+  simpleResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: HUDManager, Assembly-CSharp
+        m_MethodName: ShowGameOver
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

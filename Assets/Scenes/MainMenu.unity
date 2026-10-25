@@ -593,7 +593,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1150537303}
+      - m_Target: {fileID: 1150537305}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: ResetHighScore
         m_Mode: 1
@@ -1296,7 +1296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1150537304}
-  - component: {fileID: 1150537303}
+  - component: {fileID: 1150537305}
   m_Layer: 0
   m_Name: MenuManager
   m_TagString: Untagged
@@ -1304,19 +1304,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1150537303
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1150537302}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8cb87e3863423d469d520a17142c779, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MainMenu
-  highScoreText: {fileID: 242624714}
 --- !u!4 &1150537304
 Transform:
   m_ObjectHideFlags: 0
@@ -1332,6 +1319,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1150537305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1150537302}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8cb87e3863423d469d520a17142c779, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MainMenu
+  gameManager: {fileID: 0}
+  gameScore: {fileID: 11400000, guid: 096d843602603ed409fd214a88a45e99, type: 2}
+  highScoreText: {fileID: 242624714}
 --- !u!4 &1160641483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5630312437850801233, guid: 30c49b4687fc7574aa3d7733710b73e2, type: 3}
@@ -1602,7 +1604,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1150537303}
+      - m_Target: {fileID: 1150537305}
         m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: StartGame
         m_Mode: 1

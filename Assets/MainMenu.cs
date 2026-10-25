@@ -4,11 +4,14 @@ using TMPro;
 
 public class MainMenu : MonoBehaviour
 {
+    [SerializeField] private GameManager gameManager;
+    [SerializeField] private IntVariable gameScore;
     public TextMeshProUGUI highScoreText;
     private const string HighScoreKey = "HighScore"; // same key PlayerMovement saves the high score under
 
     void Start()
     {
+        gameScore.ResetValue();
         UpdateHighScoreText();
     }
 
@@ -16,14 +19,15 @@ public class MainMenu : MonoBehaviour
     {
         Debug.Log("Start button clicked!");
         SceneManager.LoadScene("LoadingScene");
+
     }
 
     // called by the reset highscore button
     public void ResetHighScore()
     {
         // the GameManager survives coming back to the menu and remembers the high score, so reset it there too
-        if (GameManager.instance != null)
-            GameManager.instance.ResetHighScore();
+        if (gameManager != null)
+            gameManager.ResetHighScore();
         PlayerPrefs.DeleteKey(HighScoreKey);
         PlayerPrefs.Save();
         UpdateHighScoreText();

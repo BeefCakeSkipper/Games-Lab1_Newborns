@@ -3,21 +3,18 @@ using UnityEngine;
 [RequireComponent(typeof(AudioSource))]
 public class FlagGoal : MonoBehaviour
 {
-    public AudioClip levelCompleteSound; 
+    [Header("Game Events")]
+    [SerializeField] private SimpleGameEvent onLevelComplete;
+    public AudioClip levelCompleteSound;
     private AudioSource flagAudio;
     private bool reached = false;
 
     void Start()
     {
         flagAudio = GetComponent<AudioSource>();
-        GameManager.instance.gameRestart.AddListener(GameRestart);
     }
 
-    void OnDestroy()
-    {
-        if (GameManager.instance != null)
-            GameManager.instance.gameRestart.RemoveListener(GameRestart);
-    }
+
 
     void OnTriggerEnter2D(Collider2D other)
     {
@@ -32,9 +29,11 @@ public class FlagGoal : MonoBehaviour
         if (levelCompleteSound != null)
             flagAudio.PlayOneShot(levelCompleteSound);
         mario.ShowEndScreen("You Win!");
+        if (onLevelComplete != null)
+            onLevelComplete.Raise();
     }
 
-    void GameRestart()
+    public void GameRestart()
     {
         reached = false;
         flagAudio.Stop();

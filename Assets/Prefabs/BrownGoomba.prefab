@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 5630312437850801233}
   - component: {fileID: 2707716291811985598}
   - component: {fileID: 6096943806478621144}
-  - component: {fileID: 8100350752707425436}
   - component: {fileID: 2489550436370945726}
   m_Layer: 0
   m_Name: BrownGoomba
@@ -121,20 +120,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &8100350752707425436
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 214171825318074276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ee67cf0a37393c46a373f865e6e5126, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::EnemyMovement
-  squashedSprite: {fileID: -464194137, guid: 7eb68ac47e5fe4bbca37c767951ce034, type: 3}
-  despawnDelay: 0.5
 --- !u!61 &2489550436370945726
 BoxCollider2D:
   m_ObjectHideFlags: 0

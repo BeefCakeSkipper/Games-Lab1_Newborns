@@ -1,30 +1,64 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class RestartButtonController : MonoBehaviour, IInteractiveButton
 {
-    public string firstLevel = "World 1-1"; // restart always goes back to the first level
+    [SerializeField] private SimpleGameEvent onGameRestart;
+    [SerializeField] private PlayerMovement player;
+    [SerializeField] private string mainMenuScene = "MainMenu";
+    [SerializeField] private IntVariable gameScore;
 
-    // implements the interface
+    private void Start()
+    {
+        if (player == null)
+        {
+            player = FindFirstObjectByType<PlayerMovement>();
+        }
+
+        if (player == null)
+        {
+            Debug.LogError("[RestartButtonController] PlayerMovement not found!");
+        }
+    }
+
     public void ButtonClick()
     {
-        Debug.Log("Onclick restart button");
+        Debug.Log("Restart button clicked");
 
-        // the end screen paused the game
+        bool hasWon = player != null && player.isLevelComplete;
+
+        // Resume gameplay and audio.
         Time.timeScale = 1f;
         AudioListener.pause = false;
 
-        // mario, the HUD and the GameManager survive scene changes, throw them away so
-        // the first level loads its own fresh ones (score back to 0, every level reloaded)
-        if (PlayerMovement.instance != null)
-            Destroy(PlayerMovement.instance.gameObject);
-        if (HUDManager.instance != null)
-            Destroy(HUDManager.instance.gameObject);
-        if (GameManager.instance != null)
-            Destroy(GameManager.instance.gameObject);
+        if (hasWon)
+        {
+            SceneManager.LoadScene(mainMenuScene);
+            return;
+        }
 
-        SceneManager.LoadScene(firstLevel);
+        // Reset the score before restarting.
+        if (gameScore == null)
+        {
+            Debug.LogError("[RestartButtonController] Game Score is not assigned!");
+            return;
+        }
+
+        gameScore.ResetValue();
+
+        Debug.Log($"[RestartButtonController] Score reset to {gameScore.Value}");
+
+        if (onGameRestart != null)
+        {
+            onGameRestart.Raise();
+        }
+        else
+        {
+            Debug.LogError("OnGameRestart is not assigned!");
+            return;
+        }
+
+        string currentLevel = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentLevel);
     }
 }

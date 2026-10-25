@@ -4,13 +4,19 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 
-public class PlayerMovement : Singleton<PlayerMovement>
+public class PlayerMovement : MonoBehaviour
 {
+    [Header("ScriptableObject References")]
+    [SerializeField] private GameConstants gameConstants;
+    [SerializeField] private IntGameEvent onIncrementScore;
+    [SerializeField] private SimpleGameEvent onGameOver;
+    [Header("Boss UI")]
+    [SerializeField] private GameObject bossHealthUI;
     public float speed = 10;
     private Rigidbody2D marioBody;
 
     public float upSpeed = 2;
-    public CameraFollow cameraFollow;
+    public CameraController CameraController;
     public BossTrigger bossTrigger;
     private bool onGroundState = true;
     private SpriteRenderer marioSprite;
@@ -54,7 +60,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
     private BoxCollider2D marioCollider;
     private Vector2 smallColliderSize;
     private Vector2 smallColliderOffset;
-
+    public bool isLevelComplete = false;
     // starman
     public float starDuration = 10f;        // seconds of invincibility
     public float starColorSpeed = 10f;      // how fast mario cycles colours
@@ -64,16 +70,11 @@ public class PlayerMovement : Singleton<PlayerMovement>
     private Coroutine starAnimation;
     private AudioSource pausedMusic;        // level/boss music paused while the star music plays
     // Property
-    public override void Awake()
+    private void Awake()
     {
         Debug.Log("Mario Awake called");
         Debug.Log($"Mario Awake: {gameObject.name}");
-        Debug.Log($"Mario Instance: {PlayerMovement.instance}");
-        base.Awake();
-
         Debug.Log($"Mario scene: {gameObject.scene.name}");
-        GameManager.instance.gameRestart.AddListener(GameRestart);
-        GameManager.instance.gameOver.AddListener(GameOver);
     }
     void PlayDeathImpulse()
     {
@@ -83,14 +84,13 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     public void GameRestart()
     {
-        // the HUDManager hides the game over screen itself on restart
+        CancelInvoke(nameof(RaiseGameOver));
+
         ResetGame();
-        if (cameraFollow != null)
-            cameraFollow.enabled = true;
     }
 
 
-    void GameOver()
+    public void GameOver()
     {
         ShowEndScreen("GAME OVER");
     }
@@ -121,7 +121,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
         GetComponent<Collider2D>().enabled = false;
 
-        Invoke(nameof(GameOver), deathDelay);
+        Invoke(nameof(RaiseGameOver), deathDelay);
     }
 
     // Start is called before the first frame update
@@ -225,11 +225,13 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
     void Move(int value)
     {
-
         Vector2 movement = new Vector2(value, 0);
-        // check if it doesn't go beyond maxSpeed
-        if (marioBody.linearVelocity.magnitude < maxSpeed)
+
+        // Check horizontal speed instead of total velocity
+        if (Mathf.Abs(marioBody.linearVelocity.x) < maxSpeed)
+        {
             marioBody.AddForce(movement * speed);
+        }
     }
     public void Jump()
     {
@@ -377,7 +379,7 @@ public class PlayerMovement : Singleton<PlayerMovement>
         if (enemy == null)
             return;
         enemy.Squash();
-        GameManager.instance.IncreaseScore(GameManager.instance.gameConstants.starKillScore);
+        onIncrementScore.Raise(gameConstants.starKillScore);
         if (marioAudio != null && starKillSound != null)
             marioAudio.PlayOneShot(starKillSound);
     }
@@ -477,13 +479,16 @@ public class PlayerMovement : Singleton<PlayerMovement>
     // shows the end screen
     public void ShowEndScreen(string message)
     {
-        // the HUD only exists if the game was started from a level that has one
-        if (HUDManager.instance != null)
-            HUDManager.instance.ShowEndScreen(message);
+        // HUDManager listens to OnGameOver.asset
+        // and displays the game-over screen itself.
+        if (message == "You Win!")
+        {
+            isLevelComplete = true;
+        }
         EndStar(false);
-        // not every level has a boss
         if (bossTrigger != null)
-            bossTrigger.bossHealth.SetActive(false);
+            bossTrigger.HideBossHealthUI();
+
 
         Time.timeScale = 0.0f;
     }
@@ -491,11 +496,19 @@ public class PlayerMovement : Singleton<PlayerMovement>
     private void ResetGame()
     {
         isDead = false;
+        alive = true;
+
         Time.timeScale = 1.0f;
         AudioListener.pause = false;
-        // reset position
-        marioBody.transform.localPosition = startPosition;
+
+        // Restore Mario's collision and physics.
+        marioCollider.enabled = true;
+        marioBody.simulated = true;
         marioBody.linearVelocity = Vector2.zero;
+        marioBody.angularVelocity = 0f;
+
+        // Reset Mario's position.
+        marioBody.transform.localPosition = startPosition;
         // reset sprite direction
         faceRightState = true;
         marioSprite.flipX = false;
@@ -513,35 +526,36 @@ public class PlayerMovement : Singleton<PlayerMovement>
 
         // reset animation
         marioAnimator.SetTrigger("gameRestart");
-        alive = true;
-        // give mario his hitbox back
-        GetComponent<Collider2D>().enabled = true;
 
 
     }
     // called when mario stomps the boss, goes through the GameManager so the score stays in one place
     public void AddScore()
     {
-        GameManager.instance.IncreaseScore(GameManager.instance.gameConstants.bossHitScore);
+        onIncrementScore.Raise(gameConstants.bossHitScore);
     }
 
     public void SetStartingPosition(Scene current, Scene next)
     {
-
         if (next.name == "SampleScene" || next.name.StartsWith("World"))
         {
-            // change the position accordingly in your World-1-2 case
-            this.transform.position = GameManager.instance.gameConstants.marioStartingPosition;
-            // restarting in this level should put mario back here, not at the previous level's start
+            transform.position = gameConstants.marioStartingPosition;
             startPosition = transform.localPosition;
         }
+
+        // Reconnect references belonging to the newly loaded scene.
         FindSceneReferences();
+
+        if (CameraController != null)
+        {
+            CameraController.enabled = true;
+        }
     }
 
     // mario survives scene changes but the camera and boss trigger don't, so grab the new scene's ones
     void FindSceneReferences()
     {
-        cameraFollow = FindFirstObjectByType<CameraFollow>();
+        CameraController = FindFirstObjectByType<CameraController>();
         bossTrigger = FindFirstObjectByType<BossTrigger>(); // null in levels without a boss
     }
 
@@ -562,19 +576,17 @@ public class PlayerMovement : Singleton<PlayerMovement>
         }
     }
 
-    protected override void OnDestroy()
+    private void OnDestroy()
     {
         // Unsubscribe from scene change events
         SceneManager.activeSceneChanged -= SetStartingPosition;
         // stop listening to the GameManager (it survives going back to the main menu, mario doesn't)
-        if (GameManager.instance != null)
-        {
-            GameManager.instance.gameRestart.RemoveListener(GameRestart);
-            GameManager.instance.gameOver.RemoveListener(GameOver);
-        }
+
         Debug.Log($"Mario Destroyed: {gameObject.name}");
-        // Clear singleton reference
-        base.OnDestroy();
+    }
+    private void RaiseGameOver()
+    {
+        onGameOver.Raise();
     }
 }
 

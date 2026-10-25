@@ -228,7 +228,8 @@ AudioMixerController:
   m_Snapshots:
   - {fileID: 24500006}
   - {fileID: -9190919434093073028}
-  m_StartSnapshot: {fileID: 24500006}
+  - {fileID: 953863828597270742}
+  m_StartSnapshot: {fileID: 953863828597270742}
   m_SuspendThreshold: -80
   m_EnableSuspend: 1
   m_UpdateMode: 0
@@ -259,7 +260,7 @@ AudioMixerController:
     - 0e670badb4653874abde7441fdf7e21e
     name: SFX Only
   m_CurrentViewIndex: 0
-  m_TargetSnapshot: {fileID: 24500006}
+  m_TargetSnapshot: {fileID: 953863828597270742}
 --- !u!243 &24300002
 AudioMixerGroupController:
   m_ObjectHideFlags: 0
@@ -323,6 +324,41 @@ AudioMixerSnapshotController:
     c93d102ea53173e4f9d9d11c70ae9e9c: 0
     6c1e805eb90d2b9488071646cc5061fe: -1775
     454c32ffcdd23a6469678ba1b74103d0: -24
+  m_TransitionOverrides: {}
+--- !u!245 &953863828597270742
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Quiet
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: faf67b6e96d1b8541993f0126b2b2cf8
+  m_FloatValues:
+    2b482a01e92322146bcc968ea2ab028e: 3.4
+    161e993178c95414093d47e8e43e4987: -5.3230715
+    173b6b71760aaba4ca214763c76fdfde: -4.560346
+    c71585f1ee124fe4f83b66cc5a72967a: 2000
+    cca6f4229cb1aea449d73d8280239c29: -414
+    3bafcf526473db947be65a24834e12c5: -65
+    a7c2d1e2d58813e4cb2e62069a21e266: -4.560346
+    8ecb97e344bc85a4699adff863314ba5: -13.0627575
+    414b91a5aec690142b24e43856c14806: -4.9356413
+    eeaba2d53dc867d498d8fafa3e87d889: -12.498483
+    8aefc3e50adb9f1499620dccaaa0005c: -10.345207
+    ba30b5b76deb4a14aac14775c5577ed4: 5
+    571ef728068feb8439a2521b53e038b6: -4.560346
+    8a783c3881f3a474888330c441d019e6: 1000
+    c9e25909e2f85e949bba082681cd9d24: 0
+    8f972789647ce9e48aa83c776042f615: 0.069
+    57799fda75c796f4cbd5c9b75c6c23ef: -4.560346
+    73a3167b6f94e8f40ad4b3c1b629edb4: -458
+    1c2a833d3a52440468a6e22f67f21aa8: 0.009
+    bb79c89d0fb3c5147a2c152805181d9f: -4.560346
+    c93d102ea53173e4f9d9d11c70ae9e9c: 0
+    6c1e805eb90d2b9488071646cc5061fe: -1775
+    454c32ffcdd23a6469678ba1b74103d0: -24
+    7f4e79ff8e06f03449b19f6b2629492c: -5.3230715
   m_TransitionOverrides: {}
 --- !u!244 &1125365810363829383
 AudioMixerEffectController:

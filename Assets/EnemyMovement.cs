@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
-
+    [SerializeField] private GameConstants constants;
     private float originalX;
     private float maxOffset;        // set from GameConstants
     private float enemyPatroltime;  // set from GameConstants
@@ -29,23 +29,28 @@ public class EnemyMovement : MonoBehaviour
         originalX = transform.position.x;
 
         // patrol values come from the game constants
-        GameConstants constants = GameManager.instance.gameConstants;
+        // GameConstants constants = GameManager.instance.gameConstants;
         maxOffset = constants.goombaMaxOffset;
         enemyPatroltime = constants.goombaPatrolTime;
         ComputeVelocity();
-
-        // reset this goomba when the game restarts
-        GameManager.instance.gameRestart.AddListener(Respawn);
     }
 
-    void OnDestroy()
-    {
-        if (GameManager.instance != null)
-            GameManager.instance.gameRestart.RemoveListener(Respawn);
-    }
+
+
     void ComputeVelocity()
     {
-        velocity = new Vector2((moveRight) * maxOffset / enemyPatroltime, 0);
+        if (enemyPatroltime <= 0f)
+        {
+            Debug.LogError(
+                $"Invalid goombaPatrolTime: {enemyPatroltime} on {gameObject.name}",
+                this
+            );
+
+            velocity = Vector2.zero;
+            return;
+        }
+
+        velocity = new Vector2(moveRight * maxOffset / enemyPatroltime, 0);
     }
     void Movegoomba()
     {
@@ -65,17 +70,16 @@ public class EnemyMovement : MonoBehaviour
             goombaSprite.flipX = true;
         }
 
-        if (Mathf.Abs(enemyBody.position.x - originalX) < maxOffset)
-        {// move goomba
-            Movegoomba();
-        }
-        else
+        float distanceFromStart = enemyBody.position.x - originalX;
+
+        if ((moveRight > 0 && distanceFromStart >= maxOffset) ||
+            (moveRight < 0 && distanceFromStart <= -maxOffset))
         {
-            // change direction
             moveRight *= -1;
             ComputeVelocity();
-            Movegoomba();
         }
+
+        Movegoomba();
     }
 
     void OnCollisionEnter2D(Collision2D col)
@@ -104,7 +108,7 @@ public class EnemyMovement : MonoBehaviour
     {
         gameObject.SetActive(false);
     }
-    public void Respawn()
+    public void GameRestart()
     {
         CancelInvoke();
         squashed = false;

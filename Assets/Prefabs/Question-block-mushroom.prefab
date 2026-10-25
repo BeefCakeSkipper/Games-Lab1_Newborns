@@ -273,7 +273,8 @@ PrefabInstance:
       propertyPath: m_Name
       value: Question-block-mushroom
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 847325115620356528, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
     m_RemovedGameObjects:
     - {fileID: 3055852846167637567, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
     m_AddedGameObjects:

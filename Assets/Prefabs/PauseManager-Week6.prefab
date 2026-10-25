@@ -1,0 +1,189 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &3773572097424925852
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 999575842325938848, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: onGamePause
+      value: 
+      objectReference: {fileID: 11400000, guid: e050b593de44631468480528066319d0, type: 2}
+    - target: {fileID: 999575842325938848, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: onGameResume
+      value: 
+      objectReference: {fileID: 11400000, guid: 58071664dac50cf419086c3d2a13c14b, type: 2}
+    - target: {fileID: 999575842325938848, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: onReturnToMainMenu
+      value: 
+      objectReference: {fileID: 11400000, guid: e4308cadf43e59744a8b8dce4fbbd9b9, type: 2}
+    - target: {fileID: 7456450442645189641, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: m_Name
+      value: PauseManager Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287101167038018271, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.53772
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287101167038018271, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.60367
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287101167038018271, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287101167038018271, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287101167038018271, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287101167038018271, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287101167038018271, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287101167038018271, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287101167038018271, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8287101167038018271, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7456450442645189641, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8592418413650471891}
+    - targetCorrespondingSourceObject: {fileID: 7456450442645189641, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 4559856048295021815}
+    - targetCorrespondingSourceObject: {fileID: 7456450442645189641, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3821536885126156557}
+  m_SourcePrefab: {fileID: 100100000, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+--- !u!114 &4143697838874879548 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 999575842325938848, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+  m_PrefabInstance: {fileID: 3773572097424925852}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991135504559313045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75ed8df8f8f208e40af2babbb890b529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PauseManager
+--- !u!1 &5991135504559313045 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7456450442645189641, guid: 9e587cf07aa2ddc41b6a20497bd1cf71, type: 3}
+  m_PrefabInstance: {fileID: 3773572097424925852}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8592418413650471891
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991135504559313045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21957f54eba86b4588df9a1b9ceca2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleGameEventListener
+  Event: {fileID: 11400000, guid: e050b593de44631468480528066319d0, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+  simpleResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4143697838874879548}
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: PauseGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &4559856048295021815
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991135504559313045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21957f54eba86b4588df9a1b9ceca2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleGameEventListener
+  Event: {fileID: 11400000, guid: 58071664dac50cf419086c3d2a13c14b, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+  simpleResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4143697838874879548}
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: ResumeGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3821536885126156557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5991135504559313045}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21957f54eba86b4588df9a1b9ceca2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleGameEventListener
+  Event: {fileID: 11400000, guid: e4308cadf43e59744a8b8dce4fbbd9b9, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+  simpleResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4143697838874879548}
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: ReturnToMainMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

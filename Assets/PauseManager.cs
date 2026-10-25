@@ -1,9 +1,18 @@
+
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class PauseManager : MonoBehaviour
 {
-    public GameObject pauseMenu;
+    [Header("UI References")]
+    [SerializeField] private GameObject pauseMenu;
+
+    [Header("ScriptableObject Events")]
+    [SerializeField] private SimpleGameEvent onGamePause;
+    [SerializeField] private SimpleGameEvent onGameResume;
+    [SerializeField] private SimpleGameEvent onReturnToMainMenu;
+    [SerializeField] private PlayerMovement player;
+    public bool isLevelComplete = false;
 
     private bool isPaused = false;
 
@@ -11,8 +20,7 @@ public class PauseManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (PlayerMovement.instance != null &&
-                PlayerMovement.instance.isDead)
+            if (player != null && player.isDead)
                 return;
 
             if (isPaused)
@@ -24,52 +32,48 @@ public class PauseManager : MonoBehaviour
 
     public void PauseGame()
     {
-        if (PlayerMovement.instance != null &&
-            PlayerMovement.instance.isDead)
+        if (player != null && (player.isDead || player.isLevelComplete))
+            return;
+
+        if (isPaused)
             return;
 
         pauseMenu.SetActive(true);
+
         Time.timeScale = 0f;
         AudioListener.pause = true;
 
         isPaused = true;
+
+        if (onGamePause != null)
+            onGamePause.Raise();
     }
 
     public void ResumeGame()
     {
+        if (!isPaused)
+            return;
+
         pauseMenu.SetActive(false);
+
         Time.timeScale = 1f;
         AudioListener.pause = false;
 
         isPaused = false;
+
+        if (onGameResume != null)
+            onGameResume.Raise();
     }
 
     public void ReturnToMainMenu()
     {
-        // Resume game and audio
+        Debug.Log("ReturnToMainMenu called");
+
         Time.timeScale = 1f;
         AudioListener.pause = false;
-        isPaused = false;
 
-        // Destroy persistent Mario
-        if (PlayerMovement.instance != null)
-        {
-            Destroy(PlayerMovement.instance.gameObject);
-        }
+        Debug.Log("Attempting to load MainMenu");
 
-        // Destroy persistent HUD so the score doesn't show on the main menu
-        if (HUDManager.instance != null)
-        {
-            Destroy(HUDManager.instance.gameObject);
-        }
-
-        // Destroy persistent GameManager so a new game starts from 0 (the high score is saved separately)
-        if (GameManager.instance != null)
-        {
-            Destroy(GameManager.instance.gameObject);
-        }
-
-        // Return to Main Menu
         SceneManager.LoadScene("MainMenu");
     }
 }

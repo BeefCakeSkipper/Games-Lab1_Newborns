@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
-public class ActionManager : Singleton<ActionManager>
+public class ActionManager : MonoBehaviour
 {
     public UnityEvent<int> moveCheck;
     public UnityEvent jump;
@@ -29,6 +29,9 @@ public class ActionManager : Singleton<ActionManager>
     // called twice, when pressed and unpressed
     public void OnMoveAction(InputAction.CallbackContext context)
     {
+        float movement = context.ReadValue<float>();
+        int direction = Mathf.RoundToInt(movement);
+
         if (context.started)
         {
             int faceRight = context.ReadValue<float>() > 0 ? 1 : -1;
