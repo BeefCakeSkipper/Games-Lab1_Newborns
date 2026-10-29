@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcfa8751daa3ccf4aab21f38133bdab0, type: 3}
   m_Name: DeadMario
   m_EditorClassIdentifier: Assembly-CSharp::State
-  setupActions: []
+  setupActions:
+  - {fileID: 11400000, guid: 856a1cf9daefa7f458140f5d15efade9, type: 2}
   actions: []
   eventTriggeredActions: []
   exitActions: []

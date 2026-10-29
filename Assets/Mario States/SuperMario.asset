@@ -12,9 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bcfa8751daa3ccf4aab21f38133bdab0, type: 3}
   m_Name: SuperMario
   m_EditorClassIdentifier: Assembly-CSharp::State
-  setupActions: []
+  setupActions:
+  - {fileID: 11400000, guid: 301e9639faa59a14094a972bb99e6094, type: 2}
+  - {fileID: 11400000, guid: b4919478585aeaf49ad1326ce76b5a1b, type: 2}
   actions: []
   eventTriggeredActions: []
   exitActions: []
-  transitions: []
+  transitions:
+  - decision: {fileID: 11400000, guid: 1024d2f7bcb7f9249a9cdb1828f9f3dd, type: 2}
+    trueState: {fileID: 11400000, guid: 551ec4d3ed3a616429347157e184bbf1, type: 2}
+    falseState: {fileID: 11400000, guid: 02771fa2592fc9348934b47100781f9e, type: 2}
   sceneGizmoColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}

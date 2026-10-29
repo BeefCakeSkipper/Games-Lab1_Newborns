@@ -32,7 +32,7 @@ public class MagicMushroomPowerup : BasePowerup
         if (col.gameObject.CompareTag("Player"))
         {
             // give mario the powerup
-            ApplyPowerup(col.gameObject.GetComponent<PlayerMovement>());
+            ApplyPowerup(col.gameObject.GetComponent<MarioStateController>());
 
             // hide instead of destroying so it can be reset on restart
             gameObject.SetActive(false);
@@ -89,11 +89,10 @@ public class MagicMushroomPowerup : BasePowerup
     // interface implementation
     public override void ApplyPowerup(MonoBehaviour i)
     {
-        // make mario big
-        PlayerMovement mario = i as PlayerMovement;
+        MarioStateController mario = i as MarioStateController;
         if (mario != null)
         {
-            mario.MakeBig();
+            mario.SetPowerup(powerupType);
         }
     }
 }

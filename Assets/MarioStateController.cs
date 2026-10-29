@@ -1,9 +1,13 @@
+using System;
+using System.Collections;
 using UnityEngine;
 
 public class MarioStateController : StateController
 {
+    public GameConstants gameConstants;
     public PowerupType currentPowerupType = PowerupType.Default;
     public MarioState shouldBeNextState = MarioState.Default;
+    private SpriteRenderer spriteRenderer;
 
     public override void Start()
     {
@@ -21,4 +25,24 @@ public class MarioStateController : StateController
     {
         currentPowerupType = i;
     }
+    public void SetRendererToFlicker()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        StartCoroutine(BlinkSpriteRenderer());
+    }
+    private IEnumerator BlinkSpriteRenderer()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        while (string.Equals(currentState.name, "InvincibleSmallMario", StringComparison.OrdinalIgnoreCase))
+        {
+            // Toggle the visibility of the sprite renderer
+            spriteRenderer.enabled = !spriteRenderer.enabled;
+
+            // Wait for the specified blink interval
+            yield return new WaitForSeconds(gameConstants.flickerInterval);
+        }
+
+        spriteRenderer.enabled = true;
+    }
+
 }

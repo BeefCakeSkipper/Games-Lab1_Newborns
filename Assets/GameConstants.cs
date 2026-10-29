@@ -12,6 +12,7 @@ public class GameConstants : ScriptableObject
 
     [Header("Mario")]
     public Vector3 marioStartingPosition = new Vector3(-4.56f, -2.64f, 0.0f); // where mario starts after a scene change
+    public float flickerInterval = 0.08f;
 
     [Header("Goomba")]
     public float goombaMaxOffset = 5.0f;   // how far a goomba walks from its start before turning

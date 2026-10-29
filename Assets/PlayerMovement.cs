@@ -58,6 +58,7 @@ public class PlayerMovement : MonoBehaviour
     private bool invincible = false;
     private RuntimeAnimatorController smallMarioController;
     private BoxCollider2D marioCollider;
+    private MarioStateController marioStateController;
     private Vector2 smallColliderSize;
     private Vector2 smallColliderOffset;
     public bool isLevelComplete = false;
@@ -101,13 +102,11 @@ public class PlayerMovement : MonoBehaviour
         if (!alive || invincible || starPower)
             return;
 
-        // big mario shrinks instead of dying
-        if (isBig)
-        {
-            PowerDown();
-            return;
-        }
+        marioStateController.SetPowerup(PowerupType.Damage);
+    }
 
+    public void KillMario()
+    {
         isDead = true;
         alive = false;
 
@@ -137,6 +136,7 @@ public class PlayerMovement : MonoBehaviour
         // remember small mario's animator and hitbox
         smallMarioController = marioAnimator.runtimeAnimatorController;
         marioCollider = GetComponent<BoxCollider2D>();
+        marioStateController = GetComponent<MarioStateController>();
         smallColliderSize = marioCollider.size;
         smallColliderOffset = marioCollider.offset;
         // ground check hits layer 3 (Ground) and layer 7 (Obstacles)
@@ -286,7 +286,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
     // big mario got hit, shrink and become invincible for a bit
-    void PowerDown()
+    public void PowerDown()
     {
         isBig = false;
         invincible = true;

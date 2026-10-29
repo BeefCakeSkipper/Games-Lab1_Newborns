@@ -3465,6 +3465,7 @@ MonoBehaviour:
   transitionStateChanged: 0
   stateTimeElapsed: 0
   isActive: 1
+  gameConstants: {fileID: 11400000, guid: 496ed93c8e0dbc44aba77a2ead3a80d6, type: 2}
   currentPowerupType: -1
   shouldBeNextState: -1
 --- !u!114 &1191641762
