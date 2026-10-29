@@ -2064,6 +2064,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 70585683}
   m_SourcePrefab: {fileID: 100100000, guid: f25340fde083189419ccf2d0f5f3fa88, type: 3}
+--- !u!1 &693034673 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1335411359212573779, guid: 82b7a36940eec6941a54cfda4697145d, type: 3}
+  m_PrefabInstance: {fileID: 1452001054402964876}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &711684591 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1559379387053105805, guid: a577bd7e5df67224e8f9aab1d6177204, type: 3}
@@ -3435,12 +3440,64 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4865310966138003149, guid: 82b7a36940eec6941a54cfda4697145d, type: 3}
   m_PrefabInstance: {fileID: 1452001054402964876}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 693034673}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 44e800d5f5a87e943a2749e1746fec27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement
+--- !u!114 &1191641761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693034673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 98a9fd09a2813974fb0569088d6015f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MarioStateController
+  startState: {fileID: 11400000, guid: e51e6593de08f784cb2aa9ac086a9272, type: 2}
+  previousState: {fileID: 0}
+  currentState: {fileID: 0}
+  remainState: {fileID: 11400000, guid: 02771fa2592fc9348934b47100781f9e, type: 2}
+  transitionStateChanged: 0
+  stateTimeElapsed: 0
+  isActive: 1
+  currentPowerupType: -1
+  shouldBeNextState: -1
+--- !u!114 &1191641762
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 693034673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d21957f54eba86b4588df9a1b9ceca2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::SimpleGameEventListener
+  Event: {fileID: 11400000, guid: ce7f88ad76086924495dab9fe7c9c6ad, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls: []
+  simpleResponse:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1191641761}
+        m_TargetAssemblyTypeName: MarioStateController, Assembly-CSharp
+        m_MethodName: GameRestart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1192081789 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8850680806718565455, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
@@ -6087,7 +6144,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1335411359212573779, guid: 82b7a36940eec6941a54cfda4697145d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1191641761}
+    - targetCorrespondingSourceObject: {fileID: 1335411359212573779, guid: 82b7a36940eec6941a54cfda4697145d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1191641762}
   m_SourcePrefab: {fileID: 100100000, guid: 82b7a36940eec6941a54cfda4697145d, type: 3}
 --- !u!1001 &2468704301309947992
 PrefabInstance:
