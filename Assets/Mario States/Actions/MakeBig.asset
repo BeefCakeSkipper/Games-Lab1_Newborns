@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6aa05365440da6842b0b43e58e234531, type: 3}
   m_Name: MakeBig
   m_EditorClassIdentifier: Assembly-CSharp::MakeBigAction
+  powerupSound: {fileID: 8300000, guid: 26301d2e86e99420599e315297a825df, type: 3}

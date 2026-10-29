@@ -5,6 +5,7 @@ public class EndInvincibleAction : Action
 {
     public override void Act(StateController controller)
     {
-        controller.GetComponent<PlayerMovement>().EndInvincible();
+        MarioStateController m = (MarioStateController)controller;
+        m.invincible = false;
     }
 }

@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 78e72749163e1034eae8ac34e5dff183, type: 3}
   m_Name: KillMario
   m_EditorClassIdentifier: Assembly-CSharp::KillMarioAction
+  deathSound: {fileID: 8300000, guid: 0f4e05c00f1ceec40859da13d14351e4, type: 3}

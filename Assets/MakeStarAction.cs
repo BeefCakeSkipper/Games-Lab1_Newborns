@@ -5,6 +5,7 @@ public class MakeStarAction : Action
 {
     public override void Act(StateController controller)
     {
-        controller.GetComponent<PlayerMovement>().MakeStar();
+        MarioStateController m = (MarioStateController)controller;
+        m.MakeStar();
     }
 }

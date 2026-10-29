@@ -5,6 +5,7 @@ public class PowerDownAction : Action
 {
     public override void Act(StateController controller)
     {
-        controller.GetComponent<PlayerMovement>().PowerDown();
+        MarioStateController m = (MarioStateController)controller;
+        m.PowerDown();
     }
 }

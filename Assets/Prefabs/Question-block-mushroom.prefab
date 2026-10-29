@@ -215,11 +215,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 213609928969261052, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 5.4088902
       objectReference: {fileID: 0}
     - target: {fileID: 213609928969261052, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.77389
       objectReference: {fileID: 0}
     - target: {fileID: 213609928969261052, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -281,10 +281,50 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 213609928969261052, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4448570071517097708}
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8850680806718565455, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 731223909463608238}
   m_SourcePrefab: {fileID: 100100000, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
 --- !u!4 &1559379387053105805 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 213609928969261052, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
+  m_PrefabInstance: {fileID: 1680654457675214193}
+  m_PrefabAsset: {fileID: 0}
+--- !u!82 &6551004478928710665 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 5601129446831653240, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
+  m_PrefabInstance: {fileID: 1680654457675214193}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7890602445221101886 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8850680806718565455, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
+  m_PrefabInstance: {fileID: 1680654457675214193}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &731223909463608238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7890602445221101886}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba7a1f55bb023b34bb5da323187c88b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::MarioBlock
+  bounceHeight: 0.5
+  bounceSpeed: 2
+  blockAnimator: {fileID: 8517137370097975335}
+  blockAudio: {fileID: 6551004478928710665}
+  coinSound: {fileID: 8300000, guid: d885ffc842af744d89f7d595ffcc176a, type: 3}
+  reusable: 0
+  hasCoin: 0
+  powerup: {fileID: 1855287660913233653}
+  powerupAnimator: {fileID: 6503040786380905336}
+  powerupAppearsSound: {fileID: 8300000, guid: 97a450c65284a4a3094ba5c2221a492b, type: 3}
+--- !u!95 &8517137370097975335 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 7016627034957638998, guid: 52fef70b83fc2184e9b18b8d97cc025b, type: 3}
   m_PrefabInstance: {fileID: 1680654457675214193}
   m_PrefabAsset: {fileID: 0}

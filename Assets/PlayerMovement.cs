@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour
     [Header("ScriptableObject References")]
     [SerializeField] private GameConstants gameConstants;
     [SerializeField] private IntGameEvent onIncrementScore;
-    [SerializeField] private SimpleGameEvent onGameOver;
     [Header("Boss UI")]
     [SerializeField] private GameObject bossHealthUI;
     public float speed = 10;
@@ -30,47 +29,21 @@ public class PlayerMovement : MonoBehaviour
     public LayerMask layerMask;
     public Animator marioAnimator;
     public AudioSource marioAudio;
-    public AudioSource marioDeathAudio;
-    public AudioClip marioDeath;
     public AudioClip marioJump;
     public AudioSource LevelCompleteAudio;
     public float deathImpulse = 15;
-    public bool isDead = false;
 
     // state
-    [System.NonSerialized]
-    public bool alive = true;
-
-    public float deathDelay = 3.0f;   // seconds before the game over screen shows
-
-    // magic mushroom
-    public Vector2 bigColliderSize = new Vector2(1, 2);   // big mario's hitbox
-    public Vector2 bigColliderOffset = new Vector2(0, 0.5f);
-    public float bigMaxDistance = 0.1f;                   // ground check distance for big mario
-    public float hurtInvincibleTime = 1.5f; // seconds mario can't be hit after shrinking
-    public AudioClip marioPowerup;
-    public AudioClip marioPowerdown;
-    public int sizeFlickers = 8;            // how many times mario flickers between small and big
-    public float flickerInterval = 0.08f;   // seconds between each flicker
-    private Coroutine sizeAnimation;
-    private bool isBig = false;
-    private bool invincible = false;
-    private BoxCollider2D marioCollider;
     private MarioStateController marioStateController;
-    private Vector2 smallColliderSize;
-    private Vector2 smallColliderOffset;
+    public bool isDead => marioStateController.isDead;
+    public bool alive => !marioStateController.isDead;
+
+    public float bigMaxDistance = 0.1f;                   // ground check distance for big mario
     public bool isLevelComplete = false;
-    // starman
-    public float starDuration = 10f;        // seconds of invincibility
-    public float starColorSpeed = 10f;      // how fast mario cycles colours
-    public AudioSource starMusic;           // plays the starman theme while invincible
-    public AudioClip starKillSound;         // when mario runs into an enemy while invincible
-    private bool starPower = false;
-    private Coroutine starAnimation;
-    private AudioSource pausedMusic;        // level/boss music paused while the star music plays
     // Property
     private void Awake()
     {
+        marioStateController = GetComponent<MarioStateController>();
         Debug.Log("Mario Awake called");
         Debug.Log($"Mario Awake: {gameObject.name}");
         Debug.Log($"Mario scene: {gameObject.scene.name}");
@@ -83,8 +56,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void GameRestart()
     {
-        CancelInvoke(nameof(RaiseGameOver));
-
         ResetGame();
     }
 
@@ -92,33 +63,6 @@ public class PlayerMovement : MonoBehaviour
     public void GameOver()
     {
         ShowEndScreen("GAME OVER");
-    }
-
-    // kills mario dedge
-    public void Die()
-    {
-        if (!alive || invincible || starPower)
-            return;
-
-        marioStateController.SetPowerup(PowerupType.Damage);
-    }
-
-    public void KillMario()
-    {
-        isDead = true;
-        alive = false;
-
-        marioAnimator.Play("mario-die");
-
-        if (marioDeathAudio != null && marioDeath != null)
-        {
-            marioDeathAudio.PlayOneShot(marioDeath);
-        }
-        StopAllMusic();
-
-        GetComponent<Collider2D>().enabled = false;
-
-        Invoke(nameof(RaiseGameOver), deathDelay);
     }
 
     // Start is called before the first frame update
@@ -131,11 +75,6 @@ public class PlayerMovement : MonoBehaviour
         marioBody = GetComponent<Rigidbody2D>();
         marioSprite = GetComponent<SpriteRenderer>();
         startPosition = transform.localPosition;
-        // remember small mario's hitbox
-        marioCollider = GetComponent<BoxCollider2D>();
-        marioStateController = GetComponent<MarioStateController>();
-        smallColliderSize = marioCollider.size;
-        smallColliderOffset = marioCollider.offset;
         // ground check hits layer 3 (Ground) and layer 7 (Obstacles)
         layerMask = (1 << 3) | (1 << 7);
 
@@ -172,30 +111,6 @@ public class PlayerMovement : MonoBehaviour
         {
             // skid
             marioBody.linearVelocity = new Vector2(marioBody.linearVelocity.x * stopDamping, marioBody.linearVelocity.y);
-        }
-    }
-
-    // if invincibility ends and mario is still touching enemy nuke him
-    void OnCollisionStay2D(Collision2D col)
-    {
-        if (!alive)
-            return;
-
-        if (col.gameObject.CompareTag("Enemy")
-            && transform.position.y - col.transform.position.y < 0.4f)
-        {
-            if (starPower)
-                StarKill(col.gameObject.GetComponent<EnemyMovement>());
-            else if (!invincible)
-                Die();
-        }
-        else if (col.gameObject.CompareTag("Boss") && !invincible && !starPower)
-        {
-            ContactPoint2D contact = col.GetContact(0);
-            if (contact.normal.y < 0.7f)
-            {
-                Die();
-            }
         }
     }
 
@@ -269,167 +184,17 @@ public class PlayerMovement : MonoBehaviour
             Move(value);
         }
     }
-    // called by the magic mushroom
-    public void MakeBig()
-    {
-        if (isBig)
-            return;
-        isBig = true;
-        if (marioAudio != null && marioPowerup != null)
-            marioAudio.PlayOneShot(marioPowerup);
-        // taller hitbox straight away, sprites flicker into big mario
-        SetBigCollider(true);
-        StartSizeAnimation(GrowAnimation());
-    }
-
-    // big mario got hit, shrink and become invincible for a bit
-    public void PowerDown()
-    {
-        StopSizeAnimation();
-        isBig = false;
-        invincible = true;
-        SetBigCollider(false);
-    }
-
-    public void EndInvincible()
-    {
-        invincible = false;
-    }
-
-    // called by the starman powerup
-    public void MakeStar()
-    {
-        if (starAnimation != null)
-            StopCoroutine(starAnimation); // picking up another star restarts the timer
-        else
-            StartStarMusic();
-        starPower = true;
-        starAnimation = StartCoroutine(StarAnimation());
-    }
-
-    // cycle mario's colour until the star runs out
-    IEnumerator StarAnimation()
-    {
-        float elapsed = 0;
-        while (elapsed < starDuration)
-        {
-            marioSprite.color = Color.HSVToRGB((elapsed * starColorSpeed) % 1f, 0.6f, 1f);
-            yield return null;
-            elapsed += Time.deltaTime;
-        }
-        EndStar(true);
-    }
-
-    void EndStar(bool resumeMusic)
-    {
-        if (starAnimation != null)
-            StopCoroutine(starAnimation);
-        starAnimation = null;
-        starPower = false;
-        marioSprite.color = Color.white;
-
-        if (starMusic != null)
-            starMusic.Stop();
-        if (resumeMusic && pausedMusic != null)
-            pausedMusic.UnPause();
-        pausedMusic = null;
-    }
 
     // called when the level switches music so the star music has priority
     public void MusicChanged(AudioSource newMusic)
     {
-        if (!starPower || newMusic == null)
-            return;
-        newMusic.Pause();
-        pausedMusic = newMusic; // resume this one when the star runs out
+        marioStateController.MusicChanged(newMusic);
     }
-
-    // stop the level, boss and star music (restart plays the level music again)
-    void StopAllMusic()
-    {
-        EndStar(false);
-        if (bossTrigger != null)
-        {
-            if (bossTrigger.backgroundMusic != null)
-                bossTrigger.backgroundMusic.Stop();
-            if (bossTrigger.bossMusic != null)
-                bossTrigger.bossMusic.Stop();
-        }
-    }
-
-    void StartStarMusic()
-    {
-        // pause whatever is playing and play the star theme
-        pausedMusic = null;
-        if (bossTrigger != null)
-        {
-            if (bossTrigger.bossMusic != null && bossTrigger.bossMusic.isPlaying)
-                pausedMusic = bossTrigger.bossMusic;
-            else if (bossTrigger.backgroundMusic != null && bossTrigger.backgroundMusic.isPlaying)
-                pausedMusic = bossTrigger.backgroundMusic;
-        }
-        if (pausedMusic != null)
-            pausedMusic.Pause();
-        if (starMusic != null)
-            starMusic.Play();
-    }
-
-    void StarKill(EnemyMovement enemy)
-    {
-        if (enemy == null)
-            return;
-        enemy.Squash();
-        onIncrementScore.Raise(gameConstants.starKillScore);
-        if (marioAudio != null && starKillSound != null)
-            marioAudio.PlayOneShot(starKillSound);
-    }
-
-    // instantly back to small mario, no sound or animation (used on restart)
-    void MakeSmall()
-    {
-        StopSizeAnimation();
-        isBig = false;
-        invincible = false;
-        SetBigCollider(false);
-    }
-
-    void SetBigCollider(bool big)
-    {
-        marioCollider.size = big ? bigColliderSize : smallColliderSize;
-        marioCollider.offset = big ? bigColliderOffset : smallColliderOffset;
-    }
-
-    // doing this cause idk how to make him invincible while the animation plays
-    void StartSizeAnimation(IEnumerator animation)
-    {
-        StopSizeAnimation();
-        sizeAnimation = StartCoroutine(animation);
-    }
-
-    void StopSizeAnimation()
-    {
-        if (sizeAnimation != null)
-            StopCoroutine(sizeAnimation);
-        sizeAnimation = null;
-        marioSprite.enabled = true;
-    }
-
-    IEnumerator GrowAnimation()
-    {
-        for (int i = 0; i < sizeFlickers; i++)
-        {
-            marioSprite.enabled = !marioSprite.enabled;
-            yield return new WaitForSeconds(flickerInterval);
-        }
-        marioSprite.enabled = true;
-        sizeAnimation = null;
-    }
-
 
     private bool onGroundCheck()
     {
         // big mario's feet are further from his center, so check further down
-        float distance = isBig ? bigMaxDistance : maxDistance;
+        float distance = marioStateController.isBig ? bigMaxDistance : maxDistance;
         if (Physics2D.BoxCast(transform.position, boxSize, 0, -transform.up, distance, layerMask))
         {
             return true;
@@ -455,7 +220,7 @@ public class PlayerMovement : MonoBehaviour
         {
             isLevelComplete = true;
         }
-        EndStar(false);
+        marioStateController.EndStar(false);
         if (bossTrigger != null)
             bossTrigger.HideBossHealthUI();
 
@@ -465,14 +230,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void ResetGame()
     {
-        isDead = false;
-        alive = true;
-
         Time.timeScale = 1.0f;
         AudioListener.pause = false;
 
-        // Restore Mario's collision and physics.
-        marioCollider.enabled = true;
+        // Restore Mario's physics.
         marioBody.simulated = true;
         marioBody.linearVelocity = Vector2.zero;
         marioBody.angularVelocity = 0f;
@@ -484,10 +245,7 @@ public class PlayerMovement : MonoBehaviour
         marioSprite.flipX = false;
         moving = false;
         jumpedState = false;
-        // back to small mario
-        MakeSmall();
-        // lose the star (BossTrigger restarts the level music on restart)
-        EndStar(false);
+        // size, star, invincibility and death are reset by MarioStateController.GameRestart
         // the score and the HUD are reset by GameManager and HUDManager
         // goombas, blocks/powerups and the boss + music reset themselves on GameManager.gameRestart
 
@@ -554,12 +312,4 @@ public class PlayerMovement : MonoBehaviour
 
         Debug.Log($"Mario Destroyed: {gameObject.name}");
     }
-    private void RaiseGameOver()
-    {
-        onGameOver.Raise();
-    }
 }
-
-
-
-
