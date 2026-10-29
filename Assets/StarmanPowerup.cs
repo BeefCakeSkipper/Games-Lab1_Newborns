@@ -28,7 +28,7 @@ public class StarmanPowerup : BasePowerup
 
         if (col.gameObject.CompareTag("Player"))
         {
-            ApplyPowerup(col.gameObject.GetComponent<PlayerMovement>());
+            ApplyPowerup(col.gameObject.GetComponent<MarioStateController>());
 
             gameObject.SetActive(false);
             return;
@@ -82,11 +82,10 @@ public class StarmanPowerup : BasePowerup
 
     public override void ApplyPowerup(MonoBehaviour i)
     {
-        // make mario invincible
-        PlayerMovement mario = i as PlayerMovement;
+        MarioStateController mario = i as MarioStateController;
         if (mario != null)
         {
-            mario.MakeStar();
+            mario.SetPowerup(powerupType);
         }
     }
 }

@@ -27,7 +27,6 @@ public class MarioStateController : StateController
     }
     public void SetRendererToFlicker()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(BlinkSpriteRenderer());
     }
     private IEnumerator BlinkSpriteRenderer()

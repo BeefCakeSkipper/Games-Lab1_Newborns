@@ -44,7 +44,6 @@ public class PlayerMovement : MonoBehaviour
     public float deathDelay = 3.0f;   // seconds before the game over screen shows
 
     // magic mushroom
-    public RuntimeAnimatorController bigMarioController; // override controller with the big mario sprites
     public Vector2 bigColliderSize = new Vector2(1, 2);   // big mario's hitbox
     public Vector2 bigColliderOffset = new Vector2(0, 0.5f);
     public float bigMaxDistance = 0.1f;                   // ground check distance for big mario
@@ -56,7 +55,6 @@ public class PlayerMovement : MonoBehaviour
     private Coroutine sizeAnimation;
     private bool isBig = false;
     private bool invincible = false;
-    private RuntimeAnimatorController smallMarioController;
     private BoxCollider2D marioCollider;
     private MarioStateController marioStateController;
     private Vector2 smallColliderSize;
@@ -133,8 +131,7 @@ public class PlayerMovement : MonoBehaviour
         marioBody = GetComponent<Rigidbody2D>();
         marioSprite = GetComponent<SpriteRenderer>();
         startPosition = transform.localPosition;
-        // remember small mario's animator and hitbox
-        smallMarioController = marioAnimator.runtimeAnimatorController;
+        // remember small mario's hitbox
         marioCollider = GetComponent<BoxCollider2D>();
         marioStateController = GetComponent<MarioStateController>();
         smallColliderSize = marioCollider.size;
@@ -288,12 +285,15 @@ public class PlayerMovement : MonoBehaviour
     // big mario got hit, shrink and become invincible for a bit
     public void PowerDown()
     {
+        StopSizeAnimation();
         isBig = false;
         invincible = true;
-        if (marioAudio != null && marioPowerdown != null)
-            marioAudio.PlayOneShot(marioPowerdown);
         SetBigCollider(false);
-        StartSizeAnimation(ShrinkAnimation());
+    }
+
+    public void EndInvincible()
+    {
+        invincible = false;
     }
 
     // called by the starman powerup
@@ -390,16 +390,7 @@ public class PlayerMovement : MonoBehaviour
         StopSizeAnimation();
         isBig = false;
         invincible = false;
-        SetBigSprites(false);
         SetBigCollider(false);
-    }
-
-    void SetBigSprites(bool big)
-    {
-        if (big && bigMarioController != null)
-            marioAnimator.runtimeAnimatorController = bigMarioController;
-        else
-            marioAnimator.runtimeAnimatorController = smallMarioController;
     }
 
     void SetBigCollider(bool big)
@@ -427,34 +418,13 @@ public class PlayerMovement : MonoBehaviour
     {
         for (int i = 0; i < sizeFlickers; i++)
         {
-            SetBigSprites(i % 2 == 1);
-            yield return new WaitForSeconds(flickerInterval);
-        }
-        SetBigSprites(true);
-        sizeAnimation = null;
-    }
-
-    IEnumerator ShrinkAnimation()
-    {
-        float elapsed = 0;
-        for (int i = 0; i < sizeFlickers; i++)
-        {
-            SetBigSprites(i % 2 == 1);
-            yield return new WaitForSeconds(flickerInterval);
-            elapsed += flickerInterval;
-        }
-        SetBigSprites(false);
-
-        while (elapsed < hurtInvincibleTime)
-        {
             marioSprite.enabled = !marioSprite.enabled;
             yield return new WaitForSeconds(flickerInterval);
-            elapsed += flickerInterval;
         }
         marioSprite.enabled = true;
-        invincible = false;
         sizeAnimation = null;
     }
+
 
     private bool onGroundCheck()
     {
