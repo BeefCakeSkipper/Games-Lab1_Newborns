@@ -5,7 +5,7 @@ public class EndStarAction : Action
 {
     public override void Act(StateController controller)
     {
-        MarioStateController m = (MarioStateController)controller;
-        m.EndStar(true);
+        BuffStateController b = (BuffStateController)controller;
+        b.mario.EndStar(true);
     }
 }

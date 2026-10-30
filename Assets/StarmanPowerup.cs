@@ -28,7 +28,7 @@ public class StarmanPowerup : BasePowerup
 
         if (col.gameObject.CompareTag("Player"))
         {
-            ApplyPowerup(col.gameObject.GetComponent<MarioStateController>());
+            ApplyPowerup(col.gameObject.GetComponent<BuffStateController>());
 
             gameObject.SetActive(false);
             return;
@@ -82,10 +82,10 @@ public class StarmanPowerup : BasePowerup
 
     public override void ApplyPowerup(MonoBehaviour i)
     {
-        MarioStateController mario = i as MarioStateController;
-        if (mario != null)
+        BuffStateController buff = i as BuffStateController;
+        if (buff != null)
         {
-            mario.SetPowerup(powerupType);
+            buff.SetBuff(powerupType);
         }
     }
 }

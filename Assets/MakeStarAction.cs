@@ -5,7 +5,7 @@ public class MakeStarAction : Action
 {
     public override void Act(StateController controller)
     {
-        MarioStateController m = (MarioStateController)controller;
-        m.MakeStar();
+        BuffStateController b = (BuffStateController)controller;
+        b.mario.MakeStar();
     }
 }

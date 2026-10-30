@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 8847944824574940021}
   - component: {fileID: 4885997506483573209}
   - component: {fileID: 8661285146935866555}
+  - component: {fileID: 5738908116083636884}
   m_Layer: 0
   m_Name: Mario
   m_TagString: Player
@@ -983,3 +984,24 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5738908116083636884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5883544514327335840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ada904abfd56ad41b4094ef6033f1bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::BuffStateController
+  startState: {fileID: 11400000, guid: 6883d8bf0984cf844a6635e40f39050d, type: 2}
+  previousState: {fileID: 0}
+  currentState: {fileID: 0}
+  remainState: {fileID: 11400000, guid: 02771fa2592fc9348934b47100781f9e, type: 2}
+  transitionStateChanged: 0
+  stateTimeElapsed: 0
+  isActive: 1
+  currentBuffType: -1
+  mario: {fileID: 0}

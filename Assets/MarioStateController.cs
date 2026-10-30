@@ -59,6 +59,10 @@ public class MarioStateController : StateController
         marioCollider.enabled = true;
         currentPowerupType = PowerupType.Default;
         TransitionToState(startState);
+
+        BuffStateController buff = GetComponent<BuffStateController>();
+        if (buff != null)
+            buff.GameRestart();
     }
 
     public void SetPowerup(PowerupType i)

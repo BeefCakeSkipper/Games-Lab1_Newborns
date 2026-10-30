@@ -9,13 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 267ceb7d0370ff3418bbeba3d5968db6, type: 3}
-  m_Name: ToStarSuper
-  m_EditorClassIdentifier: Assembly-CSharp::TransformDecision
+  m_Script: {fileID: 11500000, guid: e6df3a6ba06cd464284c5a70271fd2b6, type: 3}
+  m_Name: ToStarman
+  m_EditorClassIdentifier: Assembly-CSharp::BuffDecision
   map:
+  - fromState: 0
+    powerupCollected: 3
   - fromState: 1
     powerupCollected: 3
-  - fromState: 2
-    powerupCollected: 3
-  - fromState: 4
-    powerupCollected: 1
