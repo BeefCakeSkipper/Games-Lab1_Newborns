@@ -7,6 +7,15 @@ public class ActionManager : MonoBehaviour
     public UnityEvent<int> moveCheck;
     public UnityEvent jump;
     public UnityEvent jumpHold;
+    public UnityEvent fire;
+
+    public void OnFireAction(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            fire.Invoke();
+        }
+    }
 
     public void OnJumpHoldAction(InputAction.CallbackContext context)
     {

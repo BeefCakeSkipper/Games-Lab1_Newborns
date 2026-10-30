@@ -69,6 +69,13 @@ public class MarioStateController : StateController
     {
         currentPowerupType = i;
     }
+
+    public void Fire()
+    {
+        if (isDead || currentState == null)
+            return;
+        currentState.DoEventTriggeredActions(this, ActionType.Attack);
+    }
     public void SetRendererToFlicker()
     {
         StartCoroutine(BlinkSpriteRenderer());

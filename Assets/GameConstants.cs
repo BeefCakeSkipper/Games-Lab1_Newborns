@@ -8,6 +8,7 @@ public class GameConstants : ScriptableObject
     public int startingScore = 0;     // score after a restart
     public int goombaStompScore = 1;
     public int starKillScore = 1;
+    public int fireballKillScore = 1;
     public int bossHitScore = 1;
 
     [Header("Mario")]
